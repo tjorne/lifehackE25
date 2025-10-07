@@ -15,4 +15,5 @@ public interface ExpenseService {
     List<ExpenseDTO> getExpensesByGroupId(int groupId) throws DatabaseException;
     List<ExpenseDTO> getExpensesByUserId(int userId) throws DatabaseException;
     List<ExpenseDTO> getExpensesByUserAndGroup(int userId, int groupId) throws DatabaseException;
+
 }

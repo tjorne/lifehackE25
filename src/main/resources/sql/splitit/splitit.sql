@@ -21,3 +21,10 @@ CREATE TABLE public.expense (
                                 FOREIGN KEY (user_id) REFERENCES public.users(user_id),
                                 FOREIGN KEY (group_id) REFERENCES public.groups(group_id)
 );
+
+
+INSERT INTO groups (name) VALUES ('Sommerhus Tur 2025');
+INSERT INTO groups (name) VALUES ('Norge Eventyr 2025');
+INSERT INTO groups (name) VALUES ('Copenhell Festival');
+INSERT INTO groups (name) VALUES ('Sommer i Sunny Beach');
+INSERT INTO groups (name) VALUES ('London baby');

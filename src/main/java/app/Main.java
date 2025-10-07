@@ -3,6 +3,10 @@ package app;
 import app.config.ThymeleafConfig;
 import app.controllers.*;
 import app.persistence.ConnectionPool;
+import app.persistence.splitit.GroupMapper;
+import app.persistence.splitit.GroupMemberMapper;
+import app.services.splitit.AccountService;
+import app.services.splitit.AccountServiceImpl;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -28,7 +32,13 @@ public class Main
         app.get("/", ctx -> ctx.render("index.html"));
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
-        SplitItController.addRoutes(app);
+
+
+        GroupMapper groupMapper = new GroupMapper(connectionPool);
+        GroupMemberMapper groupMemberMapper = new GroupMemberMapper(connectionPool);
+        AccountService accountService = new AccountServiceImpl(groupMapper,groupMemberMapper);
+        SplitItController splitItController = new SplitItController(accountService);
+        splitItController.addRoutes(app);
 
     }
 }
