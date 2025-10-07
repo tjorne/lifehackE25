@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmRouletten</title>
+
+    <!-- Google-font til Xanh Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+
+    <link href="../../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="../../public/css/FilmRouletten.css" th:href="@{/css/FilmRouletten.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="page">
+
+    <header>
+        <a href="../index.html" th:href="@{/}">
+            <img alt="Lifehack-logo"
+                 src="../../public/images/lifehacklogo.png"
+                 th:src="@{/images/lifehacklogo.png}" />
+        </a>
+    </header>
+
+    <h1>FilmRouletten</h1>
+
+    <main>
+
+        <!-- VIEW 1: VÆLG GENRE -->
+        <section class="view view--genres" data-view="genres">
+            <h2>VælgGenre</h2>
+
+            <div class="genres">
+                <button class="pill" type="button">Action</button>
+                <button class="pill" type="button">Gyser</button>
+                <button class="pill" type="button">Komedie</button>
+                <button class="pill" type="button">Sci-Fi</button>
+                <button class="pill" type="button">Krimi</button>
+                <button class="pill" type="button">Drama</button>
+                <button class="pill" type="button">Thriller</button>
+                <button class="pill" type="button">Eventyr</button>
+            </div>
+
+            <div class="RouletteHjul">
+                <img src="../../public/images/FilmRoulettenLogo" alt="FilmRouletteLogo" />
+            </div>
+        </section>
+
+        <!-- VIEW 2: SPIN HJULET  -->
+        <section class="view view--spin" data-view="spin" hidden>
+            <div class="wheel">
+                <img src="../../public/images/FilmRoulettenLogo" alt="FilmRoulettenLogo" />
+            </div>
+
+            <button class="btn btn--primary" type="button">Klik for at spinne!</button>
+        </section>
+
+        <!-- VIEW 3: RESULTAT -->
+        <section class="view view--result" data-view="result" hidden>
+            <div class="wheel">
+                <img src="../../public/images/FilmRoulettenLogo.png" alt="FilmRoulettenLogo" />
+            </div>
+
+            <div class="card result">
+                <h2 class="result__title">Hurra! Du skal se…</h2>
+
+                <ul class="result__meta">
+                    <li>IMDb: </li>
+                    <li>Varighed:</li>
+                    <li>Genre:</li>
+                </ul>
+            </div>
+
+                <div class="result__actions">
+                    <a class="btn btn--primary" href="#">Tag mig til filmen!</a>
+                </div>
+
+
+            <div class="result__options">
+                <button class="pill" type="button">KLIK FOR AT SPINNE IGEN!</button>
+                <span class="muted">eller</span>
+                <button class="pill" type="button">ELLER VÆLG NY GENRE!</button>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
