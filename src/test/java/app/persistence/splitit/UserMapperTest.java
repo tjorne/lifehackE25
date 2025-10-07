@@ -30,36 +30,52 @@ class UserMapperTest {
 
         try (Connection con = testPool.getConnection();
              Statement stmt = con.createStatement()) {
-            stmt.execute("DROP TABLE IF EXISTS users CASCADE");
-            stmt.execute("CREATE TABLE users (" +
+
+            stmt.execute("DROP TABLE IF EXISTS test.users CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS public.users CASCADE");
+
+            stmt.execute("CREATE TABLE public.users (" +
                     "user_id SERIAL PRIMARY KEY," +
-                    "name VARCHAR(50) NOT NULL," +
-                    "password VARCHAR(100) NOT NULL" +
+                    "username VARCHAR(50) NOT NULL," +
+                    "password VARCHAR(100) NOT NULL," +
+                    "role VARCHAR(20) DEFAULT 'user' NOT NULL" +
                     ")");
+
+            stmt.execute("CREATE TABLE test.users (" +
+                    "user_id SERIAL PRIMARY KEY," +
+                    "username VARCHAR(50) NOT NULL," +
+                    "password VARCHAR(100) NOT NULL," +
+                    "role VARCHAR(20) DEFAULT 'user' NOT NULL" +
+                    ")");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             fail("Database connection failed");
         }
     }
 
-
     @BeforeEach
     void setUp() {
-
-        userMapper = new UserMapper();
-
         try (Connection con = testPool.getConnection();
              Statement stmt = con.createStatement()) {
 
-            stmt.execute("DELETE FROM users CASCADE");
+            stmt.execute("DELETE FROM public.users CASCADE");
+            stmt.execute("DELETE FROM test.users CASCADE");
 
-            stmt.execute("ALTER SEQUENCE users_user_id_seq RESTART WITH 1");
+            stmt.execute("ALTER SEQUENCE public.users_user_id_seq RESTART WITH 1");
+            stmt.execute("ALTER SEQUENCE test.users_user_id_seq RESTART WITH 1");
 
-            stmt.execute("INSERT INTO users (name, password) VALUES " +
-                    "('Daniel', '1234'), " +
-                    "('Morten', 'abcd'), " +
-                    "('Jesper', 'pass'), " +
-                    "('Toby', '123abc')");
+            stmt.execute("INSERT INTO public.users (username, password, role) VALUES " +
+                    "('Daniel', '1234', 'user'), " +
+                    "('Morten', 'abcd', 'user'), " +
+                    "('Jesper', 'pass', 'user'), " +
+                    "('Toby', '123abc', 'user')");
+
+            stmt.execute("INSERT INTO test.users (username, password, role) VALUES " +
+                    "('Daniel', '1234', 'user'), " +
+                    "('Morten', 'abcd', 'user'), " +
+                    "('Jesper', 'pass', 'user'), " +
+                    "('Toby', '123abc', 'user')");
 
         } catch (SQLException e) {
             fail("Database setup failed: " + e.getMessage());
@@ -73,32 +89,36 @@ class UserMapperTest {
 
     @Test
     void testLogin() throws DatabaseException {
-        User user = userMapper.login("Morten", "abcd");
+        User user = UserMapper.login("Morten", "abcd");
         assertNotNull(user);
         assertEquals("Morten", user.getUserName());
+    }
 
-        User wrongUser = userMapper.login("Morten", "wrongpass");
-        assertNull(wrongUser);
+    @Test
+    void testLoginFailure() {
+        assertThrows(DatabaseException.class, () -> {
+            UserMapper.login("Morten", "wrongpass");
+        });
     }
 
     @Test
     void testCreateUser() throws DatabaseException {
-       userMapper.createuser("Laura","1234");
-        assertEquals(user,userMapper.getUserById(user.getUserId()));
+        UserMapper.createuser("Laura","1234");
+        assertEquals(5, UserMapper.getAllUsers().size());
     }
 
     @Test
     void testGetAllUsers() throws DatabaseException {
-        List<User> users = userMapper.getAllUsers();
+        List<User> users = UserMapper.getAllUsers();
         assertEquals(4, users.size());
     }
 
-
     @Test
     void getUserById() throws DatabaseException {
-        User expected = new User(3,"Jesper","pass");
-        User actual = userMapper.getUserById(3);
-        assertEquals(expected,actual);
+        User actual = UserMapper.getUserById(2);
+        assertNotNull(actual);
+        assertEquals("Morten", actual.getUserName());
+        assertEquals(2, actual.getUserId());
     }
 
 

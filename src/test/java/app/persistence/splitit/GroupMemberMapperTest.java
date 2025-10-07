@@ -31,30 +31,31 @@ class GroupMemberMapperTest {
         try (Connection con = testPool.getConnection();
              Statement stmt = con.createStatement()) {
 
-            stmt.execute("DROP TABLE IF EXISTS expense CASCADE");
-            stmt.execute("DROP TABLE IF EXISTS group_users CASCADE");
-            stmt.execute("DROP TABLE IF EXISTS groups CASCADE");
-            stmt.execute("DROP TABLE IF EXISTS users CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS test.expense CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS test.group_users CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS test.groups CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS test.users CASCADE");
 
-            stmt.execute("CREATE TABLE users (" +
+            stmt.execute("CREATE TABLE test.users (" +
                     "user_id SERIAL PRIMARY KEY," +
                     "name VARCHAR(100) NOT NULL," +
                     "password VARCHAR(255) NOT NULL," +
+                    "role VARCHAR(20) DEFAULT 'user' NOT NULL," +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                     ")");
 
-            stmt.execute("CREATE TABLE groups (" +
+            stmt.execute("CREATE TABLE test.groups (" +
                     "group_id SERIAL PRIMARY KEY," +
                     "name VARCHAR(100) NOT NULL," +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                     ")");
 
-            stmt.execute("CREATE TABLE group_users (" +
+            stmt.execute("CREATE TABLE test.group_users (" +
                     "user_id INT NOT NULL," +
                     "group_id INT NOT NULL," +
                     "PRIMARY KEY (user_id, group_id)," +
-                    "CONSTRAINT group_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE," +
-                    "CONSTRAINT group_users_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE" +
+                    "CONSTRAINT group_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES test.users(user_id) ON DELETE CASCADE," +
+                    "CONSTRAINT group_users_group_id_fkey FOREIGN KEY (group_id) REFERENCES test.groups(group_id) ON DELETE CASCADE" +
                     ")");
 
         } catch (SQLException e) {
@@ -70,27 +71,27 @@ class GroupMemberMapperTest {
         try (Connection con = testPool.getConnection();
              Statement stmt = con.createStatement()) {
 
-            stmt.execute("DELETE FROM group_users");
-            stmt.execute("DELETE FROM groups");
-            stmt.execute("DELETE FROM users");
+            stmt.execute("DELETE FROM test.group_users");
+            stmt.execute("DELETE FROM test.groups");
+            stmt.execute("DELETE FROM test.users");
 
-            stmt.execute("ALTER SEQUENCE users_user_id_seq RESTART WITH 1");
-            stmt.execute("ALTER SEQUENCE groups_group_id_seq RESTART WITH 1");
+            stmt.execute("ALTER SEQUENCE test.users_user_id_seq RESTART WITH 1");
+            stmt.execute("ALTER SEQUENCE test.groups_group_id_seq RESTART WITH 1");
 
-            stmt.execute("INSERT INTO users (name, password) VALUES " +
-                    "('Alice', 'pass123'), " +
-                    "('Bob', 'pass456'), " +
-                    "('Charlie', 'pass789'), " +
-                    "('David', 'pass000'), " +
-                    "('Eve', 'pass111')");
+            stmt.execute("INSERT INTO test.users (name, password, role) VALUES " +
+                    "('Alice', 'pass123', 'user'), " +
+                    "('Bob', 'pass456', 'user'), " +
+                    "('Charlie', 'pass789', 'user'), " +
+                    "('David', 'pass000', 'user'), " +
+                    "('Eve', 'pass111', 'user')");
 
-            stmt.execute("INSERT INTO groups (name) VALUES " +
+            stmt.execute("INSERT INTO test.groups (name) VALUES " +
                     "('Weekendtur'), " +
                     "('Fredagsbar'), " +
                     "('Fødselsdagsfest'), " +
                     "('Tom gruppe')");
 
-            stmt.execute("INSERT INTO group_users (user_id, group_id) VALUES " +
+            stmt.execute("INSERT INTO test.group_users (user_id, group_id) VALUES " +
                     "(1, 1), " +
                     "(2, 1), " +
                     "(3, 1), " +
@@ -157,7 +158,6 @@ class GroupMemberMapperTest {
         assertEquals(2, groups.size());
 
     }
-
 
     @Test
     void testRemoveAllMembersFromGroup() throws DatabaseException {
