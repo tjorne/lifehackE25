@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../public/css/gruppeE/stylesheet.css" th:href="@{/css/gruppeE/stylesheet.css}" rel="stylesheet">
+
+</head>
+<body>
+<div class="flexbox-container">
+    <div class="flexbox-item1">
+        <th:block th:each="field : ${mineMap.field}">
+            <div class="flexbox-item2">
+                <p th:text="${field}"></p>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
