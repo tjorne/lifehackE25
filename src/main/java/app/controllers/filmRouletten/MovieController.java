@@ -6,6 +6,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.util.List;
+import java.util.Random;
 
 public class MovieController {
 
@@ -20,23 +21,34 @@ public class MovieController {
 
         app.get("", ctx -> {
 
-            List<Movie> allMoviesByGenre = getAllMoviesByGenre(ctx);
+            Movie aMovieByGenre = getaMoviesByGenre(ctx);
 
-            if (allMoviesByGenre != null) {
+            if (aMovieByGenre != null) {
 
-                ctx.attribute("allMoviesByGenre", allMoviesByGenre);
+                ctx.attribute("allMoviesByGenre", aMovieByGenre);
                 ctx.render("");
             }
         });
     }
 
-    public static List<Movie> getAllMoviesByGenre(Context ctx) {
+    public static Movie getaMoviesByGenre(Context ctx) {
 
         String genre = ctx.formParam("genreId");
+
+        List<Movie> movies = MovieMapper.getAllMoviesByGenre(genre);
+
+        Movie movie;
+
         if (genre != null && !genre.isEmpty()) {
-            return MovieMapper.getAllMoviesByGenre(genre);
+
+            Random random = new Random();
+
+            int size = random.nextInt(movies.size());
+
+            movie = movies.get(size);
+            return movie;
         }
 
-        return List.of();
+        return null;
     }
 }
