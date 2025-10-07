@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../../public/css/wordngo.css">
 </head>
 <body>
+<div class="login-box">
+    <h1 class="title">Word&go</h1>
 
-<h1>this is a test </h1>
+    <form action="login" method="post">
+        <div class="input">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username" placeholder="Enter username"><br>
+
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder="Enter password"><br>
+        </div>
+
+        <div class="buttons">
+            <input type="button" name="create" value="Create Account">
+            <input type="submit" name="login" value="Login">
+        </div>
+    </form>
+</div>
 </body>
 </html>
