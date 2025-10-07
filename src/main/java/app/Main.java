@@ -26,6 +26,7 @@ public class Main
 
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
+        FilmRoulettenController.addRoutes(app);
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
 
