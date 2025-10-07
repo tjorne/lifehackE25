@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SPLITit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/splitit/splitit.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="@{/}">
+            <img th:src="@{/images/splitit/logo.svg}" alt="Split it logo">
+        </a>
+    </nav>
+</header>
+
+<main>
+    <div class="title">
+        <h1>SPLITit</h1>
+        <hr class="divider">
+        <h3>Your expense splitter</h3>
+    </div>
+
+    <div class="selector">
+        <h2>Choose / create a group</h2>
+
+        <!-- Form to submit selected group -->
+        <form th:action="@{/expense}" method="get">
+            <select name="groupId" id="groupSelect">
+                <option value="" disabled selected>Select a group</option>
+                <option th:each="group : ${groups}"
+                        th:value="${group.id}"
+                        th:text="${group.name}">
+                    Group Name
+                </option>
+            </select>
+            <br>
+            <button type="submit">Show group</button>
+        </form>
+    </div>
+
+    <div class="link">
+        <a th:href="@{/createGroup}">Create a group</a>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p>
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
+                <img th:src="@{/images/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+            </a>
+        </p>
+        <p>
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
+                <img th:src="@{/images/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+            </a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
