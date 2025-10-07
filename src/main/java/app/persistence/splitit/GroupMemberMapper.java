@@ -32,10 +32,10 @@ public class GroupMemberMapper {
             }
 
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new DatabaseException("Bruger er allerede medlem af gruppen", e);
+            throw new DatabaseException("Bruger er allerede medlem af gruppen");
 
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke tilføje medlem til gruppe: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke tilføje medlem til gruppe: " + e.getMessage());
         }
         return result;
     }
@@ -55,7 +55,7 @@ public class GroupMemberMapper {
                 result = true;
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke fjerne medlem fra gruppe: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke fjerne medlem fra gruppe: " + e.getMessage());
         }
         return result;
     }
@@ -77,12 +77,13 @@ public class GroupMemberMapper {
                 int userId = rs.getInt("user_id");
                 String name = rs.getString("name");
                 String password = rs.getString("password");
+                String role = rs.getString("role");
 
-                users.add(new User(userId, name, password));
+                users.add(new User(userId, name, password,role));
             }
 
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af brugere for gruppe " + groupId + ": " + e.getMessage(), e);
+            throw new DatabaseException("Fejl ved hentning af brugere for gruppe " + groupId + ": " + e.getMessage());
         }
         return users;
     }
@@ -108,7 +109,7 @@ public class GroupMemberMapper {
             }
 
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af grupper for bruger " + userId + ": " + e.getMessage(), e);
+            throw new DatabaseException("Fejl ved hentning af grupper for bruger " + userId + ": " + e.getMessage());
         }
         return groups;
     }
@@ -128,7 +129,7 @@ public class GroupMemberMapper {
             }
 
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved tjek af gruppemedlemskab: " + e.getMessage(), e);
+            throw new DatabaseException("Fejl ved tjek af gruppemedlemskab: " + e.getMessage());
         }
         return false;
     }
@@ -147,7 +148,7 @@ public class GroupMemberMapper {
             result = true;
 
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke fjerne medlemmer fra gruppe: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke fjerne medlemmer fra gruppe: " + e.getMessage());
         }
         return result;
     }
@@ -164,7 +165,7 @@ public class GroupMemberMapper {
             result = true;
 
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke fjerne bruger fra grupper: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke fjerne bruger fra grupper: " + e.getMessage());
         }
         return result;
     }

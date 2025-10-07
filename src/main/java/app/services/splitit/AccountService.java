@@ -1,6 +1,6 @@
 package app.services.splitit;
 
-import app.entities.Group;
+import app.entities.splitit.Group;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 

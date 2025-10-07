@@ -33,7 +33,7 @@ public class GroupMapper {
                  group = new Group(id,name);
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af bruger med id " + groupId + ": " + e.getMessage(), e);
+            throw new DatabaseException("Fejl ved hentning af bruger med id " + groupId + ": " + e.getMessage());
         }
         return group;
     }
@@ -69,10 +69,10 @@ public class GroupMapper {
                     result = true;
                 }
             } catch (SQLException e) {
-                throw new DatabaseException("Fejl ved hentning af alle grupper " + e.getMessage(), e);
+                throw new DatabaseException("Fejl ved hentning af alle grupper " + e.getMessage());
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke oprette forbindelse til databasen: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke oprette forbindelse til databasen: " + e.getMessage());
         }
         return result;
     }
@@ -112,10 +112,10 @@ public class GroupMapper {
                     result = true;
                 }
             } catch (SQLException e) {
-                throw new DatabaseException("Fejl ved hentning af alle grupper: " + e.getMessage(), e);
+                throw new DatabaseException("Fejl ved hentning af alle grupper: " + e.getMessage());
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Kunne ikke oprette forbindelse til databasen: " + e.getMessage(), e);
+            throw new DatabaseException("Kunne ikke oprette forbindelse til databasen: " + e.getMessage());
         }
         return result;
     }
