@@ -9,6 +9,7 @@ import app.persistence.UserMapper;
 import app.persistence.splitit.ExpenseMapper;
 import app.persistence.splitit.GroupMapper;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ExpenseServiceImpl implements ExpenseService {
@@ -51,27 +52,81 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public boolean updateExpense(int expenseId, String description, double amount) throws DatabaseException {
-        return false;
+        validateAmount(amount);
+        validateDescription(description);
+        return expenseMapper.updateExpense(expenseId,description,amount);
     }
 
     @Override
     public boolean deleteExpense(int expenseId) throws DatabaseException {
-        return false;
+        return expenseMapper.deleteExpense(expenseId);
     }
 
     @Override
     public List<ExpenseDTO> getExpensesByGroupId(int groupId) throws DatabaseException {
-        return List.of();
+        List<Expense> expenses = expenseMapper.getExpensesByGroupId(groupId);
+        Group group = groupMapper.getGroupById(groupId);
+
+        return expenses.stream()
+                .map(expense -> {
+                    try {
+                        return new ExpenseDTO(
+                                expense.getExpenseId(),
+                                expense.getDescription(),
+                                expense.getAmount(),
+                                expense.getCreatedAt(),
+                                UserMapper.getUserById(expense.getUserId()).getUserName(),
+                                group.getName()
+                        );
+                    } catch (DatabaseException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .sorted(Comparator.comparing(ExpenseDTO::getCreatedAt).reversed())
+                .toList();
     }
 
     @Override
     public List<ExpenseDTO> getExpensesByUserId(int userId) throws DatabaseException {
-        return List.of();
+        List<Expense> expenses = expenseMapper.getExpensesByUserId(userId);
+        User user = UserMapper.getUserById(userId);
+
+        return expenses.stream()
+                .map(expense -> {
+                    try {
+                        return new ExpenseDTO(
+                                expense.getExpenseId(),
+                                expense.getDescription(),
+                                expense.getAmount(),
+                                expense.getCreatedAt(),
+                                user.getUserName(),
+                                groupMapper.getGroupById(expense.getGroupId()).getName()
+                        );
+                    } catch (DatabaseException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .sorted(Comparator.comparing(ExpenseDTO::getCreatedAt).reversed())
+                .toList();
     }
 
     @Override
     public List<ExpenseDTO> getExpensesByUserAndGroup(int userId, int groupId) throws DatabaseException {
-        return List.of();
+        List<Expense> expenses = expenseMapper.getExpensesByUserAndGroup(userId,groupId);
+        User user = UserMapper.getUserById(userId);
+        Group group = groupMapper.getGroupById(groupId);
+
+        return expenses.stream()
+                .map(expense -> new ExpenseDTO(
+                        expense.getExpenseId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getCreatedAt(),
+                        user.getUserName(),
+                        group.getName()
+                ))
+                .sorted(Comparator.comparing(ExpenseDTO::getCreatedAt).reversed())
+                .toList();
     }
 
     private void validateDescription(String description)
