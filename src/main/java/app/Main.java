@@ -32,4 +32,3 @@ public class Main
             WordngoController.addRoutes(app);
         }
     }
-}
