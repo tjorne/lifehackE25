@@ -7,13 +7,40 @@
 
 </head>
 <body>
-<div class="flexbox-container">
-    <div class="flexbox-item1">
-        <th:block th:each="field : ${mineMap.field}">
-            <div class="flexbox-item2">
-                <p th:text="${field}"></p>
+<div class="game-wrapper">
+    <div class="game-wrapper-flagfields">
+        <span>Flags:</span> <span>Fields left:</span>
+    </div>
+    <div class="game-view">
+        <div class="game-menu">
+            <form th:action="@{/gruppeE/restart}" method="post">
+                <button type="submit">reset</button>
+            </form>
+            <form th:action="@{/gruppeE/quit}" method="post">
+                <button type="submit">quit</button>
+            </form>
+        </div>
+        <div class="field-container">
+
+            <div th:each="field,iter : ${mineMap.field}">
+
+                <th:block th:if="${field.shown} == false">
+                    <form class="field-item field-hidden" th:action="@{/gruppeE/mine/{id} (id=${iter.index})}" method="POST">
+                        <button type="submit"></button>
+                    </form>
+                </th:block>
+                <th:block th:if="${field.shown} == true">
+                    <th:block th:if="${field.isMine} == false">
+                        <p class="field-item field" th:text="${field.mineCnt}"></p>
+                    </th:block>
+                    <th:block th:if="${field.isMine} == true">
+                        <div class="field-item field">
+                            <p>¤</p>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
-        </th:block>
+        </div>
     </div>
 </div>
 </body>
