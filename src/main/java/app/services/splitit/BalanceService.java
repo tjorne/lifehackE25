@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface BalanceService {
         public List<UserBalanceDTO>  getGroupBalances(int groupId) throws DatabaseException;
-        public List<Settlement> getSettlements(int groupId);
+        public List<Settlement> getSettlements(int groupId) throws DatabaseException;
     }
 
 

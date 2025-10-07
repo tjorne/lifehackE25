@@ -13,17 +13,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BalanceServiceImpl implements BalanceService{
+public class BalanceServiceImpl implements BalanceService
+{
     private ExpenseMapper expenseMapper;
     private GroupMemberMapper groupMemberMapper;
 
-    public BalanceServiceImpl(ExpenseMapper expenseMapper, GroupMemberMapper groupMemberMapper) {
+    public BalanceServiceImpl(ExpenseMapper expenseMapper, GroupMemberMapper groupMemberMapper)
+    {
         this.expenseMapper = expenseMapper;
         this.groupMemberMapper = groupMemberMapper;
     }
 
     @Override
-    public List<UserBalanceDTO> getGroupBalances(int groupId) throws DatabaseException {
+    public List<UserBalanceDTO> getGroupBalances(int groupId) throws DatabaseException
+    {
         List<Expense> expenses = expenseMapper.getExpensesByGroupId(groupId);
         List<User> users = groupMemberMapper.getUsersByGroupId(groupId);
 
@@ -55,7 +58,47 @@ public class BalanceServiceImpl implements BalanceService{
     }
 
     @Override
-    public List<Settlement> getSettlements(int groupId) {
-        return List.of();
-    }
-}
+    public List<Settlement> getSettlements(int groupId) throws DatabaseException
+    {
+        List<UserBalanceDTO> balanceDTOS = getGroupBalances(groupId);
+        List<Settlement> settlements = new ArrayList<>();
+
+        List<UserBalanceDTO> debitors = balanceDTOS.stream()
+                .filter(balance -> balance.getBalance() < 0)
+                .collect(Collectors.toList());
+
+        List<UserBalanceDTO> creditors = balanceDTOS.stream()
+                .filter(balance -> balance.getBalance() > 0)
+                .collect(Collectors.toList());
+
+        for(UserBalanceDTO debitor: debitors)
+        {
+            double amountOwed = -debitor.getBalance();
+
+            for(UserBalanceDTO creditor: creditors)
+            {
+                if(amountOwed <= 0){
+                    break;
+                }
+                if(creditor.getBalance() <=0){
+                    continue;
+                }
+
+                double payment = Math.min(amountOwed, creditor.getBalance());
+
+                settlements.add(new Settlement(
+                        debitor.getUserName(),
+                        creditor.getUserName(),
+                        payment
+                ));
+
+                amountOwed -= payment;
+                creditor.setBalance(creditor.getBalance() - payment);
+            }
+        }
+
+        return settlements;
+            }
+        }
+
+
