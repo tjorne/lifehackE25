@@ -1,4 +1,4 @@
-# Lifehack Spring 2024 - team B
+# Lifehack Fall 2025
 
 ![Lifehack](src/main/resources/public/images/lifehacklogo.png)
 
@@ -55,12 +55,12 @@
     
     public class ProjectNameController
     {
-        public static void addRoutes(Javalin app, ConnectionPool connectionPool)
+        public static void addRoutes(Javalin app)
         {
-            app.get("/projectname", ctx -> index(ctx, connectionPool));
+            app.get("/projectname", ctx -> index(ctx));
         }
     
-        private static void index(Context ctx, ConnectionPool connectionPool)
+        private static void index(Context ctx)
         {
             ctx.render("/projectname/index.html");
         }
@@ -74,7 +74,7 @@
    {
         // ...........
         // Add routing
-        ProjectNameController.addRoutes(app, connectionPool);
+        ProjectNameController.addRoutes(app);
     }
     ```
    
