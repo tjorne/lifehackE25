@@ -107,7 +107,8 @@ public class UserMapper
         return users;
     }
 
-    public User getUserById(int userId) throws DatabaseException {
+    public User getUserById(int userId) throws DatabaseException
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         User user = null;
