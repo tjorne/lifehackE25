@@ -29,5 +29,7 @@ public class Main
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
 
+            WordngoController.addRoutes(app);
+        }
     }
 }
