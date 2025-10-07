@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fourthingsplus</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page">
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img alt="logo" src="../public/images/lifehacklogo.png" th:src="@{/images/lifehacklogo.png}"/>
+        </a>
+    </header>
+    <h1>Create new user</h1>
+
+    <form class="generic-form" method="post">
+        <input type="text" name="username" placeholder="Enter your username"/>
+        <input type="password" name="password1" placeholder="Enter your password"/>
+        <input type="password" name="password2" placeholder="Enter your password again"/>
+
+        <button type="submit" formaction="/createuser">Create user</button>
+        <div><p th:text="${message}"></p></div>
+    </form>
+
+    <div>
+        <a th:if="${session.currentUser != null}" href="index.html" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>

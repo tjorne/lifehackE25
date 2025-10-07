@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(title)">
+  <title th:text="${title}">Frontpage</title>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../public/css/myevent_eventlist.css" th:href="@{/css/myevent_eventlist.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div id="page-container">
+
+  <div id="page-content">
+    <header th:fragment="header(title)">
+      <div class="headerimage">
+        <img th:src="@{/images/myevents/frontpage_crop.jpeg}" src="/images/myevents/frontpage_crop.jpeg" width="100%"/>
+      </div>
+    </header>
+
+    <footer th:fragment="footer" class="footer-container">
+      <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
+      <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
+      <a href="/public" class="footer-item">Home</a>
+    </footer>
+  </div>
+</div>
+</body>
+</html>
