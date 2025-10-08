@@ -1,43 +1,49 @@
+// Package
 package app.entities;
 
-public class User
-{
+public class User {
+
+    // Attributes
     private int userId;
     private String userName;
     private String password;
     private String role;
 
-    public User(int userId, String userName, String password, String role)
-    {
+    // ______________________________________________________________
+
+    public User(int userId, String userName, String password, String role) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.role = role;
     }
 
-    public int getUserId()
-    {
+    // ______________________________________________________________
+
+    public int getUserId() {
         return userId;
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         return userName;
     }
 
-    public String getPassword()
-    {
+    // ______________________________________________________________
+
+    public String getPassword() {
         return password;
     }
 
-    public String getRole()
-    {
+    // ______________________________________________________________
+
+    public String getRole() {
         return role;
     }
 
+    // ______________________________________________________________
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
@@ -45,4 +51,5 @@ public class User
                 ", role='" + role + '\'' +
                 '}';
     }
-}
+
+} // User end

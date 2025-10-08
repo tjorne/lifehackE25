@@ -1,5 +1,5 @@
 // Package
-package dk.project.server;
+package app.config.gruppeD;
 
 // Imports
 import org.thymeleaf.TemplateEngine;
@@ -13,7 +13,7 @@ public class ThymeleafSetup {
     // Attributes
     private static final TemplateEngine templateEngine;
     private static String suffix = ".html";
-    private static String prefix = "/templates/";
+    private static String prefix = "templates/gruppeD/";
 
     // __________________________________________________________
 

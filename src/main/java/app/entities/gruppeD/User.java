@@ -1,11 +1,13 @@
-package dk.project;
+// Package
+package app.entities.gruppeD;
 
+// Imports
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.time.LocalDateTime;
 
 public class User {
 
+    // Attributes
     private int id;
     private String username;
     private String email;
@@ -14,6 +16,8 @@ public class User {
     private LocalDateTime createdAt;
     private boolean notifications;
     private String lang;
+
+    // ______________________________________________________________
 
     public User(int id, String username, String email, String passwordHash, int roleId, LocalDateTime createdAt, boolean notifications, String language) {
         this.id = id;
@@ -124,4 +128,5 @@ public class User {
     }
 
     // __________________________________________________________
-}
+
+} // User end

@@ -1,9 +1,9 @@
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
 // Imports
-import dk.project.User;
-import dk.project.db.Database;
-import dk.project.mapper.UserMapper;
+import app.entities.gruppeD.User;
+import app.db.gruppeD.Database;
+import app.persistence.gruppeD.UserMapper;
 import io.javalin.http.Context;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -21,38 +21,38 @@ public class SettingsController {
 
    
         if (confirmation == null || name == null) {
-            ctx.redirect("/settings?error=deleteMissingFields");
+            ctx.redirect("/gruppeD/settings?error=deleteMissingFields");
             return;
         }
 
         if (!"I am so sexy".equals(confirmation)) {
-            ctx.redirect("/settings?error=deleteConfirmMismatch");
+            ctx.redirect("/gruppeD/settings?error=deleteConfirmMismatch");
             return;
         }
 
         User currentUser = ctx.sessionAttribute("currentUser");
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
         if (!currentUser.getUsername().equals(name)) {
-            ctx.redirect("/settings?error=deleteNameMismatch");
+            ctx.redirect("/gruppeD/settings?error=deleteNameMismatch");
             return;
         }
 
         // Delete fra databasen
         try (Connection connection = Database.getConnection()) {
+
             UserMapper userMapper = new UserMapper(connection);
             userMapper.deleteUser(currentUser.getId());
 
-            //invalider session så den ohpper til forsiden
             ctx.req().getSession().invalidate();
-            ctx.redirect("/?error=accountDeleted");
+            ctx.redirect("/gruppeD/?error=accountDeleted");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=deleteError");
+            ctx.redirect("/gruppeD/settings?error=deleteError");
         }
     }
 
@@ -63,7 +63,7 @@ public class SettingsController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
@@ -71,7 +71,7 @@ public class SettingsController {
             UserMapper userMapper = new UserMapper(connection);
             User existingUser = userMapper.getUserByUsername(newName);
             if(existingUser != null) {
-                ctx.redirect("/settings?error=accountExists");
+                ctx.redirect("/gruppeD/settings?error=accountExists");
                 return;
             }
 
@@ -81,12 +81,12 @@ public class SettingsController {
 
             ctx.sessionAttribute("currentUser", currentUser);
 
-            ctx.redirect("/settings?error=usernameChanged");
+            ctx.redirect("/gruppeD/settings?error=usernameChanged");
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=UsernameError");
+            ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
 
@@ -102,18 +102,18 @@ public class SettingsController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
         try (Connection connection = Database.getConnection()) {
             UserMapper userMapper = new UserMapper(connection);
             if (!BCrypt.checkpw(oldPassword, currentUser.getPasswordHash())) {
-                ctx.redirect("/settings?error=wrongPassword");
+                ctx.redirect("/gruppeD/settings?error=wrongPassword");
                 return;
             }
             if(!newPassword.equals(confirmPassword)) {
-                ctx.redirect("/settings?error=passwordMismatch");
+                ctx.redirect("/gruppeD/settings?error=passwordMismatch");
                 return;
             }
 
@@ -123,12 +123,12 @@ public class SettingsController {
 
             ctx.sessionAttribute("currentUser", currentUser);
 
-            ctx.redirect("/settings?error=wrongPassMatch");
+            ctx.redirect("/gruppeD/settings?error=wrongPassMatch");
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=UsernameError");
+            ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
 
@@ -143,14 +143,14 @@ public class SettingsController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
         try (Connection connection = Database.getConnection()) {
             UserMapper userMapper = new UserMapper(connection);
             if(!currentUser.getPasswordHash().equals(password)) {
-                ctx.redirect("/settings?error=wrongPassword");
+                ctx.redirect("/gruppeD/settings?error=wrongPassword");
                 return;
             }
 
@@ -160,12 +160,12 @@ public class SettingsController {
 
             ctx.sessionAttribute("currentUser", currentUser);
 
-            ctx.redirect("/settings?error=emailChanged");
+            ctx.redirect("/gruppeD/settings?error=emailChanged");
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=UsernameError");
+            ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
 
@@ -178,7 +178,7 @@ public class SettingsController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
@@ -193,7 +193,7 @@ public class SettingsController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=UsernameError");
+            ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
 
@@ -206,7 +206,7 @@ public class SettingsController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         if (currentUser == null) {
-            ctx.redirect("/settings?error=deleteNotLoggedIn");
+            ctx.redirect("/gruppeD/settings?error=deleteNotLoggedIn");
             return;
         }
 
@@ -215,7 +215,7 @@ public class SettingsController {
             String lang = ctx.formParam("language");
 
             if (lang == null || lang.isEmpty() || currentUser.getLanguage().equals(lang)) {
-                ctx.redirect("/settings?error=UsernameError");
+                ctx.redirect("/gruppeD/settings?error=UsernameError");
                 return;
             }
 
@@ -227,7 +227,7 @@ public class SettingsController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/settings?error=UsernameError");
+            ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
 

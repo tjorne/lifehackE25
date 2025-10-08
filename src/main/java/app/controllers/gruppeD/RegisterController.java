@@ -1,10 +1,10 @@
 // Package
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
 // Imports
-import dk.project.User;
-import dk.project.db.Database;
-import dk.project.mapper.UserMapper;
+import app.entities.gruppeD.User;
+import app.db.gruppeD.Database;
+import app.persistence.gruppeD.UserMapper;
 import io.javalin.http.Context;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
@@ -28,13 +28,13 @@ public class RegisterController {
         // Validation
         if (username == null || email == null || password == null || passwordConfirm == null) {
             // Notification later
-            ctx.redirect("/register?error=missingFields");
+            ctx.redirect("/gruppeD/register?error=missingFields");
             return;
         }
 
         if (!password.equals(passwordConfirm)) {
             // Notification later
-            ctx.redirect("/register?error=wrongPassMatch");
+            ctx.redirect("/gruppeD/register?error=wrongPassMatch");
             return;
         }
 
@@ -46,7 +46,7 @@ public class RegisterController {
 
             if (existingUser != null) {
 
-                ctx.redirect("/register?error=accountExists");
+                ctx.redirect("/gruppeD/register?error=accountExists");
                 return;
 
             }
@@ -59,11 +59,11 @@ public class RegisterController {
             userMapper.insertUser(user);
 
             // Redirect back to login
-            ctx.redirect("/?error=accountCreated");
+            ctx.redirect("/gruppeD/?error=accountCreated");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/register?error=500");
+            ctx.redirect("/gruppeD/register?error=500");
 
         }
     }

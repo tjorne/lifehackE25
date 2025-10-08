@@ -1,5 +1,5 @@
 // Package
-package dk.project.server.helper;
+package app.helper;
 
 // Imports
 

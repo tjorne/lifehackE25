@@ -8,7 +8,7 @@
     --blockquote-under-white: white;
 
     /* Colors */
-    --cupcake-orange: #ffa400;
+    --cupcake-orange: #fa8600;
     --cupcake-red: red;
     --cupcake-blue: blue;
     --cupcake-green: green;
@@ -526,7 +526,7 @@ body::-webkit-scrollbar { /* All other browsers */
 
 #pinButton i.fa:hover,
 #pinButton.active i.fa {
-    color: var(--cupcake-orange) !important;
+    color: #ff0000 !important;
     transform: scale(1.2);
 }
 
@@ -535,19 +535,24 @@ body::-webkit-scrollbar { /* All other browsers */
     transform: scale(1.2);
 }
 
-.guac-navbar-bottom i.fa.fa-star:hover,
-.guac-navbar-bottom i.fa.fa-meh-o:hover,
-.guac-navbar-bottom i.fa.fa-map-pin:hover,
+.guac-navbar-bottom i.fa:hover {
+    color: gray !important;
+    transform: scale(1.2);
+}
+
 #displayBucketList.active i.fa.fa-star,
 #displayHated.active i.fa.fa-meh-o,
-#displayVisited.active i.fa.fa-map-pin {
+#displayVisited.active i.fa.fa-check {
     color: var(--cupcake-orange) !important;
     transform: scale(1.2);
 }
 
-.guac-navbar-bottom a.active i.fa,
+.guac-navbar-bottom a.active i.fa {
+    color: #fa8600 !important;
+}
+
 .guac-navbar-bottom-right a.active i.fa {
-    color: var(--cupcake-orange) !important;
+    color: #ff0000 !important;
 }
 
 #settingsButton i.fa:hover {

@@ -1,10 +1,10 @@
 // Package
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
 // Imports
-import dk.project.User;
-import dk.project.db.Database;
-import dk.project.mapper.UserMapper;
+import app.entities.gruppeD.User;
+import app.db.gruppeD.Database;
+import app.persistence.gruppeD.UserMapper;
 import io.javalin.http.Context;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
@@ -23,7 +23,7 @@ public class LoginController {
 
         // Validation
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            ctx.redirect("/?error=missingFields");
+            ctx.redirect("/gruppeD/?error=missingFields");
             return;
         }
 
@@ -33,7 +33,7 @@ public class LoginController {
             User user = userMapper.getUserByUsername(username);
 
             if (user == null || !BCrypt.checkpw(password, user.getPasswordHash())) {
-                ctx.redirect("/?error=wrongInfo");
+                ctx.redirect("/gruppeD/?error=wrongInfo");
                 return;
             }
 
@@ -41,11 +41,11 @@ public class LoginController {
             ctx.sessionAttribute("currentUser", user);
 
             // Redirect if success
-            ctx.status(200).redirect("/worldmap");
+            ctx.status(200).redirect("/gruppeD/worldmap");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            ctx.redirect("/?error=500");
+            ctx.redirect("/gruppeD/?error=500");
         }
     }
 

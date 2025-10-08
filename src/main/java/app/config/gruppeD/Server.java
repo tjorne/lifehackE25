@@ -1,10 +1,10 @@
 // Package
-package dk.project.server;
+package app.config.gruppeD;
 
 // Imports
-import dk.project.server.routes.ErrorRoutes;
-import dk.project.server.routes.PageRoutes;
-import dk.project.server.routes.ValidRoutes;
+import app.config.routes.gruppeD.ErrorRoutes;
+import app.config.routes.gruppeD.PageRoutes;
+import app.config.routes.gruppeD.ValidRoutes;
 import io.javalin.Javalin;
 import java.sql.SQLException;
 
@@ -19,7 +19,7 @@ public class Server {
 
         // Resource folder
         app = Javalin.create(config -> {
-            config.staticFiles.add("/static"); // folder i resources/static
+            config.staticFiles.add("/public"); // folder i resources/static
         }).start(port);
 
         // __________________________________________________

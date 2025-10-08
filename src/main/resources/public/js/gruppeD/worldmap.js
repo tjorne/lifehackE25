@@ -107,9 +107,6 @@ function updateActiveNavbarMode() {
     }
 }
 
-// kør min fukntion
-updateActiveNavbarMode();
-
 // __________________________________________________________
 
 const blIcon = L.icon({ /* Bucket List Icon */
@@ -258,7 +255,7 @@ map.on('click', function(e) {
             };
 
             // TODO: Der skal så her fetches og sendes til vores thymeleaf så vi kan gemme øvrige data til vores database
-            await fetch("/pins", {
+            await fetch("/gruppeD/pins", {
 
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -301,7 +298,7 @@ map.on('click', function(e) {
 
                             try {
 
-                                await fetch(`/pins/${marker.pinData.id}`, {method: "DELETE"});
+                                await fetch(`/gruppeD/pins/${marker.pinData.id}`, {method: "DELETE"});
 
                             } catch (err) {
 
@@ -331,7 +328,6 @@ function updateVisibleMarkers() {
         case 'visited':
             visitedMarkers.forEach(m => map.addLayer(m));
             visitedButton.classList.add('active');
-
             displayMode.textContent = "Visited";
             break;
         case 'hated':
@@ -356,7 +352,7 @@ async function loadPins() {
 
     try {
 
-        const res = await fetch("/pins");
+        const res = await fetch("/gruppeD/pins");
         if (!res.ok) throw new Error("Failed to fetch pins");
         const pins = await res.json();
 
@@ -441,7 +437,6 @@ async function loadPins() {
             if (pin.category_id === 1) visitedMarkers.push(marker);
             if (pin.category_id === 2) hatedMarkers.push(marker);
             if (pin.category_id === 3) bucketMarkers.push(marker);
-
 
         });
 

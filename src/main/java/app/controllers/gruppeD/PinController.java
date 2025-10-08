@@ -1,12 +1,11 @@
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
-import dk.project.Pin;
-import dk.project.User;
-import dk.project.db.Database;
-import dk.project.mapper.PinMapper;
+import app.entities.gruppeD.Pin;
+import app.entities.gruppeD.User;
+import app.db.gruppeD.Database;
+import app.persistence.gruppeD.PinMapper;
 import io.javalin.http.Context;
 import org.json.JSONObject;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -25,9 +24,8 @@ public class PinController {
                 return;
             }
 
-
             JSONObject body = new JSONObject(ctx.body());
-            String category = body.optString("category", "visited"); // default kategori
+            String category = body.optString("category", "visited");
             String title = body.optString("title", "Untitled").trim();
             int rating = body.optInt("rating", 0);
             double lat = body.getDouble("lat");
@@ -60,7 +58,7 @@ public class PinController {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            ctx.redirect("/?error=500");
+            ctx.redirect("/gruppeD/?error=500");
 
         }
     }
@@ -80,7 +78,7 @@ public class PinController {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            ctx.redirect("/?error=500");
+            ctx.redirect("/gruppeD/?error=500");
 
         }
     }
@@ -105,7 +103,7 @@ public class PinController {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            ctx.redirect("/?error=500");
+            ctx.redirect("/gruppeD/?error=500");
 
         }
     }

@@ -1,8 +1,8 @@
 // Package
-package dk.project.mapper;
+package app.persistence.gruppeD;
 
 // Imports
-import dk.project.Search;
+import app.entities.gruppeD.Search;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

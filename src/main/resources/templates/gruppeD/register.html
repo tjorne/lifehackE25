@@ -33,7 +33,7 @@
 <body>
 
 <!-- Exit Button Start -->
-<a href="/gruppeD/" class="exit-btn" title="Tilbage til forsiden">&#10006;</a>
+<a href="/" class="exit-btn" title="Tilbage til forsiden">&#10006;</a>
 <!-- Exit Button End -->
 
 <!-- Register Section Start -->
@@ -52,13 +52,13 @@
 
     <div class="login-container guac-animate guac-fade-slide-up">
         <h2>Opret Bruger</h2>
-        <form id="registerForm" method="post" action="/gruppeD/register">
+        <form id="registerForm" method="post" action="register">
             <input type="text" name="username" placeholder="Brugernavn" required>
             <input type="password" name="password" placeholder="Adgangskode" required minlength="6">
             <input type="password" name="password_confirm" placeholder="Adgangskode igen" required minlength="6">
             <input type="email" name="email" placeholder="Email" required>
             <div class="login-btn-group">
-                <button type="button" class="guac-btn guac-btn-form lh-font" onclick="window.location.href='/'">
+                <button type="button" class="guac-btn guac-btn-form lh-font" onclick="window.location.href='/gruppeD/'">
                     Tilbage
                 </button>
                 <button type="submit" class="guac-btn guac-btn-form lh-font">

@@ -1,9 +1,9 @@
 // Package
-package dk.project.server.routes;
+package app.config.routes.gruppeD;
 
 // Imports
 import io.javalin.Javalin;
-import dk.project.server.controllers.ErrorController;
+import app.controllers.gruppeD.ErrorController;
 
 public class ErrorRoutes {
 

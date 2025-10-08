@@ -1,10 +1,10 @@
 // Package
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
 // Imports
-import dk.project.Search;
-import dk.project.db.Database;
-import dk.project.mapper.SearchMapper;
+import app.entities.gruppeD.Search;
+import app.db.gruppeD.Database;
+import app.persistence.gruppeD.SearchMapper;
 import io.javalin.http.Context;
 import java.sql.Connection;
 import java.sql.SQLException;

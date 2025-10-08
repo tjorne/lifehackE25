@@ -32,7 +32,7 @@ searchInput.addEventListener("keydown", async (e) => {
 
         try {
 
-            const res = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+            const res = await fetch(`/gruppeD/api/search?query=${encodeURIComponent(query)}`);
             const cities = await res.json();
 
             if (cities.length > 0) {

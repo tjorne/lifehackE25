@@ -1,9 +1,9 @@
 // Package
-package dk.project.mapper;
+package app.persistence.gruppeD;
 
 // Imports
-import dk.project.Pin;
-import dk.project.User;
+import app.entities.gruppeD.Pin;
+import app.entities.gruppeD.User;
 
 import java.sql.*;
 import java.sql.Connection;

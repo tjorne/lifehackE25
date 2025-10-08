@@ -1,4 +1,4 @@
-package dk.project.server.controllers;
+package app.controllers.gruppeD;
 
 public class UserController {
 }

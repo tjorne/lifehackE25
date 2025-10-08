@@ -1,5 +1,5 @@
 // Package
-package dk.project;
+package app.entities.gruppeD;
 
 // Imports
 import java.sql.Timestamp;
