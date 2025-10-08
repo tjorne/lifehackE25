@@ -1,0 +1,58 @@
+/* Dark overlay behind popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Popup window */
+.popup-window {
+    background: #fff;
+    border-radius: 12px;
+    width: 400px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    position: relative;
+}
+
+/* Close button */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Table of providers */
+.providers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.providers-table th,
+.providers-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.providers-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.providers-table a:hover {
+    text-decoration: underline;
+}
