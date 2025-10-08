@@ -12,6 +12,11 @@ public class UserController {
     public static void addRoutes(Javalin app) {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
+        app.get("/", ctx -> {
+            User currentUser = ctx.sessionAttribute("currentUser");
+            ctx.attribute("currentUser", currentUser);
+        });
+
         app.get("/login", ctx -> ctx.render("login.html"));
         app.post("/login", ctx -> login(ctx));
 
@@ -19,6 +24,7 @@ public class UserController {
 
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx));
+
     }
 
     private static void createUser(Context ctx) {

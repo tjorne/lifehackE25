@@ -2,7 +2,6 @@ package app;
 
 import app.config.ThymeleafConfig;
 import app.controllers.*;
-import app.entities.User;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -26,12 +25,7 @@ public class Main
         }).start(7070);
 
         // Routing
-        app.get("/", ctx -> {
-            User currentUser = ctx.sessionAttribute("currentUser");
-            ctx.attribute("currentUser", currentUser);
-            ctx.render("index.html");
-        });
-
+        app.get("/", ctx -> ctx.render("index.html"));
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
 
