@@ -1,0 +1,430 @@
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Theme tokens ===== */
+:root {
+    --bg-dark: hsl(0 0% 0%);
+    --bg: hsl(0 0% 5%);
+    --bg-light: hsl(0 0% 10%);
+    --text: hsl(0 0% 95%);
+    --text-muted: hsl(0 0% 70%);
+    --border: hsl(0 0% 30%);
+    --highlight: hsl(0 0% 60%);
+    --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+    --border-card: 1px solid var(--border);
+    --shadow: 0 2px 2px hsla(0, 0%, 0%, 0.07), 0 4px 4px hsla(0, 0%, 0%, 0.15);
+
+    --muted: #bbb;
+    --card: #111;
+    --radius: 12px;
+    --transparent: rgba(27, 27, 27, 0.6);
+}
+
+body.light {
+    --bg-dark: hsl(0 0% 90%);
+    --bg: hsl(0 0% 95%);
+    --bg-light: hsl(0 0% 100%);
+    --text: hsl(0 0% 5%);
+    --text-muted: hsl(0 0% 30%);
+    --border: hsl(0 0% 70%);
+    --border-card: 1px solid var(--bg);
+    --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+    --highlight: hsl(0 0% 100%);
+}
+
+/* ===== Base ===== */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+body p {
+    font-weight: bold;
+    color: var(--text-muted);
+}
+
+/* ===== Header ===== */
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gradient);
+    border-bottom: 1px solid var(--border);
+    max-height: 10vh;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+}
+
+header button {
+    color: var(--text);
+    background: none;
+}
+
+header img {
+    max-height: 8vh;
+    width: auto;
+    object-fit: contain;
+}
+
+header a {
+    color: var(--text);
+    text-decoration: none;
+    background: none;
+}
+
+/* ===== Calculator container ===== */
+.calculator-container {
+    background: var(--gradient);
+    border: var(--border-card);
+    border-top: 1px solid var(--highlight);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 40%;
+    box-shadow: var(--shadow);
+}
+
+/* Titel */
+.title-container {
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.6rem;
+}
+
+.under-title {
+    text-align: right;
+    font-size: .9rem;
+    color: var(--text-muted);
+}
+
+/* ===== Materiale valg ===== */
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.radio-group label {
+    cursor: pointer;
+}
+
+.toggle {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: var(--border-card);
+    border-top: 1px solid var(--highlight);
+    border-radius: 999px;
+    background: var(--bg-light);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: background 0.2s ease;
+}
+
+.toggle-option {
+    text-align: center;
+    padding: .5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+/* Tommelfinger på togglen */
+.toggle-thumb {
+    position: absolute;
+    top: .25rem;
+    bottom: .25rem;
+    left: .25rem;
+    width: calc(50% - .5rem);
+    border-radius: 999px;
+    background: var(--transparent); /* mørk glas-effekt i dark mode */
+    border: 1px solid var(--text-muted);
+    transition: transform .2s ease, background .2s ease, border .2s ease;
+}
+
+/* Når H×B er valgt, flyt thumb til højre */
+#mode-hb:checked ~ .toggle .toggle-thumb {
+    transform: translateX(100%);
+}
+
+/* Aktiv label bliver lysere */
+#mode-m2:checked ~ .toggle label[for="mode-m2"],
+#mode-hb:checked ~ .toggle label[for="mode-hb"] {
+    color: var(--text);
+    font-weight: bold;
+}
+
+/* === Light mode justeringer === */
+body.light .toggle {
+    background: var(--bg-light);
+}
+
+body.light .toggle-thumb {
+    background: rgba(255, 255, 255, 5%);
+    border-color: var(--border);
+}
+
+body.light .toggle-option {
+    color: var(--text-muted);
+}
+
+body.light #mode-m2:checked ~ .toggle label[for="mode-m2"],
+body.light #mode-hb:checked ~ .toggle label[for="mode-hb"] {
+    color: var(--text);
+}
+
+.hidden-radio[type="radio"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    /* ekstra sikkerhed i nogle browsere */
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* ===== Inputområder ===== */
+.mode {
+    display: none;
+    margin-bottom: 1rem;
+}
+
+.mode label {
+    display: block;
+    width: 100%;
+    margin-bottom: .5rem;
+}
+
+.mode input {
+    width: 100%;
+    padding: .5rem;
+    border: var(--border-card);
+    border-radius: var(--radius);
+    background: var(--bg-light);
+    color: var(--text);
+}
+
+#mode-m2:checked ~ .mode-m2 {
+    display: block;
+}
+
+#mode-hb:checked ~ .mode-hb {
+    display: flex;
+    gap: .5rem;
+}
+
+/* ===== Knap ===== */
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: true;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 1turn;
+    }
+}
+
+button {
+    text-align: center;
+    padding: .6rem 1rem;
+    color: var(--text);
+    border: 5px solid transparent;
+    border-radius: 100vw;
+    background: linear-gradient(var(--bg-dark), var(--bg-light)) padding-box,
+    conic-gradient(from var(--angle), red, orange, yellow, green, aquamarine, violet, red) border-box;
+    cursor: pointer;
+    animation: rotate 2s linear infinite;
+    animation-play-state: paused;
+}
+
+button:hover {
+    filter: brightness(1.1);
+    animation-play-state: running;
+}
+
+/* ===== Resultater ===== */
+.results-container {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem auto;
+    max-width: 40%;
+}
+
+@media (min-width: 768px) {
+    .results-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.resultbox {
+    background: var(--gradient);
+    border: var(--border-card);
+    border-top: 1px solid var(--highlight);
+    border-radius: var(--radius);
+    padding: 1rem;
+    position: relative;
+    box-shadow: var(--shadow);
+    min-height: 35vh;
+}
+
+.resultbox:hover {
+    background: var(--gradient-hover);
+}
+
+.resultbox h3 {
+    line-height: 1.2;
+    margin-bottom: .5rem;
+}
+
+.resultbox p {
+    white-space: pre-line;
+}
+
+.price {
+    position: absolute;
+    right: 1rem;
+    bottom: .5rem;
+    font-size: 1.4rem;
+    text-align: right;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    background: var(--gradient);
+    border-top: 1px solid var(--border);
+    max-height: 8vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+footer img {
+    max-height: 7vh;
+}
+
+#rightimg{
+    transform: scaleX(-1);
+}
+
+/* ===== Fejlbesked ===== */
+.error {
+    color: crimson;
+    border: 2px solid crimson;
+    padding: 5px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    max-width: max-content;
+    text-align: center;
+    margin: 1rem 0 1rem 0;
+}
+
+.centerBox {
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== Typografi for inputs/labels/placeholder ===== */
+label, button, ::placeholder {
+    font-size: clamp(1.1rem, 0.95vw, 4rem);
+    font-weight: bold;
+}
+
+/* Fjern talfelt-pile i WebKit */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Works in Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Bedre fokus-states */
+input:focus, button:focus-visible {
+    outline: 2px solid var(--highlight);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--highlight);
+}
+
+
+@media (max-width: 1200px) {
+    .results-container,
+    .calculator-container {
+        max-width: 60%;
+    }
+
+    header img {
+        max-height: 6vh;
+    }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+    .results-container,
+    .calculator-container {
+        max-width: 75%;
+    }
+
+    header img {
+        max-height: 5vh;
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 600px) {
+    .results-container,
+    .calculator-container {
+        max-width: 90%;
+    }
+
+    header img {
+        max-height: 4vh;
+    }
+}
+
+/* Phones */
+@media (max-width: 400px) {
+    .results-container,
+    .calculator-container {
+        max-width: 100%;
+    }
+
+    header img {
+        max-height: 3vh;
+    }
+}
