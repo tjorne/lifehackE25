@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Roulette</title>
+</head>
+<body>
+<header>
+  <h1>Movie Roulette</h1>
+
+  <div th:if="${currentUser != null}">
+    <p>Velkommen, <span th:text="${currentUser.userName}"></span>!</p>
+    <a href="/logout"><button>Log ud</button></a>
+    <a href="/watchlist"><button>Vis Watchlist</button></a>
+  </div>
+
+  <div th:if="${currentUser == null}">
+    <a href="/login"><button>Log ind</button></a>
+    <a href="/createuser"><button>Opret bruger</button></a>
+  </div>
+</header>
+
+<main>
+  <p>Velkommen til Movie Roulette!</p>
+  <p>Vælg en film, eller log ind for at se din watchlist.</p>
+</main>
+</body>
+</html>
