@@ -4,55 +4,66 @@
     <meta charset="UTF-8">
     <title>SPLITit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/css/splitit/splitit.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/splitit/splitit.css}">
 </head>
 <body>
-<header>
-    <nav>
-        <a th:href="@{/}"><img th:src="@{/images/splitit/logo.svg}" alt="Split it logo"></a>
+<header class="header">
+    <nav class="header-nav">
+        <a th:href="@{/}" class="logo-link">
+            <img th:src="@{/images/splitit/logo.svg}" alt="Split it logo" class="logo">
+        </a>
     </nav>
 </header>
 
-<main>
-    <div class="title">
-        <h1>SPLITit</h1>
-        <hr class="divider"> <!-- Format this line - maybe id or class? -->
-        <h3>Your expense splitter</h3>
-    </div>
+<main class="main">
+    <div class="main-container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="main-title">SPLITit</h1>
+            <hr class="divider">
+            <h3 class="tagline">Your expense splitter</h3>
+        </div>
 
-    <div class="selector">
-        <h2>Choose / create a group</h2>
-        <form th:action="@{/expense}" method="get">
-            <select name="groupId" id="groupSelect">
-                <option value="" disabled selected>Select a group</option>
-                <option th:each="group : ${groups}"
-                        th:value="${group.groupId}"
-                        th:text="${group.name}">
-                    Group Name
-                </option>
-            </select>
-            <br>
-            <button type="submit">
-                Show group
-            </button>
-        </form>
-    </div>
+        <!-- Group Selector Section -->
+        <div class="selector-section">
+            <h2 class="section-heading">Choose / create a group</h2>
 
-    <div class="link">
-        <a th:href="@{/splitit/createGroup}">Create a group</a>
+            <form th:action="@{/expense}" method="get" class="selector-form">
+                <div class="select-wrapper">
+                    <select name="groupId" id="groupSelect" class="group-select" required>
+                        <option value="" disabled selected>Choose a group</option>
+                        <option th:each="group : ${groups}"
+                                th:value="${group.groupId}"
+                                th:text="${group.name}">
+                            Group Name
+                        </option>
+                    </select>
+                    <img th:src="@{/images/splitit/arrow.svg}" alt="" class="select-arrow">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Show group</button>
+            </form>
+        </div>
+
+        <!-- Create Group Link -->
+        <div class="link-section">
+            <a th:href="@{/splitit/createGroup}" class="create-link">Create a group</a>
+        </div>
     </div>
 </main>
 
-<footer>
-    <div>
-        <p>
-            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
-                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+<footer class="footer">
+    <div class="footer-content">
+        <p class="footer-item">
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>MORTEN JENSEN</span>
             </a>
         </p>
-        <p>
-            <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
-                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+        <p class="footer-item">
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>DANIEL HANGAARD</span>
             </a>
         </p>
     </div>
