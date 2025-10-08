@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../images/wordngo/angry_owl.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+.login-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 530px;
+    height: 250px;
+    transform: translate(-50%, -50%);
+    background-color: #e74c3c;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+
+    display: flex;              /* use flexbox */
+    flex-direction: column;     /* stack items vertically */
+    align-items: flex-start;    /* left-align children */
+}
+
+/* center only the title */
+.title {
+    align-self: center;         /* center this one element horizontally */
+    margin-top: 0;
+    margin-bottom: 0px;
+    font-size: 40px;
+}
+
+/* form inputs */
+.input {
+    width: 100%;
+}
+
+/* buttons container */
+.buttons {
+    margin-top: 10px;
+    align-self: center;         /* optional: center buttons horizontally inside the box */
+}
+
+input[type="button"],
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 25px;
+    margin: 10px 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Base style for inputs */
+input[type="text"],
+input[type="password"] {
+    width: 500px;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    background-color: #fdfdfd;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* When user clicks inside */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #000;                  /* black border when active */
+    box-shadow: 0 0 8px rgba(0,0,0,0.3); /* subtle glow */
+    background-color: #fff;
+}
+
+/* Placeholder text style */
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: #444;
+}
