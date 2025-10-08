@@ -27,6 +27,20 @@ public class WordngoController {
                 ctx.status(404).result("No word found");
             }
         });
+
+        app.get("/Wordngo/gamepage", ctx -> {
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("user", user);
+            WordMapper wordMapper = new WordMapper();
+            Word word = wordMapper.getWord();
+            ctx.sessionAttribute("correctWord", word);
+
+            ctx.render("Wordngo/gamepage.html");
+        });
+
+
+
+
     }
 
 

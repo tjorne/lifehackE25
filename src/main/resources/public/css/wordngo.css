@@ -63,7 +63,7 @@ body {
     height:200px ;
     gap: 8px;
     width:40px;
-    top: -90px;
+    top: -70px;
     position: relative;
 
 
@@ -153,4 +153,17 @@ body {
 
 
     }
+}
+.sidebar-actions.hidden {
+  display: none;
+  pointer-events: none; /* In case display is overridden elsewhere */
+  opacity: 0;
+}
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }

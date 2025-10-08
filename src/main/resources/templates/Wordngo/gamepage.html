@@ -13,12 +13,23 @@
 
 <div class="layout">
 <div class="sidebar">
-  <a class="sidebar-button" href="" > <img src="/images/wordngo/menu.png"/> </a>
-  <a class="sidebar-button" href="/wordngo/index"><img src="/images/wordngo/home.png"/></a>
-  <div class="sidebar-button"><img src="/images/wordngo/trophy.png"/></div>
-  <a class="sidebar-button" href="/wordngo/gamepage"><img src="/images/wordngo/close.png"/></a>
+  <a class="sidebar-button" href="#" id="menu-btn">
+    <img src="/images/wordngo/menu.png"/>
+  </a>
+  <div id="sidebar-actions" class="sidebar-actions hidden">
+    <a class="sidebar-button" th:href="@{/Wordngo}">
+      <img src="/images/wordngo/home.png"/>
+    </a>
+    <div class="sidebar-button">
+      <img src="/images/wordngo/trophy.png"/>
+    </div>
+    <a class="sidebar-button" th:href="@{/Wordngo/gamepage}">
+      <img src="/images/wordngo/redo.png"/>
+    </a>
+  </div>
 </div>
 </div>
+
 
 <div class="container">
   <h1 class="title">WORD & GO</h1>
@@ -179,9 +190,17 @@
 
     return result;
   }
-</script>
-</body>
-</html>
-</body>
-</html>
 
+  document.getElementById('menu-btn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent navigation
+    const actions = document.getElementById('sidebar-actions');
+    actions.classList.toggle('hidden');
+  });
+
+</script>
+
+
+</body>
+</html>
+</body>
+</html>
