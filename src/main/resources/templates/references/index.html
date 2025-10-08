@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front Page</title>
+    <title>References</title>
     <link rel="stylesheet" href="/css/references.css">
 </head>
 <body>
 <header>
     <div class="nav-container">
         <h1>References</h1>
-        <nav>
-            <a href="#">Hjem</a>
-        </nav>
+        <nav><a href="#">Hjem</a></nav>
     </div>
 </header>
 
 <main>
-    <section class="dropdown-section">
-        <div class="dropdown">Teoretiker<br>Dropdown</div>
-        <div class="dropdown">Felt<br>Dropdown</div>
-        <div class="dropdown">Titel<br>Dropdown</div>
-        <div class="dropdown">Titel<br>Dropdown</div>
-    </section>
-
-    <button class="search-btn">Søg</button>
+    <form action="/references" method="post">
+        <label for="field-select">Select a field:</label>
+        <select name="field" id="field-select" required>
+            <option disabled selected>Select a field</option>
+            <option th:each="field : ${fields}"
+                    th:value="${field.id}"
+                    th:text="${field.name}">Placeholder</option>
+        </select>
+        <button type="submit" class="search-btn">Search field</button>
+    </form>
 </main>
 
 <footer>
@@ -39,3 +39,88 @@
 </footer>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>References</title>
+    <link rel="stylesheet" href="/css/references.css">
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <h1>References</h1>
+        <nav><a href="#">Hjem</a></nav>
+    </div>
+</header>
+
+<main>
+    <form action="/references" method="post">
+        <label for="field-select">Select a field:</label>
+        <select name="field" id="field-select" required>
+            <option disabled selected>Select a field</option>
+            <option th:each="field : ${fields}"
+                    th:value="${field.id}"
+                    th:text="${field.name}">
+            </option>
+        </select>
+        <button type="submit" class="search-btn">Search field</button>
+    </form>
+</main>
+
+<footer>
+    <p>© 2025 References Inc. All rights reserved</p>
+    <div class="footer-links">
+        <a href="#">Guides / Instructions</a> |
+        <a href="#">Company Information</a> |
+        <a href="#">Terms of Use</a> |
+        <a href="#">Privacy and Cookies Policy</a>
+    </div>
+    <span class="footer-locale">Denmark</span>
+</footer>
+</body>
+</html>
+
+
+
+ <!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Page</title>
+    <link rel="stylesheet" href="/css/references.css">
+</head>
+<body>
+<header>
+    <div class="nav-container"><h1>References</h1>
+        <nav><a href="#">Hjem</a></nav>
+    </div>
+</header>
+<main>
+    <form action="/references" method="post">
+        <select name="field" id="field-select" required>
+            <option disabled selected>Select a field</option>
+            <option th:each="field : ${fields}"
+                    th:value="${field.id}"
+                    th:text="${field.name}">
+            </option>
+        </select>
+        <button type="submit" class="search-btn">Search field</button>
+
+    </form>
+
+</main>
+
+
+<footer><p>© 2025 References Inc. All rights reserved</p>
+    <div class="footer-links"><a href="#">Guides / Instructions</a> | <a href="#">Company Information</a> | <a href="#">Terms
+        of Use</a> | <a href="#">Privacy and Cookies Policy</a></div>
+    <span class="footer-locale">Denmark</span></footer>
+</body>
+</html>
+
+-->

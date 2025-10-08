@@ -31,7 +31,7 @@ public class FieldsMapper {
 
             e.printStackTrace();
         }
-        return fieldsList;
 
+        return fieldsList;
     }
 }
