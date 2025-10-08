@@ -1,90 +1,143 @@
-body {
+/* Reset and base styling */
+* {
     margin: 0;
     padding: 0;
-    background-image: url("../images/wordngo/angry_owl.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #421414;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    font-size: 24px;
-    font-family: Arial, sans-serif;
-}
-.login-box {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    width: 530px;
-    height: 250px;
-    transform: translate(-50%, -50%);
-    background-color: #e74c3c;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-
-    display: flex;              /* use flexbox */
-    flex-direction: column;     /* stack items vertically */
-    align-items: flex-start;    /* left-align children */
+    font-family: 'Jacques Francois shadow', sans-serif;
+    color: #fff;
 }
 
-/* center only the title */
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
+/* Title */
 .title {
-    align-self: center;         /* center this one element horizontally */
-    margin-top: 0;
-    margin-bottom: 0px;
-    font-size: 40px;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #93139A;
+    text-shadow: 0 0 8px #6f00ff;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
 }
 
-/* form inputs */
-.input {
-    width: 100%;
+
+/* Game area */
+
+
+.game-area {
+    display: flex;
+    background-color: #420530;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
 }
 
-/* buttons container */
-.buttons {
-    margin-top: 10px;
-    align-self: center;         /* optional: center buttons horizontally inside the box */
+
+/* Sidebar */
+
+
+
+.sidebar {
+    display: flex;
+    background-color: #421414;
+    padding-right: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height:200px ;
+    gap: 8px;
+    width:40px;
+    top: -90px;
+    position: relative;
+
+
 }
 
-input[type="button"],
-input[type="submit"] {
-    background-color: black;
-    color: white;
+
+
+.sidebar-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2980b9;
     border: none;
-    border-radius: 6px;
-    padding: 10px 25px;
-    margin: 10px 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-/* Base style for inputs */
-input[type="text"],
-input[type="password"] {
-    width: 500px;
-    margin: 10px 0;
-    padding: 12px;
     border-radius: 8px;
-    border: 2px solid #ccc;
-    background-color: #fdfdfd;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    outline: none;
+    padding: 12px;
+    cursor: pointer;
+    color: white;
+    width: 40px;
+    height: 40px;
 }
 
-/* When user clicks inside */
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #000;                  /* black border when active */
-    box-shadow: 0 0 8px rgba(0,0,0,0.3); /* subtle glow */
-    background-color: #fff;
+.sidebar-button:hover {
+    transform: scale(1.1);
+    background-color: #3498db;
 }
 
-/* Placeholder text style */
-input::placeholder {
-    color: #999;
-    font-style: italic;
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    grid-template-rows: repeat(6, 70px);
+    gap: 8px;
+    justify-content: center;
+    align-content: center;
 }
-input[type="button"]:hover,
-input[type="submit"]:hover {
-    background-color: #444;
+
+.cell {
+    width: 70px;
+    height: 70px;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+
+.layout{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap:20px;
+
+
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .grid {
+        grid-template-columns: repeat(5, 50px);
+        grid-template-rows: repeat(6, 50px);
+    }
+
+    .cell {
+        width: 50px;
+        height: 50px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .sidebar {
+
+        top: -35px;
+
+
+
+    }
 }
