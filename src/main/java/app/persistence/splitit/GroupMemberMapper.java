@@ -62,7 +62,7 @@ public class GroupMemberMapper {
 
     public List<User> getUsersByGroupId(int groupId) throws DatabaseException {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT u.user_id, u.name, u.password, u.role " +
+        String sql = "SELECT u.user_id, u.username, u.password, u.role " +
                 "FROM users u " +
                 "JOIN group_users gu ON u.user_id = gu.user_id " +
                 "WHERE gu.group_id = ?";
@@ -75,7 +75,7 @@ public class GroupMemberMapper {
 
             while (rs.next()) {
                 int userId = rs.getInt("user_id");
-                String name = rs.getString("name");
+                String name = rs.getString("username");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
 

@@ -114,4 +114,12 @@ public class AccountServiceImpl implements AccountService{
         groups.sort(Comparator.comparing(Group::getName));
         return List.copyOf(groups);
     }
+
+    public boolean isUserInGroup(List<User> members, int userId)
+    {
+        return members.stream()
+                .anyMatch(member -> member.getUserId() == userId);
+
+    }
+
 }

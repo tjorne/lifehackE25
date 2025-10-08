@@ -42,8 +42,8 @@
                 <select name="userId" id="userSelect" required>
                     <option value="" disabled selected>Choose groupmember from list</option>
                     <option th:each="user : ${availableUsers}"
-                            th:value="${user.id}"
-                            th:text="${user.name}">
+                            th:value="${user.userId}"
+                            th:text="${user.userName}">
                         User Name
                     </option>
                 </select>
@@ -55,9 +55,9 @@
             <!-- Display Added Members -->
             <div class="member-list" th:if="${addedMembers != null and !addedMembers.empty}">
                 <div class="member-item" th:each="member : ${addedMembers}">
-                    <h4 th:text="${member.name}">Name</h4>
+                    <h4 th:text="${member.userName}">Name</h4>
                     <form th:action="@{/createGroup/removeMember}" method="post" style="display: inline;">
-                        <input type="hidden" name="userId" th:value="${member.id}">
+                        <input type="hidden" name="userId" th:value="${member.userId}">
                         <button type="submit" class="btn-delete">🗑️</button>
                     </form>
                 </div>

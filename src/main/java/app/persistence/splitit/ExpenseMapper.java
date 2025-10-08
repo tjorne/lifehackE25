@@ -85,6 +85,7 @@ public class ExpenseMapper {
                     ResultSet rs = ps.getGeneratedKeys();
                     rs.next();
                     int expenseId = rs.getInt(1);
+                    Timestamp createdAt = rs.getTimestamp("created_at");
 
                     expense = new Expense(expenseId, userId, groupId, description, amount, new Timestamp(System.currentTimeMillis()));
                     }

@@ -11,7 +11,7 @@ public class Expense {
     private double amount;
     private Timestamp createdAt;
 
-    public Expense(int expenseId, int userId, int groupId, String description, double amount, Timestamp createdAt) {
+    public Expense(int expenseId, int userId, int groupId, String description, double amount,Timestamp createdAt) {
         this.expenseId = expenseId;
         this.userId = userId;
         this.groupId = groupId;
