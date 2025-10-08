@@ -11,7 +11,6 @@ import app.entities.User;
 
 public class WordngoController {
     public static void addRoutes(Javalin app) {
-
         app.get("/Wordngo", ctx -> {
             User user = ctx.sessionAttribute("currentUser");
             ctx.attribute("user", user);

@@ -14,12 +14,13 @@ public class WordMapper {
     //     lytter til den første character der bliver trykket på
     public Word getWord() throws DatabaseException {
 
-        Random rdm = new Random(getLengthOfList());
+        Random rdm = new Random();
         String sql = "select word from words where id = ?";
         try (
                 Connection connection = ConnectionPool.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
+
             ps.setInt(1, rdm.nextInt(getLengthOfList()));
             ResultSet rs = ps.executeQuery();
             rs.next();
