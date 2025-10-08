@@ -1,0 +1,21 @@
+<table class="watchlist-table">
+    <link rel="stylesheet" href="src/main/resources/public/css/styles.css">
+    <thead>
+    <tr>
+        <th>Titel</th>
+        <th>Beskrivelse</th>
+        <th>Udgivelsesdato</th>
+        <th>Længde (min)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (Movie movie : movies) { %>
+    <tr>
+        <td><%= movie.getMovieTitle() %></td>
+        <td><%= movie.getMovieDescription() %></td>
+        <td><%= movie.getMovieAired() %></td>
+        <td><%= movie.getMovieLength() %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
