@@ -25,7 +25,7 @@ public class MovieController {
 
             if (aMovieByGenre != null) {
 
-                ctx.attribute("allMoviesByGenre", aMovieByGenre);
+                ctx.attribute("aMovieByGenre", aMovieByGenre);
                 ctx.render("");
             }
         });
@@ -35,18 +35,18 @@ public class MovieController {
 
         String genre = ctx.formParam("genreId");
 
-        List<Movie> movies = MovieMapper.getAllMoviesByGenre(genre);
+        if (genre != null) {
 
-        Movie movie;
+            List<Movie> movies = MovieMapper.getAllMoviesByGenre(genre);
 
-        if (genre != null && !genre.isEmpty()) {
+            if (!movies.isEmpty()) {
 
-            Random random = new Random();
+                Random random = new Random();
 
-            int size = random.nextInt(movies.size());
+                int size = random.nextInt(movies.size());
 
-            movie = movies.get(size);
-            return movie;
+                return movies.get(size);
+            }
         }
 
         return null;

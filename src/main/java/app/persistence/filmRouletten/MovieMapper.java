@@ -13,7 +13,7 @@ public class MovieMapper {
 
         List<Movie> movies = new ArrayList<>();
 
-        String sql = "SELECT * FROM movie";
+        String sql = "SELECT * FROM movie_roulette";
 
         try(Connection connection = ConnectionPool.getInstance().getConnection()) {
 
@@ -43,7 +43,7 @@ public class MovieMapper {
 
         List<Movie> movies = new ArrayList<>();
 
-        String sql = "SELECT * FROM movie + JOIN genre ON movie.movie_id = genre.movie_id WHERE genre_name = ?";
+        String sql = "SELECT * FROM movie_roulette JOIN genre_roulette ON movie_roulette.movie_id = genre_roulette.movie_id WHERE genre_roulette.genre_name = ? ";
 
         try(Connection connection = ConnectionPool.getInstance().getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);

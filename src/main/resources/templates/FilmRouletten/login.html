@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Log ind</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Log ind</h1>
+
+<form action="/login" method="post">
+    <label for="username">Brugernavn:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Adgangskode:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Log ind</button>
+</form>
+
+<p>Har du ikke en konto? <a href="/createuser">Opret bruger</a></p>
+
+<p th:if="${message}" th:text="${message}" style="color:red"></p>
+</body>
+</html>

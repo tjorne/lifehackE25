@@ -1,0 +1,11 @@
+.RouletteHjul {
+    position: absolute;
+    top: 50%;
+    left: 80vw;
+    transform: translateY(-50%);
+    transition: left 1.5s ease-out;
+}
+
+.RouletteHjul.slide-in {
+    left: 50%;
+}

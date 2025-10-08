@@ -17,7 +17,7 @@ public class ConnectionPool {
     private static final String DEFAULT_USER = "postgres";
     private static final String DEFAULT_PASSWORD = System.getenv("JDBC_PASSWORD");
     private static final String DEFAULT_URL = "jdbc:postgresql://159.223.25.61:5432/%s?currentSchema=public";
-    private static final String DEFAULT_DB = "messageboard";
+    private static final String DEFAULT_DB = "FilmRouletten";
     public static ConnectionPool instance = null;
     public static HikariDataSource ds = null;
 
