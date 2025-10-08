@@ -8,12 +8,13 @@
 <body>
 <div class="login-box">
     <h1 class="title">Word&go</h1>
-    <span th:text="${user.userName}">Guest</span>
+
+    <div th:text="${user != null ? user.userName : 'Guest'}"></div>
     <form action="login" method="post">
 
         <div class="input">
             <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" placeholder="Enter username"><br>
+            <input type="text" id="username" name="username" placeholder="Enter username" value=><br>
 
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password" placeholder="Enter password"><br>
