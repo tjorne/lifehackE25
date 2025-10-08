@@ -21,7 +21,7 @@ public class MovieController {
 
         app.get("", ctx -> {
 
-            Movie aMovieByGenre = getaMoviesByGenre(ctx);
+            Movie aMovieByGenre = getAMoviesByGenre(ctx);
 
             if (aMovieByGenre != null) {
 
@@ -31,7 +31,7 @@ public class MovieController {
         });
     }
 
-    public static Movie getaMoviesByGenre(Context ctx) {
+    public static Movie getAMoviesByGenre(Context ctx) {
 
         String genre = ctx.formParam("genreId");
 
