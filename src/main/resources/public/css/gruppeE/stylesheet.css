@@ -151,3 +151,57 @@
     height: 90%;
     width: 90%;
 }
+.flexbox-container-gameover{
+    background-color:white;
+    display: flex;
+    flex-wrap: wrap;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+}
+.flexbox-item-h1-gameover{
+    display: flex;
+    font-size: 48px;
+    background-color: white;
+    width: 100vw;
+    justify-content: center;
+}
+.flexbox-lowerhalf-container{
+    display: flex;
+    width: 20vw;
+    height:50vh;
+    background-color: grey;
+    margin-top: -100px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+}
+.flexbox-holder-scoreboard{
+    display: flex;
+    width: 20vw;
+    height: 10vh;
+    flex-wrap: wrap;
+    background-color: #B8B8B6;
+    justify-content: center;
+}
+.flexbox-holder-scores{
+    height:40vh;
+    width:10vw;
+    display:flex;
+    justify-content: center;
+    background-color: #969696;
+}
+.flexbox-holder-dates{
+    height:40vh;
+    width:10vw;
+    display:flex;
+    justify-content: center;
+    background-color: #969696;
+}
+.body{
+margin:0px;
+}
+.field-item button{
+
+    width: 20px; height:20px;
+}
