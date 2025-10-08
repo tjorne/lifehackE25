@@ -23,6 +23,14 @@
     <div class="expense-identifier">
         <!-- Group name -->
         <p><strong>Group:</strong> <span th:text="${groupName}">Group Name</span></p>
+        <!--
+        <form th:action="@{/expenses/deleteGroup}" method="post" style="display: inline;">
+            <input type="hidden" name="groupId" th:value="${group.groupId}">
+            <button type="submit" class="btn-delete">
+                <img th:src="@{/images/splitit/bucket.svg}" alt="Delete group" class="delete-icon">
+            </button>
+        </form>
+        -->
         <!-- User name -->
         <h4 th:text="${accountname}">Name</h4>
     </div>
@@ -48,6 +56,18 @@
             <span class="expense-amount">Description: <em th:text="${expense.description}"></em></span>
             <br>
             <p th:text="${expense.getRelativeTime}">Timestamp</p>
+            <form th:action="@{/createGroup/editExpense}" method="post" style="display: inline;">
+                <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
+                <button type="submit" class="btn-edit">
+                    <img th:src="@{/images/splitit/edit.svg}" alt="Edit expense" class="edit-icon">
+                </button>
+            </form>
+            <form th:action="@{/expenses/deleteExpense}" method="post" style="display: inline;">
+                <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
+                <button type="submit" class="btn-delete">
+                    <img th:src="@{/images/splitit/bucket.svg}" alt="Delete expense" class="delete-icon">
+                </button>
+            </form>
             <hr class="divider">
         </div>
     </div>

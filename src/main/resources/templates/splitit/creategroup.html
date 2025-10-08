@@ -58,7 +58,9 @@
                     <h4 th:text="${member.userName}">Name</h4>
                     <form th:action="@{/createGroup/removeMember}" method="post" style="display: inline;">
                         <input type="hidden" name="userId" th:value="${member.userId}">
-                        <button type="submit" class="btn-delete">🗑️</button>
+                        <button type="submit" class="btn-delete">
+                            <img th:src="@{/images/splitit/bucket.svg}" alt="Delete member" class="delete-icon">
+                        </button>
                     </form>
                 </div>
             </div>
@@ -75,23 +77,22 @@
                     CREATE
                 </button>
             </form>
-
-            <!-- Cancel/Reset  Make this as a link, not a button! -->
-            <a th:href="@{/createGroup/cancel}">Cancel</a>
         </div>
     </div>
+    <!-- Cancel/Reset  Make this as a link, not a button! -->
+    <a th:href="@{/createGroup/cancel}">Cancel</a>
 </main>
 
 <footer>
     <div>
         <p>
             <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
-                <img th:src="@{/images/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
             </a>
         </p>
         <p>
             <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
-                <img th:src="@{/images/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
             </a>
         </p>
     </div>
