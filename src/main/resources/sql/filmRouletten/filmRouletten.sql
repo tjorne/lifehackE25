@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS public.provider_name_roulette
 (
     provider_name_id serial NOT NULL,
     provider_name character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT provider_name_roulette_pkey PRIMARY KEY (provider_name_id)
+    CONSTRAINT provider_name_roulette_pkey PRIMARY KEY (provider_name_id)Har
     );
 
 CREATE TABLE IF NOT EXISTS public.user_roulette
