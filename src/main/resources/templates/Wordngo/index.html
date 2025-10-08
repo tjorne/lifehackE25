@@ -8,21 +8,26 @@
 <body>
 <div class="login-box">
     <h1 class="title">Word&go</h1>
-
-    <div th:text="${user != null ? user.userName : 'Guest'}"></div>
     <form action="login" method="post">
 
         <div class="input">
             <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" placeholder="Enter username" value=><br>
+            <input type="text" id="username" name="username" placeholder="Enter username"
+                   th:value="${user != null ? user.userName : ''}">
+
+            <br>
 
             <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter password"><br>
+            <input type="password" id="password" name="password" placeholder="Enter password"
+                   th:value="${user != null ? user.password : ''}"><br>
         </div>
 
         <div class="buttons">
+            <a th:href="@{/createuser}">
             <input type="button" name="create" value="Create Account">
+            </a>
             <input type="submit" name="login" value="Login">
+
         </div>
     </form>
 </div>
