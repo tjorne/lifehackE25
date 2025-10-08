@@ -83,13 +83,13 @@ public class MineController {
             return;
         }
 
-        serveGamePage(ctx);
+        ctx.redirect("/gruppeE/game");
     }
 
     public static void serveBackStartPage(Context ctx)
     {
         ctx.sessionAttribute("mineMap",null);
-        ctx.render("/gruppeE/start.html");
+        ctx.redirect("/gruppeE");
     }
 
     public static void serveBackToGamePage(Context ctx)

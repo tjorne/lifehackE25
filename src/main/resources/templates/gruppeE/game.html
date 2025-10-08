@@ -22,22 +22,29 @@
         </div>
         <div class="field-container">
 
-            <div th:each="field,iter : ${mineMap.field}">
+            <div class="field-item" th:style="'width: calc(100%/'+@{${mineMap.width}}+');'+'height: calc(100%/'+@{${mineMap.height}}+')'" th:each="field,iter : ${mineMap.field}">
 
+                <!-- render field -->
                 <th:block th:if="${field.shown} == false">
-                    <form class="field-item field-hidden" th:action="@{/gruppeE/mine/{id} (id=${iter.index})}" method="POST">
+                    <form  class="field-hidden" th:action="@{/gruppeE/mine/{id} (id=${iter.index})}" method="POST">
                         <button type="submit"></button>
                     </form>
                 </th:block>
                 <th:block th:if="${field.shown} == true">
                     <th:block th:if="${field.isMine} == false">
-                        <p class="field-item field" th:text="${field.mineCnt}"></p>
+                        <hi class="field" th:text="${field.mineCnt}"></hi>
                     </th:block>
                     <th:block th:if="${field.isMine} == true">
-                        <div class="field-item field">
-                            <p>¤</p>
+                        <div class="field">
+                            <hi>¤</hi>
                         </div>
                     </th:block>
+                </th:block>
+                <!-- end render field -->
+
+                <!-- new line -->
+                <th:block th:if="${iter.index} > 0">
+                <br th:if="${iter.index} % ${mineMap.width} == 0">
                 </th:block>
             </div>
         </div>
