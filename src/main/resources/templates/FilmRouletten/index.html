@@ -41,8 +41,8 @@
     </header>
 
     <header>
-        <button class="login-btn" type="button">LOGIN</button>
-        <button class="watchlist-btn" type="button">WATCHLIST</button>
+        <a href="/login" class="login-btn">LOGIN</a>
+        <a href="/watchlist" class="watchlist-btn">WATCHLIST</a>
     </header>
 
     <h2 class="genre-title">Vælg Genre</h2>
@@ -52,62 +52,23 @@
 
         <!-- VIEW 1: VÆLG GENRE -->
         <section class="view view--genres" data-view="genres">
-
-            <div class="genres">
-                <button class="pill" type="button">Action</button>
-                <button class="pill" type="button">Gyser</button>
-                <button class="pill" type="button">Komedie</button>
-                <button class="pill" type="button">Sci-Fi</button>
-                <button class="pill" type="button">Krimi</button>
-                <button class="pill" type="button">Drama</button>
-                <button class="pill" type="button">Thriller</button>
-                <button class="pill" type="button">Eventyr</button>
-            </div>
+            <form action="/getMovie" method="get" class="genres" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+                <button class="pill" type="submit" name="genre" value="Action">Action</button>
+                <button class="pill" type="submit" name="genre" value="Gyser">Gyser</button>
+                <button class="pill" type="submit" name="genre" value="Komedie">Komedie</button>
+                <button class="pill" type="submit" name="genre" value="Sci-Fi">Sci-Fi</button>
+                <button class="pill" type="submit" name="genre" value="Krimi">Krimi</button>
+                <button class="pill" type="submit" name="genre" value="Drama">Drama</button>
+                <button class="pill" type="submit" name="genre" value="Thriller">Thriller</button>
+                <button class="pill" type="submit" name="genre" value="Eventyr">Eventyr</button>
+            </form>
 
             <div class="RouletteHjul" id="rouletteWheel">
                 <img src="../../public/images/FilmRouletteHjul.png" alt="FilmRouletteLogo" />
             </div>
 
-
         </section>
 
-
-        <!-- VIEW 2: SPIN HJULET  -->
-        <section class="view view--spin" data-view="spin" hidden>
-            <div class="wheel">
-                <img id = "wheel" src="../../public/images/FilmRoulettenLogo.png" alt="FilmRoulettenLogo" />
-            </div>
-
-            <button id = "spinBTN" class="btn btn--primary" type="button">Klik for at spinne!</button>
-        </section>
-
-        <!-- VIEW 3: RESULTAT -->
-        <section class="view view--result" data-view="result" hidden>
-            <div class="wheel">
-                <img src="../../public/images/FilmRoulettenLogo.png" alt="FilmRoulettenLogo" />
-            </div>
-
-            <div class="card result">
-                <h2 class="result__title">Hurra! Du skal se…</h2>
-
-                <ul class="result__meta">
-                    <li>IMDb: </li>
-                    <li>Varighed:</li>
-                    <li>Genre:</li>
-                </ul>
-            </div>
-
-                <div class="result__actions">
-                    <a class="btn btn--primary" href="#">Tag mig til filmen!</a>
-                </div>
-
-
-            <div class="result__options">
-                <button class="pill" type="button">KLIK FOR AT SPINNE IGEN!</button>
-                <span class="muted">eller</span>
-                <button class="pill" type="button">ELLER VÆLG NY GENRE!</button>
-            </div>
-        </section>
 
     </main>
 </div>

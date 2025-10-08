@@ -1,8 +1,9 @@
 package app;
 
 import app.config.ThymeleafConfig;
-import app.controllers.*;
 import app.controllers.filmRouletten.FilmRoulettenController;
+import app.controllers.filmRouletten.MovieController;
+import app.controllers.filmRouletten.UserController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -26,11 +27,13 @@ public class Main
         }).start(7070);
 
         // Routing
-        app.get("/", ctx -> ctx.render("index.html"));
-        FilmRoulettenController.addRoutes(app);
-
         //UserController.addRoutes(app);
         //TimeZonesController.addRoutes(app);
+
+        app.get("/", ctx -> ctx.render("filmRouletten/index.html"));
+        UserController.addRoutes(app);
+        FilmRoulettenController.addRoutes(app);
+        MovieController.addRoutes(app);
 
     }
 }

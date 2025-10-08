@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FilmRouletten</title>
+
+  <!-- Google-font til Xanh Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+
+  <link href="../../public/css/filmRouletten/FilmRouletten.css" th:href="@{/css/filmRouletten/FilmRouletten.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="page">
+
+  <header>
+    <a href="../index.html" th:href="@{/}">
+      <img class="lifehack-logo"
+           alt="Lifehack-logo"
+           src="../../public/images/lifehacklogo.png"
+           th:src="@{/images/lifehacklogo.png}" />
+    </a>
+  </header>
+
+  <header class="site-header">
+    <div class="brand">
+      <h1 class="brand__text brand__text--left">FILM</h1>
+
+      <img
+              class="brand__logo"
+              src="../../public/images/FilmRoulettenLogo.png"
+              alt="FilmRoulette logo"
+              th:src="@{/images/FilmRoulettenLogo.png}"
+      />
+
+      <h1 class="brand__text brand__text--right">ROULETTEN</h1>
+
+
+    </div>
+  </header>
+
+  <header>
+    <button class="login-btn" type="button">LOGIN</button>
+    <button class="watchlist-btn" type="button">WATCHLIST</button>
+  </header>
+
+  <h2 class="genre-title">Vælg Genre</h2>
+
+
+  <main>
+
+    <!-- VIEW 1: VÆLG GENRE -->
+    <section class="view view--genres" data-view="genres">
+
+      <div class="genres">
+
+      </div>
+
+      <div class="RouletteHjul" id="rouletteWheel">
+        <img src="../../public/images/FilmRouletteHjul.png" alt="FilmRouletteLogo" />
+      </div>
+
+
+    </section>
+
+
+    <!-- VIEW 2: SPIN HJULET  -->
+    <section class="view view--spin" data-view="spin" hidden>
+      <div class="wheel">
+        <img id = "wheel" src="../../public/images/FilmRoulettenLogo.png" alt="FilmRoulettenLogo" />
+      </div>
+
+      <button id = "spinBTN" class="btn btn--primary" type="button">Klik for at spinne!</button>
+    </section>
+
+    <!-- VIEW 3: RESULTAT -->
+    <section class="view view--result" data-view="result" hidden>
+      <div class="wheel">
+        <img src="../../public/images/FilmRoulettenLogo.png" alt="FilmRoulettenLogo" />
+      </div>
+
+      <div class="card result">
+        <h2 class="result__title">Hurra! Du skal se…</h2>
+
+        <ul class="result__meta">
+          <li>IMDb: </li>
+          <li>Varighed:</li>
+          <li>Genre:</li>
+        </ul>
+      </div>
+
+      <div class="result__actions">
+        <a class="btn btn--primary" href="#">Tag mig til filmen!</a>
+      </div>
+
+
+      <div class="result__options">
+        <button class="pill" type="button">KLIK FOR AT SPINNE IGEN!</button>
+        <span class="muted">eller</span>
+        <button class="pill" type="button">ELLER VÆLG NY GENRE!</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

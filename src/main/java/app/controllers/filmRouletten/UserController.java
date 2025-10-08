@@ -10,11 +10,11 @@ import io.javalin.http.Context;
 public class UserController {
 
     public static void addRoutes(Javalin app) {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         app.get("/", ctx -> {
             User currentUser = ctx.sessionAttribute("currentUser");
             ctx.attribute("currentUser", currentUser);
+            ctx.render("filmRouletten/index.html");
         });
 
         app.get("/login", ctx -> ctx.render("filmRouletten/login.html"));
@@ -25,9 +25,11 @@ public class UserController {
         app.get("/createuser", ctx -> ctx.render("filmRouletten/createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx));
 
-        app.get("/watchlist", ctx -> ctx.render("filmRoulette/watchlist.html"));
-        app.get("/index", ctx -> ctx.render("filmRoulette/index.html"));
+        app.get("/watchlist", ctx -> ctx.render("filmRouletten/watchlist.html"));
+        // /index kan være overflødig når / renderer index; du kan fjerne eller behold:
+        app.get("/index", ctx -> ctx.render("filmRouletten/index.html"));
     }
+
 
     private static void createUser(Context ctx) {
         String username = ctx.formParam("username");

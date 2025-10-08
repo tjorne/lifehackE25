@@ -12,43 +12,38 @@ public class MovieController {
 
     public static void addRoutes(Javalin app) {
 
-        app.get("", ctx -> {
 
-            List<Movie> allMovies = MovieMapper.getAllMovies();
-            ctx.attribute("allMovies", allMovies);
-            ctx.render("");
+        app.get("/getMovie", ctx -> {
+            String genre = ctx.queryParam("genre");
+            if (genre == null || genre.isEmpty()) {
+                ctx.redirect("/");
+                return;
+            }
+
+            Movie movie = getRandomMovieByGenre(genre);
+
+            ctx.attribute("selectedGenre", genre);
+            ctx.attribute("movie", movie); // kan være null hvis ingen film fundet
+            ctx.render("filmRouletten/getMovie.html");
         });
 
-        app.get("", ctx -> {
-
-            Movie aMovieByGenre = getAMoviesByGenre(ctx);
-
-            if (aMovieByGenre != null) {
-
-                ctx.attribute("aMovieByGenre", aMovieByGenre);
-                ctx.render("");
-            }
+        app.get("/movies", ctx -> {
+            List<Movie> allMovies = MovieMapper.getAllMovies();
+            ctx.attribute("allMovies", allMovies);
+            ctx.render("filmRouletten/allMovies.html"); // lav template hvis ønsket
         });
     }
 
-    public static Movie getAMoviesByGenre(Context ctx) {
+    private static Movie getRandomMovieByGenre(String genre) {
+        if (genre == null) return null;
 
-        String genre = ctx.formParam("genreId");
+        List<Movie> movies = MovieMapper.getAllMoviesByGenre(genre);
 
-        if (genre != null) {
-
-            List<Movie> movies = MovieMapper.getAllMoviesByGenre(genre);
-
-            if (!movies.isEmpty()) {
-
-                Random random = new Random();
-
-                int size = random.nextInt(movies.size());
-
-                return movies.get(size);
-            }
+        if (movies == null || movies.isEmpty()) {
+            return null;
         }
 
-        return null;
+        Random random = new Random();
+        return movies.get(random.nextInt(movies.size()));
     }
 }
