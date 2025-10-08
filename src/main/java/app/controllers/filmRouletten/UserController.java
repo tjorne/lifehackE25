@@ -17,14 +17,16 @@ public class UserController {
             ctx.attribute("currentUser", currentUser);
         });
 
-        app.get("/login", ctx -> ctx.render("login.html"));
+        app.get("/login", ctx -> ctx.render("filmRouletten/login.html"));
         app.post("/login", ctx -> login(ctx));
 
         app.get("/logout", ctx -> logout(ctx));
 
-        app.get("/createuser", ctx -> ctx.render("createuser.html"));
+        app.get("/createuser", ctx -> ctx.render("filmRouletten/createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx));
 
+        app.get("/watchlist", ctx -> ctx.render("filmRoulette/watchlist.html"));
+        app.get("/index", ctx -> ctx.render("filmRoulette/index.html"));
     }
 
     private static void createUser(Context ctx) {
