@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+
+    <!-- Meta -->
+    <meta charset="UTF-8"> <!-- ÆØÅ -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- In case some nerd uses Internet Explorer -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile Responsiveness -->
+    <meta name="description" content="Yea ngl I hate life. Let's get it!"> <!-- SEO / Google -->
+    <meta name="author" content="Guacamoleboy"> <!-- Author of Website -->
+
+    <!-- Visuals -->
+    <title>BeyondBorders</title>
+
+    <!-- Icon -->
+    <link rel="icon" href="/images/gruppeD/icons/logo-noText-travlr-red.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/images/gruppeD/icons/logo-noText-travlr-red.png">
+
+    <!-- CSS Load -->
+    <link rel="stylesheet" href="/css/gruppeD/guacamoleboy-wow.css">
+    <link rel="stylesheet" href="/css/gruppeD/guacamoleboy-framework.css">
+    <link rel="stylesheet" href="/css/gruppeD/style.css">
+    <link rel="stylesheet" href="/css/gruppeD/font-awesome-4.7.0.min.css">
+
+    <!-- leaflet Load -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" defer></script>
+
+    <!-- Map Load -->
+    <link rel="stylesheet" href="/css/gruppeD/worldmap.css">
+    <script src="/js/gruppeD/worldmap.js" defer></script>
+
+    <!-- Scripts -->
+    <script src="/js/gruppeD/guacamoleboy-wow.js" defer></script>
+    <script src="/js/gruppeD/blocker.js" defer></script>
+    <script src="/js/gruppeD/click-sound.js" defer></script>
+    <script src="/js/gruppeD/search.js" defer></script>
+    <script src="/js/gruppeD/notification.js" defer></script>
+
+</head>
+<body>
+
+<!-- Map Start -->
+<div id="map"></div>
+<!-- Map End -->
+
+<!-- Menu Start -->
+<section>
+    <div class="guac-container">
+        <div class="guac-row">
+
+            <!-- Left navbar Start
+            <nav class="guac-navbar-bottom guac-navbar-bottom-left">
+                <a href="/settings" id="settingsButton"><i class="fa fa-cog"></i></a>
+            </nav>
+            Left navbar End -->
+
+            <!-- Wish Mode navbar Start -->
+            <nav class="guac-navbar-bottom guac-navbar-bottom-wish" id="wishButton">
+                <div class="guac-navbar-bottom-wish-inner">
+                    <span class="wish-text" id="mode-display">Visited</span> <!-- Changes depending on each mode -->
+                </div>
+            </nav>
+            <!-- Wish Mode navbar End -->
+
+            <!-- Center navbar Start -->
+            <nav class="guac-navbar-bottom">
+                <a href="/gruppeD/settings" id="settingsButton"><i class="fa fa-cog"></i></a>
+                <a href="#" id="search-toggle"><i class="fa fa-search"></i></a> <!-- Search for country / city -->
+                <a href="#" id="displayVisited"><i class="fa fa-map-pin"></i></a> <!-- Pin Mode (Visited) -->
+                <a href="#" id="displayHated" ><i class="fa fa-meh-o"></i></a> <!-- Places we don't wanna go again -->
+                <a href="#" id="displayBucketList" ><i class="fa fa-star"></i></a> <!-- Bucket List Mode -->
+            </nav>
+            <!-- Center navbar End -->
+
+            <!-- Right navbar Start -->
+            <nav class="guac-navbar-bottom guac-navbar-bottom-right">
+                <a href="#" id="pinButton"><i class="fa fa-map-marker"></i></a> <!-- Only our Pin Menu -->
+            </nav>
+            <!-- Right navbar End -->
+
+        </div>
+    </div>
+</section>
+<!-- Menu End -->
+
+<!-- Notifications Start -->
+<section>
+    <div id="guac-notification-container"></div>
+</section>
+<!-- Notifications End -->
+
+<!-- Search Menu Overlay Start -->
+<div class="guac-container search-overlay" id="search-overlay">
+    <div class="guac-row">
+
+        <!-- Search Wrapper Start -->
+        <div class="search-wrapper">
+            <div class="search-content">
+                <h2>Search for a city or a town</h2>
+                <div class="search-box">
+                    <input type="text" id="search-wrapper-input" placeholder="Paris..." />
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Search Wrapper End -->
+
+    </div>
+</div>
+<!-- Search Menu Overlay End -->
+
+</body>
+</html>

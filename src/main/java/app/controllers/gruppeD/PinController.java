@@ -1,0 +1,115 @@
+package dk.project.server.controllers;
+
+import dk.project.Pin;
+import dk.project.User;
+import dk.project.db.Database;
+import dk.project.mapper.PinMapper;
+import io.javalin.http.Context;
+import org.json.JSONObject;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.ArrayList;
+
+public class PinController {
+
+    public static void createPin(Context ctx) {
+        try (Connection connection = Database.getConnection()) {
+
+
+            User currentUser = ctx.sessionAttribute("currentUser");
+            if (currentUser == null) {
+                ctx.status(401).result("Not logged in");
+                return;
+            }
+
+
+            JSONObject body = new JSONObject(ctx.body());
+            String category = body.optString("category", "visited"); // default kategori
+            String title = body.optString("title", "Untitled").trim();
+            int rating = body.optInt("rating", 0);
+            double lat = body.getDouble("lat");
+            double lng = body.getDouble("lng");
+
+
+            int categoryId = switch (category.toLowerCase()) {
+                case "visited" -> 1;
+                case "hated" -> 2;
+                case "bucket" -> 3;
+                default -> 1; // fallback
+            };
+
+            Pin pin = new Pin(
+                    0,
+                    currentUser.getId(),
+                    categoryId,
+                    lat,
+                    lng,
+                    Timestamp.from(Instant.now()),
+                    title,
+                    rating
+            );
+
+            PinMapper mapper = new PinMapper(connection);
+            mapper.addPin(pin);
+
+            ctx.status(201).json(pin);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            ctx.redirect("/?error=500");
+
+        }
+    }
+
+    // ________________________________________
+
+    public static void deletePin(Context ctx) {
+        try (Connection connection = Database.getConnection()) {
+
+            int id = Integer.parseInt(ctx.pathParam("id"));
+
+            PinMapper mapper = new PinMapper(connection);
+            mapper.deletePin(id);
+
+            ctx.status(204);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            ctx.redirect("/?error=500");
+
+        }
+    }
+
+    // ________________________________________
+
+    public static void getPins(Context ctx) {
+        try (Connection connection = Database.getConnection()) {
+
+            User currentUser = ctx.sessionAttribute("currentUser");
+
+            if (currentUser == null) {
+                ctx.status(401).result("Not logged in");
+                return;
+            }
+
+            PinMapper mapper = new PinMapper(connection);
+            ArrayList<Pin> pins = mapper.getPinsByUserId(currentUser.getId());
+
+            ctx.json(pins);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            ctx.redirect("/?error=500");
+
+        }
+    }
+
+    // ________________________________________
+
+}

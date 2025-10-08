@@ -1,0 +1,269 @@
+/*
+
+    Inspired by WOW.js (animations)
+        Made by Guacamoleboy
+
+          Last edited by
+           Guacamoleboy
+            28/09-2025
+
+*/
+
+.guac-animate {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.guac-animate.guac-visible {
+    opacity: 1;
+}
+
+.guac-fade-in.guac-visible {
+    animation: guacFadeIn 0.7s forwards;
+}
+
+.guac-slide-up.guac-visible {
+    animation: guacSlideUp 1s forwards;
+}
+
+.guac-slide-left.guac-visible {
+    animation: guacSlideLeft 1s forwards;
+}
+
+.guac-slide-right.guac-visible {
+    animation: guacSlideRight 1s forwards;
+}
+
+.guac-slide-in-left.guac-visible {
+    animation: guacSlideInLeft 1s forwards;
+}
+
+.guac-slide-up.guac-visible {
+    animation: guacSlideUp 1s forwards;
+}
+
+.guac-slide-in-right.guac-visible {
+    animation: guacSlideRight 1s forwards;
+}
+
+.guac-bounce.guac-visible {
+    animation: guacBounce 1s forwards;
+}
+
+.guac-zoom-in.guac-visible {
+    animation: guacZoomIn 1s forwards;
+}
+
+.guac-zoom-in-n-out.guac-visible {
+    animation: guacZoomInNOut 0.5s forwards;
+    animation-delay: 1s; /* Waits for zoom-in to be done */
+}
+
+.guac-rotate.guac-visible {
+    animation: guacRotate 1s forwards;
+}
+
+.guac-flip.guac-visible {
+    animation: guacFlip 1s forwards;
+}
+
+.guac-shake.guac-visible {
+    animation: guacShake 0.8s forwards;
+}
+
+.guac-pulse.guac-visible {
+    animation: guacPulse 1.2s forwards;
+}
+
+.guac-roll-left.guac-visible {
+    animation: guacRollLeft 1s forwards;
+}
+
+.guac-roll-right.guac-visible {
+    animation: guacRollRight 1s forwards;
+}
+
+.guac-slide-out {
+    animation: guac-slide-out 1s forwards;
+}
+
+.guac-fade-slide-up.guac-visible {
+    animation: guacFadeSlideUp 1s forwards;
+}
+
+.guac-fade-slide-down.guac-visible {
+    animation: guacFadeSlideDown 1s forwards;
+}
+
+.guac-fade-slide-left.guac-visible {
+    animation: guacFadeSlideLeft 1s forwards;
+}
+
+.guac-fade-slide-right.guac-visible {
+    animation: guacFadeSlideRight 1s forwards;
+}
+
+.guac-rotate-in.guac-visible {
+    animation: guacRotateIn 1s forwards;
+}
+
+.guac-fade-out.guac-visible {
+    animation: guacFadeOut 1s forwards;
+}
+
+.guac-rotate-out.guac-visible {
+    animation: guacRotateOut 1s forwards;
+}
+
+.guac-slide-down.guac-visible {
+    animation: guacSlideDown 1s forwards;
+}
+
+/* _______________________________________________________ */
+
+/* KEY FRAMES */
+/* _______________________________________________________ */
+
+@keyframes guacFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes guacSlideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guacSlideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guacSlideLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guacSlideRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guacSlideInLeft {
+    from { opacity: 0; transform: translateX(-100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guacSlideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guacBounce {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+    80% { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes guacZoomIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes guacZoomInNOut {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes guacRotate {
+    from { opacity: 0; transform: rotate(-180deg); }
+    to { opacity: 1; transform: rotate(0deg); }
+}
+
+@keyframes guacFlip {
+    from { opacity: 0; transform: rotateY(180deg); }
+    to { opacity: 1; transform: rotateY(0deg); }
+}
+
+@keyframes guacShake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes guacPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes guacRollLeft {
+    from { opacity: 0; transform: translateX(-100%) rotate(-360deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+@keyframes guacRollRight {
+    from { opacity: 0; transform: translateX(100%) rotate(360deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+@keyframes guacFadeSlideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guacFadeSlideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guacFadeSlideLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guacFadeSlideRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guacRotateIn {
+    from { opacity: 0; transform: rotate(-200deg); }
+    to { opacity: 1; transform: rotate(0deg); }
+}
+
+@keyframes guacFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes guacRotateOut {
+    from { opacity: 1; transform: rotate(0deg); }
+    to { opacity: 0; transform: rotate(200deg); }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+@keyframes guac-slide-out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
