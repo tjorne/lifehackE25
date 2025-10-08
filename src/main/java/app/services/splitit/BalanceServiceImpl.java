@@ -13,23 +13,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BalanceServiceImpl implements BalanceService
-{
+public class BalanceServiceImpl implements BalanceService {
     private ExpenseMapper expenseMapper;
     private GroupMemberMapper groupMemberMapper;
 
-    public BalanceServiceImpl(ExpenseMapper expenseMapper, GroupMemberMapper groupMemberMapper)
-    {
+    public BalanceServiceImpl(ExpenseMapper expenseMapper, GroupMemberMapper groupMemberMapper) {
         this.expenseMapper = expenseMapper;
         this.groupMemberMapper = groupMemberMapper;
     }
 
     @Override
-    public List<UserBalanceDTO> getGroupBalances(int groupId) throws DatabaseException
-    {
+    public List<UserBalanceDTO> getGroupBalances(int groupId) throws DatabaseException {
         List<Expense> expenses = expenseMapper.getExpensesByGroupId(groupId);
         List<User> users = groupMemberMapper.getUsersByGroupId(groupId);
+        return calculateUserBalances(expenses,users);
+    }
 
+    @Override
+    public List<Settlement> getSettlements(int groupId) throws DatabaseException {
+        List<UserBalanceDTO> balanceDTOS = getGroupBalances(groupId);
+        return calculateSettlements(balanceDTOS);
+    }
+
+    public List<UserBalanceDTO> calculateUserBalances(List<Expense> expenses, List<User> users)
+    {
         Map<String, Double> paidByUser = users.stream()
                 .collect(Collectors.toMap(
                         User::getUserName,
@@ -38,7 +45,6 @@ public class BalanceServiceImpl implements BalanceService
                                 .mapToDouble(Expense::getAmount)
                                 .sum()
                 ));
-
         double total = expenses.stream()
                 .mapToDouble(Expense::getAmount)
                 .sum();
@@ -47,20 +53,17 @@ public class BalanceServiceImpl implements BalanceService
 
         List<UserBalanceDTO> userBalanceDTOS = new ArrayList<>();
 
-
-        for(User user: users){
+        for (User user : users) {
             String username = user.getUserName();
             double paid = paidByUser.get(username);
             double balance = Math.round((paid - sharePerUser) * 100.0) / 100.0;
-            userBalanceDTOS.add(new UserBalanceDTO(username,balance));
+            userBalanceDTOS.add(new UserBalanceDTO(username, balance));
         }
         return userBalanceDTOS;
     }
 
-    @Override
-    public List<Settlement> getSettlements(int groupId) throws DatabaseException
+    public List<Settlement> calculateSettlements(List<UserBalanceDTO> balanceDTOS)
     {
-        List<UserBalanceDTO> balanceDTOS = getGroupBalances(groupId);
         List<Settlement> settlements = new ArrayList<>();
 
         List<UserBalanceDTO> debitors = balanceDTOS.stream()
@@ -96,9 +99,8 @@ public class BalanceServiceImpl implements BalanceService
                 creditor.setBalance(creditor.getBalance() - payment);
             }
         }
-
         return settlements;
-            }
-        }
+    }
+}
 
 
