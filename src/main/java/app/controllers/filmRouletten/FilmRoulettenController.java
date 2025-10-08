@@ -1,4 +1,4 @@
-package app.controllers;
+package app.controllers.filmRouletten;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
