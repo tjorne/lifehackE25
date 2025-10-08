@@ -25,11 +25,11 @@ public class Main
             config.staticFiles.add("/templates");
         }).start(7070);
 
+
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
-
-            WordngoController.addRoutes(app);
+        WordngoController.addRoutes(app);
         }
     }

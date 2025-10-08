@@ -8,6 +8,7 @@ public class WordngoController
     public static void addRoutes(Javalin app)
     {
         app.get("/projectname", ctx -> index(ctx));
+
     }
 
     private static void index(Context ctx)

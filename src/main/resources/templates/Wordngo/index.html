@@ -8,8 +8,9 @@
 <body>
 <div class="login-box">
     <h1 class="title">Word&go</h1>
-
+    <span th:text="${user.userName}">Guest</span>
     <form action="login" method="post">
+
         <div class="input">
             <label for="username">Username</label><br>
             <input type="text" id="username" name="username" placeholder="Enter username"><br>
