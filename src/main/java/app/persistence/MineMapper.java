@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 public class MineMapper {
 
-    public static void addScore(String username, long score)
+    public static void addScore(String username, long score, String difficulty)
             throws DatabaseException
     {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         String sqlUser = "select users.user_id from public.users where users.username=?";
 
-        String sql = "insert into public.scores (user_id, score_value, date) values (?,?,?)";
+        String sql = "insert into public.scores (user_id, score_value, date, difficulty) values (?,?,?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -35,6 +35,7 @@ public class MineMapper {
             ps.setInt(1, id);
             ps.setLong(2, score);
             ps.setDate(3, Date.valueOf(LocalDate.now()));
+            ps.setString(4, difficulty);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1)
             {
@@ -52,7 +53,7 @@ public class MineMapper {
     {
 
         List<MineScore> scoreList = new ArrayList<>();
-        String sql = "select users.username, scores.score_value, scores.date from public.scores join public.users on users.user_id=scores.user_id";
+        String sql = "select users.username, scores.difficulty, scores.score_value, scores.date from public.scores join public.users on users.user_id=scores.user_id";
 
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -68,6 +69,7 @@ public class MineMapper {
                 score.username = rs.getString("username");
                 score.score_value = rs.getInt("score_value");
                 score.date = rs.getDate("date");
+                score.difficulty = rs.getString("difficulty");
                 scoreList.add(score);
             }
         }

@@ -24,8 +24,10 @@ public class MineController {
                         id SERIAL NOT NULL,
                         user_id INTEGER NOT NULL,
                         score_value INTEGER NOT NULL,
-                        date DATE NOT NULL,
+                        date DATE NOT NULL,                        
+                        difficulty VARCHAR NOT NULL,
                         CONSTRAINT scores_pkey PRIMARY KEY (id)
+                        
                                                                 );
 
                         ALTER TABLE IF EXISTS public.scores
@@ -130,7 +132,7 @@ public class MineController {
             long deltaTime = endTime-(long)ctx.sessionAttribute("startTime");
             try {
                 User user = ctx.sessionAttribute("currentUser");
-                MineMapper.addScore(user.getUserName(), deltaTime);
+                MineMapper.addScore(user.getUserName(), deltaTime, ctx.sessionAttribute("difficulty"));
             } catch (Exception e) {
                 // internal server error
                 ctx.status(500);

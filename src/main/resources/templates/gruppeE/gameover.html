@@ -13,16 +13,16 @@
         </div>
         <div class="flexbox-holder-scores">
             <h3>Scores:</h3>
-            <div th:each="score : ${scores}">
+            <div class="score" th:each="score : ${scores}">
                 <br>
-                <h4 th:text="${score.username}+': '+${score.score_value}+'ms'"></h4>
+                <span th:text="${score.username}+': '+${score.score_value}+'ms ('+${score.difficulty}+')'"></span>
             </div>
         </div>
         <div class="flexbox-holder-dates">
             <h3>Date:</h3>
-            <div th:each="score : ${scores}">
+            <div class="score" th:each="score : ${scores}">
                 <br>
-                <h4 th:text="${score.date}"></h4>
+                <span th:text="${score.date}"></span>
             </div>
         </div>
 
