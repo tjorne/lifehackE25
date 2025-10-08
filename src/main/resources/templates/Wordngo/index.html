@@ -8,7 +8,7 @@
 <body>
 <div class="login-box">
     <h1 class="title">Word&go</h1>
-    <form action="login" method="post">
+    <form th:action="@{/login-wordngo}" method="post">
 
         <div class="input">
             <label for="username">Username</label><br>
@@ -26,7 +26,7 @@
             <a th:href="@{/createuser}">
             <input type="button" name="create" value="Create Account">
             </a>
-            <input type="submit" name="login" value="Login">
+            <input type="submit" name="login-wordngo" value="Login">
 
         </div>
     </form>

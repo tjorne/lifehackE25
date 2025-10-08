@@ -1,28 +1,57 @@
 package app.controllers;
 
+import app.exceptions.DatabaseException;
+import app.persistence.ConnectionPool;
+import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import app.entities.User;
 
-public class WordngoController
-{
-    public static void addRoutes(Javalin app)
-    {
+public class WordngoController {
+    public static void addRoutes(Javalin app) {
 
-        app.get("/Wordngo", ctx -> {User user = ctx.sessionAttribute("currentUser");
-        ctx.attribute("user", user);
-        ctx.render("Wordngo/index.html");
+        app.get("/Wordngo", ctx -> {
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("user", user);
+            ctx.render("Wordngo/index.html");
         });
-
+        app.post("login-wordngo", ctx -> login(ctx));
 
     }
 
-    private static void index(Context ctx)
-    {
-        ctx.render("/projectname/index.html");
+
+    public static void login(Context ctx) {
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+
+
+        // Hent form parametre
+        String username = ctx.formParam("username");
+        String password = ctx.formParam("password");
+
+        // Check om bruger findes i DB med de angivne username + password
+        try {
+            User user = UserMapper.login(username, password);
+
+            User currentUser = ctx.sessionAttribute("currentUser");
+            if (user != null) {
+                if (currentUser != null) {
+                    ctx.req().getSession().invalidate();
+                    ctx.sessionAttribute("currentUser", user);
+                    ctx.render("Wordngo/gamepage.html");
+                } else {
+                    ctx.sessionAttribute("currentUser", user);
+                    ctx.render("Wordngo/gamepage.html");
+                }
+            } else {ctx.render("Wordngo/index.html");}
+
+
+
+        } catch (DatabaseException e) {
+            // Hvis nej, send tilbage til login side med fejl besked
+
+            ctx.attribute("message", e.getMessage());
+            ctx.render("wordngo/index.html");
+        }
+
     }
-
-
-
-//    her kan du lytte til keystrokes
 }
