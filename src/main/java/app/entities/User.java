@@ -7,12 +7,11 @@ public class User
     private String password;
     private String role;
 
-    public User(int userId, String userName, String password, String role)
+    public User(int userId, String userName, String password)
     {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.role = role;
     }
 
     public int getUserId()
@@ -28,11 +27,6 @@ public class User
     public String getPassword()
     {
         return password;
-    }
-
-    public String getRole()
-    {
-        return role;
     }
 
     @Override

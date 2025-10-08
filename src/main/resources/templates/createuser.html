@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="da" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Fourthingsplus</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Opret bruger</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-<div class="page">
-    <header>
-        <a href="index.html" th:href="@{/}">
-            <img alt="logo" src="../public/images/lifehacklogo.png" th:src="@{/images/lifehacklogo.png}"/>
-        </a>
-    </header>
-    <h1>Create new user</h1>
+<h1>Opret ny bruger</h1>
 
-    <form class="generic-form" method="post">
-        <input type="text" name="username" placeholder="Enter your username"/>
-        <input type="password" name="password1" placeholder="Enter your password"/>
-        <input type="password" name="password2" placeholder="Enter your password again"/>
+<form action="/createuser" method="post">
+    <label for="username">Brugernavn:</label>
+    <input type="text" id="username" name="username" required>
 
-        <button type="submit" formaction="/createuser">Create user</button>
-        <div><p th:text="${message}"></p></div>
-    </form>
+    <label for="password1">Adgangskode:</label>
+    <input type="password" id="password1" name="password1" required>
 
-    <div>
-        <a th:if="${session.currentUser != null}" href="index.html" th:href="@{/logout}">Logout</a>
-    </div>
-</div>
+    <label for="password2">Gentag adgangskode:</label>
+    <input type="password" id="password2" name="password2" required>
+
+    <button type="submit">Opret</button>
+</form>
+
+<p>Har du allerede en konto? <a href="/login">Log ind</a></p>
+
+<p th:if="${message}" th:text="${message}" style="color:red"></p>
 </body>
 </html>
