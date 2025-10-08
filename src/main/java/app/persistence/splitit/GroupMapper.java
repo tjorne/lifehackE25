@@ -16,7 +16,8 @@ public class GroupMapper {
         this.connectionPool = connectionPool;
     }
 
-    public Group getGroupById(int groupId) throws DatabaseException {
+    public Group getGroupById(int groupId) throws DatabaseException
+    {
         Group group = null;
         String sql = "SELECT group_id, name FROM groups WHERE group_id = ?";
 
@@ -38,7 +39,8 @@ public class GroupMapper {
         return group;
     }
 
-    public List<Group> getAllGroups() throws DatabaseException {
+    public List<Group> getAllGroups() throws DatabaseException
+    {
         String sql = "SELECT * FROM groups";
         List<Group> groups = new ArrayList<>();
 
@@ -58,7 +60,8 @@ public class GroupMapper {
         return groups;
     }
 
-    public boolean deleteGroup(int groupId) throws DatabaseException {
+    public boolean deleteGroup(int groupId) throws DatabaseException
+    {
         boolean result = false;
         String sql = "DELETE FROM groups WHERE group_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
@@ -77,7 +80,8 @@ public class GroupMapper {
         return result;
     }
 
-    public Group createGroup(String name) throws DatabaseException {
+    public Group createGroup(String name) throws DatabaseException
+    {
         String sql = "INSERT INTO groups (name) VALUES (?)";
         Group group = null;
         try (Connection con = connectionPool.getConnection();
@@ -98,7 +102,8 @@ public class GroupMapper {
         return group;
     }
 
-    public boolean updateGroup(Group group) throws DatabaseException {
+    public boolean updateGroup(Group group) throws DatabaseException
+    {
         boolean result = false;
         String sql = "UPDATE groups SET name = ? WHERE group_id = ?";
 

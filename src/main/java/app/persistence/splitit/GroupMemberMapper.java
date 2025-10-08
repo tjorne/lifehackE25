@@ -60,7 +60,8 @@ public class GroupMemberMapper {
         return result;
     }
 
-    public List<User> getUsersByGroupId(int groupId) throws DatabaseException {
+    public List<User> getUsersByGroupId(int groupId) throws DatabaseException
+    {
         List<User> users = new ArrayList<>();
         String sql = "SELECT u.user_id, u.username, u.password, u.role " +
                 "FROM users u " +
@@ -88,7 +89,8 @@ public class GroupMemberMapper {
         return users;
     }
 
-    public List<Group> getGroupsByUserId(int userId) throws DatabaseException {
+    public List<Group> getGroupsByUserId(int userId) throws DatabaseException
+    {
         List<Group> groups = new ArrayList<>();
         String sql = "SELECT g.group_id, g.name " +
                 "FROM groups g " +
@@ -114,7 +116,8 @@ public class GroupMemberMapper {
         return groups;
     }
 
-    public boolean isMemberOfGroup(int userId, int groupId) throws DatabaseException {
+    public boolean isMemberOfGroup(int userId, int groupId) throws DatabaseException
+    {
         String sql = "SELECT COUNT(*) FROM group_users WHERE user_id = ? AND group_id = ?";
 
         try (Connection connection = connectionPool.getConnection();
@@ -135,7 +138,8 @@ public class GroupMemberMapper {
     }
 
 
-    public boolean removeAllMembersFromGroup(int groupId) throws DatabaseException {
+    public boolean removeAllMembersFromGroup(int groupId) throws DatabaseException
+    {
         String sql = "DELETE FROM group_users WHERE group_id = ?";
         boolean result = false;
 
@@ -153,7 +157,8 @@ public class GroupMemberMapper {
         return result;
     }
 
-    public boolean removeUserFromAllGroups(int userId) throws DatabaseException {
+    public boolean removeUserFromAllGroups(int userId) throws DatabaseException
+    {
         String sql = "DELETE FROM group_users WHERE user_id = ?";
         boolean result = false;
 

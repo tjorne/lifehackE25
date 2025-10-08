@@ -15,7 +15,8 @@ public class ExpenseMapper {
         this.connectionPool = connectionPool;
     }
 
-    public List<Expense> getExpensesByGroupId(int groupId) throws DatabaseException {
+    public List<Expense> getExpensesByGroupId(int groupId) throws DatabaseException
+    {
         List<Expense> expenses = new ArrayList<>();
         String sql = "SELECT * FROM expense WHERE group_id = ? ORDER BY created_at DESC";
 
@@ -41,7 +42,8 @@ public class ExpenseMapper {
         return expenses;
     }
 
-    public List<Expense> getExpensesByUserAndGroup(int userId, int groupId) throws DatabaseException {
+    public List<Expense> getExpensesByUserAndGroup(int userId, int groupId) throws DatabaseException
+    {
         List<Expense> expenses = new ArrayList<>();
         String sql = "SELECT * FROM expense WHERE user_id = ? AND group_id = ? ORDER BY created_at DESC";
 
@@ -68,7 +70,8 @@ public class ExpenseMapper {
     }
 
 
-        public Expense createExpense(int userId, int groupId, String description, double amount) throws DatabaseException {
+        public Expense createExpense(int userId, int groupId, String description, double amount) throws DatabaseException
+        {
             String sql = "INSERT INTO expense (user_id, group_id, description, amount) VALUES (?,?,?,?)";
             Expense expense = null;
 
@@ -95,7 +98,8 @@ public class ExpenseMapper {
             return expense;
         }
 
-        public Expense getExpenseById(int expenseId) throws DatabaseException {
+        public Expense getExpenseById(int expenseId) throws DatabaseException
+        {
             Expense expense = null;
             String sql = "select * from expense e join users u on u.user_id = e.user_id WHERE e.expense_id = ?";
 
@@ -119,7 +123,8 @@ public class ExpenseMapper {
             return expense;
         }
 
-    public List<Expense> getExpensesByUserId(int userId) throws DatabaseException {
+    public List<Expense> getExpensesByUserId(int userId) throws DatabaseException
+    {
         List<Expense> expenses = new ArrayList<>();
         String sql = "SELECT * FROM expense WHERE user_id = ? ORDER BY created_at DESC";
 
@@ -145,7 +150,8 @@ public class ExpenseMapper {
         return expenses;
     }
 
-        public boolean updateExpense(int expenseId, String description, double amount) throws DatabaseException {
+        public boolean updateExpense(int expenseId, String description, double amount) throws DatabaseException
+        {
 
             String sql = "UPDATE expense SET description = ?, amount = ? WHERE expense_id = ?";
             boolean result = false;
