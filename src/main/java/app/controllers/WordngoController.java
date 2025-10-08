@@ -14,4 +14,8 @@ public class WordngoController
     {
         ctx.render("/projectname/index.html");
     }
+
+
+
+//    her kan du lytte til keystrokes
 }
