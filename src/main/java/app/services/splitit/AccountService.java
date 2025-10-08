@@ -23,4 +23,5 @@ public interface AccountService {
     boolean removeMemberFromGroup(int userId, int groupId) throws DatabaseException;
     List<User> getGroupMembers(int groupId) throws DatabaseException;
     List<Group> getUserGroups(int userId) throws DatabaseException;
+    boolean isUserInGroup(List<User> members, int userId);
 }

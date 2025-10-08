@@ -28,7 +28,7 @@
         <!-- Group Name Input (only show if not set yet) -->
         <form th:action="@{/createGroup/setName}" method="post" th:if="${groupName == null}">
             <input type="text" name="groupName" placeholder="Group name" required>
-            <button type="submit">Set Name</button>
+            <button type="submit">ADD</button>
         </form>
 
         <!-- Show group name once set -->
@@ -76,10 +76,8 @@
                 </button>
             </form>
 
-            <!-- Cancel/Reset -->
-            <form th:action="@{/createGroup/cancel}" method="post">
-                <button type="submit" class="btn-secondary">Cancel</button>
-            </form>
+            <!-- Cancel/Reset  Make this as a link, not a button! -->
+            <a th:href="@{/createGroup/cancel}">Cancel</a>
         </div>
     </div>
 </main>

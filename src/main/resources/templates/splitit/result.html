@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SPLITit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/splitit/splitit.css}" rel="stylesheet"/>
 </head>
 <body>
+<header>
+    <nav>
+        <a th:href="@{/}"><img th:src="@{/images/splitit/logo.svg}" alt="Split it logo"></a>
+    </nav>
+</header>
 
+<main>
+    <div class="title">
+        <h1>SPLITit</h1>
+        <hr class="divider"> <!-- Format this line - maybe id or class? -->
+        <h3>Your expense splitter</h3>
+    </div>
+
+    <div class="Group-identifier">
+        <!-- Group name -->
+        <p><strong>Group:</strong> <span th:text="${groupName}">Group Name</span></p>
+    </div>
+
+    <!-- Show results of split -->
+    <div class="settlements" th:if="${settlements != null and !settlements.empty}">
+        <div class="settlement" th:each="settlement : ${settlements}">
+            <div class="result-view">
+                <span class="result-from">From: <strong th:text="${settlement.fromUserName}"></strong></span>
+                <span class="result-to">To: <strong th:text="${settlement.toUserName}"></strong></span>
+                <span class="result-amount">Amount: <strong th:text="${settlement.amount}"></strong></span>
+            </div>
+            <hr class="divider">
+        </div>
+    </div>
+
+    <a th:href="@{/backToMain}">Back</a>
+</main>
+
+<footer>
+    <div>
+        <p>
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+            </a>
+        </p>
+        <p>
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+            </a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>

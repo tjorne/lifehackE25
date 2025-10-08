@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SPLITit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/splitit/splitit.css}" rel="stylesheet"/>
 </head>
 <body>
+<header>
+    <nav>
+        <a th:href="@{/}"><img th:src="@{/images/splitit/logo.svg}" alt="Split it logo"></a>
+    </nav>
+</header>
 
+<main>
+    <div class="title">
+        <h1>SPLITit</h1>
+        <hr class="divider"> <!-- Format this line - maybe id or class? -->
+        <h3>Your expense splitter</h3>
+    </div>
+
+    <div class="expense-identifier">
+        <!-- Group name -->
+        <p><strong>Group:</strong> <span th:text="${groupName}">Group Name</span></p>
+        <!-- User name -->
+        <h4 th:text="${accountname}">Name</h4>
+    </div>
+
+    <form th:action="@{/expenses/addExpense}" method="post">
+        <!-- Input expense -->
+        <label th:for="amount">Expense</label>
+        <input th:type="text" th:id="amount" th:name="amount">
+        <hr class="divider">
+        <!-- Input description -->
+        <label th:for="description">Description</label>
+        <input th:type="text" th:id="description" th:name="description">
+        <br>
+        <button type="submit">ADD</button>
+    </form>
+
+    <!-- Div List of expenses - each element divided by <hr class="divider"> -->
+    <div class="expenses" th:if="${expenses != null and !expenses.empty}">
+        <div class="expense" th:each="expense : ${expenses}">
+            <h4 th:text="${expense.userName}">Name</h4>
+            <span class="expense-amount">Expense: <strong th:text="${expense.amount}"></strong></span>
+            <br>
+            <span class="expense-amount">Description: <em th:text="${expense.description}"></em></span>
+            <br>
+            <p th:text="${expense.getRelativeTime}">Timestamp</p>
+            <hr class="divider">
+        </div>
+    </div>
+
+    <div th:if="${expenses == null or expenses.empty}" class="empty-expenses">
+        <p>Ingen udgifter endnu.</p>
+        <br>
+        <p>Vær den første til at lave en udgift!</p>
+    </div>
+
+    <!-- User total -->
+    <span class="user-total">TOTAL: <strong th:text="${userTotal}"></strong></span>
+
+    <!-- Group total -->
+    <span class="group-total">GROUP TOTAL: <strong th:text="${groupTotal}"></strong></span>
+    <hr class="divider">
+
+    <!-- Button Split It (type=?) -->
+    <form th:action="@{/result}" method="get">
+        <button type="submit">SPLIT IT</button>
+    </form>
+
+    <a th:href="@{/backToMain}">Back</a>
+
+</main>
+
+<footer>
+    <div>
+        <p>
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+            </a>
+        </p>
+        <p>
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+            </a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>

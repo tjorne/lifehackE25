@@ -160,6 +160,8 @@ select, input {
 }
 
 /* === COMPONENTS === */
+/* === BUTTON STATES === */
+/* Default button */
 button, .btn {
     background: linear-gradient(to top, var(--color-button-dark), var(--color-button-light));
     border-radius: var(--border-radius);
@@ -168,19 +170,39 @@ button, .btn {
     border: none;
     color: var(--color-text);
 
-    /* H4 typography */
+    /* Button typography (H4 style) */
     font-size: var(--h4-size);
     font-weight: var(--h4-weight);
     line-height: var(--h4-line-height);
     letter-spacing: var(--h4-letter-spacing);
     text-transform: uppercase;
     font-family: var(--font-primary);
+
+    /* Smooth transition for hover effect */
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.btn-primary {
+/* Hover state - slightly lift button */
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-.btn-primary:hover {
+/* Active/Clicked state - push button down */
+button:active, .btn:active {
+    transform: translateY(0px);
+    opacity: 0.8;
+}
+
+/* Disabled state */
+button:disabled, .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:disabled:hover, .btn:disabled:hover {
+    transform: none;
 }
 
 /* === SECTIONS === */
