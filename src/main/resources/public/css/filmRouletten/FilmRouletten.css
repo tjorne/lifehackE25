@@ -59,7 +59,7 @@ body {
 #rouletteWheel {
     position: absolute;
     left: 33.5%;
-    top: 18%;
+    top: 20%;
     width: 10vw;
     height: auto;
 
@@ -78,25 +78,23 @@ body {
     margin-top: 10rem;
 }
 
-button,
-.btn {
+
+.pill {
+    background-color: #97716A;
+    color: #ffffff;
     border: var(--btn-border-width) solid var(--btn-border-color);
     border-radius: var(--radius);
     padding: 0.6rem 1.4rem;
     font-family: var(--font), monospace;
     font-weight: var(--font-weight-bold);
     cursor: pointer;
-    transition: background-color 0.1s ease;
+    transition: background-color 0.2s ease;
+    letter-spacing: 2px;
+
 }
 
-button:hover,
-.btn:hover {
-    background-color: var(--btn-special-bg);
-}
-
-.btn-primary {
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-text);
+.pill:hover {
+    background-color: #67514D;       /* Farve ved hover */
 }
 
 .btn-special {
@@ -154,15 +152,16 @@ button:hover,
 /* LOGO TOP VENSTRE SAMT HEADER ::::START:::: */
 .site-header {
     background: var(--header-bg);
-    height: 3.5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 2rem;
+    height: 6vh;         /* change this to the height you want */
+    padding: 0 2rem;      /* optional side padding */
+
+    /* remove flex completely */
+    display: block;
 }
 
 .brand {
     display: flex;
+    margin-top: -5vw;
     margin-left: 2vw;
     margin-right: auto;
     gap: 0.5rem;
@@ -182,4 +181,45 @@ button:hover,
     letter-spacing: 2px;
     color: var(--header-text);
 }
+.login-btn {
+    position: absolute;
+    top: 10%;
+    right: 20rem;
+    transform: translateY(-50%);
+    background-color: var(--btn-primary-bg);
+    font-family: var(--font), monospace;
+    font-weight: var(--font-weight-bold);
+    color: var(--btn-primary-text);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--radius);
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    letter-spacing: 2px; /
+}
+
+.login-btn:hover {
+    background-color: #67514D;
+}
+.watchlist-btn {
+    position: absolute;
+    top: 10%;
+    right: 10rem;
+    transform: translateY(-50%);
+    background-color: var(--btn-primary-bg);
+    font-family: var(--font), monospace;
+    font-weight: var(--font-weight-bold);
+    color: var(--btn-primary-text);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--radius);
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    letter-spacing: 2px; /
+}
+
+.watchlist-btn:hover {
+    background-color: #67514D;
+}
+
 /* LOGO TOP VENSTRE SAMT HEADER ::::SLUT:::: */
