@@ -15,7 +15,7 @@ public class WordMapper {
     public Word getWord() throws DatabaseException {
 
         Random rdm = new Random(getLengthOfList());
-        String sql = "select word from word where id = ?";
+        String sql = "select word from words where id = ?";
         try (
                 Connection connection = ConnectionPool.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)

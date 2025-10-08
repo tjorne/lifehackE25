@@ -19,6 +19,7 @@
   <a class="sidebar-button" href="/wordngo/gamepage"><img src="/images/wordngo/close.png"/></a>
 </div>
 </div>
+
 <div class="container">
   <h1 class="title">WORD & GO</h1>
 
@@ -72,6 +73,113 @@
     </div> <!-- closes .game-area -->
   </div> <!-- closes .container -->
 </div> <!-- closes .layout -->
+<script>
+  const rows = document.querySelectorAll('.row');
+  let currentRow = 0;
+  let currentCell = 0;
+  let guess = '';
+  let gameOver = false;
+
+  document.addEventListener('keydown', async (e) => {
+    if (gameOver || currentRow >= rows.length) return;
+
+    const key = e.key.toUpperCase();
+
+    if (/^[A-Z]$/.test(key) && currentCell < 5) {
+      const cell = rows[currentRow].children[currentCell];
+      cell.textContent = key;
+      guess += key;
+      currentCell++;
+    }
+
+    else if (key === 'BACKSPACE' && currentCell > 0) {
+      currentCell--;
+      const cell = rows[currentRow].children[currentCell];
+      cell.textContent = '';
+      guess = guess.slice(0, -1);
+    }
+
+    else if (key === 'ENTER' && guess.length === 5) {
+      const result = await checkGuess(guess);
+      applyColors(result);
+
+      // ✅ Win condition
+      if (result.every(r => r === 'correct')) {
+        gameOver = true;
+        setTimeout(() => alert('🎉 You guessed the word!'), 100);
+        return;
+      }
+
+      // ✅ Lose condition
+      if (currentRow === rows.length - 1) {
+        const target = await fetchCorrectWord();
+        gameOver = true;
+        setTimeout(() => alert(`❌ Game over! The word was: ${target}`), 100);
+        return;
+      }
+
+      currentRow++;
+      currentCell = 0;
+      guess = '';
+    }
+  });
+
+  function applyColors(result) {
+    const cells = rows[currentRow].children;
+    for (let i = 0; i < result.length; i++) {
+      if (result[i] === 'correct') {
+        cells[i].style.backgroundColor = '#6aaa64';
+      } else if (result[i] === 'present') {
+        cells[i].style.backgroundColor = '#c9b458';
+      } else {
+        cells[i].style.backgroundColor = '#787c7e';
+      }
+    }
+  }
+
+  async function fetchCorrectWord() {
+    try {
+      const response = await fetch('/api/correct-word');
+      if (!response.ok) throw new Error('Failed to fetch word');
+      const word = await response.text();
+      return word.toUpperCase();
+    } catch (error) {
+      console.error('Error fetching correct word:', error);
+      return null;
+    }
+  }
+
+  async function checkGuess(word) {
+    const target = await fetchCorrectWord();
+    if (!target) return Array(5).fill('absent');
+
+    const result = Array(5).fill('absent');
+    const used = Array(5).fill(false);
+
+    // First pass: correct letters
+    for (let i = 0; i < 5; i++) {
+      if (word[i] === target[i]) {
+        result[i] = 'correct';
+        used[i] = true;
+      }
+    }
+
+    // Second pass: present letters
+    for (let i = 0; i < 5; i++) {
+      if (result[i] !== 'correct') {
+        for (let j = 0; j < 5; j++) {
+          if (!used[j] && word[i] === target[j]) {
+            result[i] = 'present';
+            used[j] = true;
+            break;
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+</script>
 </body>
 </html>
 </body>

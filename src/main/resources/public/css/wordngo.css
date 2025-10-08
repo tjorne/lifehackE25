@@ -92,17 +92,23 @@ body {
 
 /* Grid */
 .grid {
-    display: flex;
+    flex-direction: column;
     gap: 8px;
     
     justify-content: center;
     align-content: center;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
 .cell {
     width: 70px;
     height: 70px;
     background-color: #777;
+    border: 2px solid black;
     border-radius: 10px;
     padding:10px;
     font-size: 2rem;

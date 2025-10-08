@@ -1,8 +1,10 @@
 package app.controllers;
 
+import app.entities.Word;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
+import app.persistence.WordMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import app.entities.User;
@@ -14,10 +16,20 @@ public class WordngoController {
             User user = ctx.sessionAttribute("currentUser");
             ctx.attribute("user", user);
             ctx.render("Wordngo/index.html");
+
         });
         app.post("login-wordngo", ctx -> login(ctx));
 
+        app.get("/api/correct-word", ctx -> {
+            Word word = ctx.sessionAttribute("correctWord");
+            if (word != null) {
+                ctx.result(word.getWord()); // Return the word as plain text
+            } else {
+                ctx.status(404).result("No word found");
+            }
+        });
     }
+
 
 
     public static void login(Context ctx) {
@@ -45,6 +57,9 @@ public class WordngoController {
             } else {ctx.render("Wordngo/index.html");}
 
 
+            WordMapper wordMapper = new WordMapper();
+            Word word = wordMapper.getWord();
+            ctx.sessionAttribute("correctWord", word);
 
         } catch (DatabaseException e) {
             // Hvis nej, send tilbage til login side med fejl besked
