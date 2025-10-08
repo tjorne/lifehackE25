@@ -11,6 +11,7 @@ import app.services.splitit.BalanceService;
 import app.services.splitit.ExpenseService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,40 @@ public class SplitItExpenseController {
         app.get("/result", ctx -> showResult(ctx));
 
         app.post("/expenses/addExpense", ctx -> addExpense(ctx));
+        app.post("/expenses/deleteGroup", ctx -> deleteGroup(ctx));
+        app.post("/expenses/deleteExpense", ctx -> deleteExpense(ctx));
+    }
+
+    private void deleteExpense(Context ctx)
+    {
+        int groupId = ctx.sessionAttribute("groupId");
+        try {
+
+            int expenseId = Integer.parseInt(ctx.formParam("expenseId"));
+            expenseService.deleteExpense(expenseId);
+            ctx.redirect("/expense?groupId=" + groupId);
+
+        } catch (NumberFormatException e) {
+            ctx.attribute("errorMessage", "Ugyldigt expense ID.");
+            ctx.redirect("/expense");
+        } catch (DatabaseException e) {
+            ctx.attribute("errorMessage", e.getMessage());
+            ctx.redirect("/expense");
+        }
+    }
+
+    private void deleteGroup(Context ctx)
+    {
+        int groupId = ctx.sessionAttribute("groupId");
+
+        try{
+            accountService.removeAllMembersFromGroup(groupId);
+            accountService.deleteGroup(groupId);
+            ctx.redirect("/splitit");
+        }catch (DatabaseException e){
+            ctx.attribute("errorMessage",e.getMessage());
+            ctx.redirect("/expense?groupId=" + groupId);
+        }
     }
 
     private void showResult(Context ctx)

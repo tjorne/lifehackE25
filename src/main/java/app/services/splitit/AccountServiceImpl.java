@@ -89,6 +89,11 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
+    public boolean removeAllMembersFromGroup(int groupId) throws DatabaseException {
+        return groupMemberMapper.removeAllMembersFromGroup(groupId);
+    }
+
+    @Override
     public boolean removeMemberFromGroup(int userId, int groupId) throws DatabaseException {
         return groupMemberMapper.removeMemberFromGroup(userId, groupId);
     }

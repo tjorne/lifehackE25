@@ -20,6 +20,7 @@ public interface AccountService {
 
     //group_members
     boolean addMemberToGroup(int userId, int groupId) throws DatabaseException;
+    boolean removeAllMembersFromGroup(int groupId) throws DatabaseException;
     boolean removeMemberFromGroup(int userId, int groupId) throws DatabaseException;
     List<User> getGroupMembers(int groupId) throws DatabaseException;
     List<Group> getUserGroups(int userId) throws DatabaseException;
