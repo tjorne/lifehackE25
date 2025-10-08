@@ -8,20 +8,23 @@
 </head>
 <body>
 <header>
-    <div class="nav-container"><h1>References</h1>
-        <nav><a href="#">Hjem</a></nav>
+    <div class="nav-container">
+        <h1><a th:href="@{/references}">References</a></h1>
+        <nav class="hjem_reference"><a th:href="@{index.html}">Home</a></nav>
     </div>
 </header>
 <main>
     <form action="/theorists" method="post">
-        <select name="field" id="field-select">
-            <option disabled selected>Select a field</option>
+        <label for="theorist-select"></label>
+        <select name="theorist" id="theorist-select">
+            <option disabled selected>Select a Theorist</option>
             <option th:each="theorist : ${theorists}"
                     th:value="${theorist.id}"
-                    th:text="${theorist.name}"
-                    th:selected="${theorist.id == selectedTheoristId}"></option>
+                    th:text="${theorist.name}">placeholder</option>
         </select>
-        <button type="submit" class="search-btn">search field</button>
+        <br/>
+        <br/>
+        <button type="submit" class="search-btn">Select Theorist</button>
     </form>
 </main>
 

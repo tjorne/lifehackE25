@@ -23,6 +23,11 @@ public class Books {
 
     }
 
+    public Books(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

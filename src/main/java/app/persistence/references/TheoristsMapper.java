@@ -37,7 +37,7 @@ public class TheoristsMapper {
         List<Theorists> theoristsListById = new ArrayList<>();
 
         String sql = """
-        SELECT t.id, t.name
+        SELECT t.id AS theorist_id, t.name
         FROM theorists t
         JOIN theorist_fields tf ON t.id = tf.theorist_id
         WHERE tf.field_id = ?;
@@ -46,11 +46,12 @@ public class TheoristsMapper {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                int theoristId = rs.getInt("theorist_id");
                 String name = rs.getString("name");
-                theoristsListById.add(new Theorists(id, name));
+                theoristsListById.add(new Theorists(theoristId, name));
             }
         } catch (SQLException e) {
             throw new DatabaseException("Something something", e.getMessage());
