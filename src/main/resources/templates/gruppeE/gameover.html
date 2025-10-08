@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../public/css/gruppeE/stylesheet.css" th:href="@{/css/gruppeE/stylesheet.css}" rel="stylesheet">
+</head>
+<body>
+<div class="flexbox-container-gameover">
+    <div class="flexbox-item-h1-gameover"><h1>Game Over!</h1></div>
+    <div class="flexbox-lowerhalf-container">
+        <div class="flexbox-holder-scoreboard"><h2>Scoreboard:</h2>
+        </div>
+        <div class="flexbox-holder-scores">
+            <h3>Scores:</h3>
+            <div class="score" th:each="score : ${scores}">
+                <br>
+                <span th:text="${score.username}+': '+${score.score_value}+'ms ('+${score.difficulty}+')'"></span>
+            </div>
+        </div>
+        <div class="flexbox-holder-dates">
+            <h3>Date:</h3>
+            <div class="score" th:each="score : ${scores}">
+                <br>
+                <span th:text="${score.date}"></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
