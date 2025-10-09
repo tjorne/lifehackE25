@@ -15,7 +15,7 @@ public class ProviderMapper {
 
         String sql = """
             SELECT p.provider_id, pn.provider_name, p.provider_url
-            FROM provider p
+            FROM provider_roulette p
             JOIN provider_name pn ON p.provider_name_id = pn.provider_name_id
             WHERE p.movie_id = ?
             ORDER BY pn.provider_name

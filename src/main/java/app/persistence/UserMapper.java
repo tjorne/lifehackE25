@@ -164,13 +164,14 @@ public class UserMapper {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("movie_id");
                 String title = rs.getString("movie_title");
                 String description = rs.getString("movie_description");
                 Date aired = rs.getDate("movie_aired");
                 int length = rs.getInt("movie_length");
                 int rating = rs.getInt("movie_rating");
 
-                Movie movie = new Movie(title, description, aired, rating, length);
+                Movie movie = new Movie(id, title, description, aired, rating, length);
                 watchedMovies.add(movie);
             }
         } catch (SQLException e) {
