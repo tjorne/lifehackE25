@@ -11,37 +11,39 @@ import java.util.List;
 public class ProviderMapper {
 
     public static List<Provider> getProvidersByMovieId(int movieId) throws DatabaseException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-
         String sql = """
-            SELECT p.provider_id, pn.provider_name, p.provider_url
-            FROM provider_roulette p
-            JOIN provider_name pn ON p.provider_name_id = pn.provider_name_id
-            WHERE p.movie_id = ?
-            ORDER BY pn.provider_name
+        SELECT provider_roulette.provider_id,
+               provider_name_roulette.provider_name,
+               provider_roulette.provider_url
+        FROM provider_roulette
+        JOIN provider_name_roulette
+          ON provider_roulette.provider_name_id = provider_name_roulette.provider_name_id
+        WHERE provider_roulette.movie_id = ?
+        ORDER BY provider_name_roulette.provider_name
         """;
 
         List<Provider> providers = new ArrayList<>();
 
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
             ps.setInt(1, movieId);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int providerId = rs.getInt("provider_id");
-                String providerName = rs.getString("provider_name");
-                String providerUrl = rs.getString("provider_url");
-
-                providers.add(new Provider(providerId, providerName, providerUrl));
+                providers.add(new Provider(
+                        rs.getInt("provider_id"),
+                        rs.getString("provider_name"),
+                        rs.getString("provider_url")
+                ));
             }
 
         } catch (SQLException e) {
+            e.printStackTrace(); // få fuld stacktrace i konsollen
             throw new DatabaseException("DB fejl ved hentning af providers for movie_id: " + movieId, e.getMessage());
         }
 
         return providers;
     }
+
 }

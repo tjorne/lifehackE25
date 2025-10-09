@@ -3,8 +3,7 @@ package app.controllers.filmRouletten;
 import app.entities.User;
 import app.entities.filmRouletten.Movie;
 import app.exceptions.DatabaseException;
-import app.persistence.ConnectionPool;
-import app.persistence.UserMapper;
+import app.persistence.filmRouletten.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 

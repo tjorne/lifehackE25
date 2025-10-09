@@ -76,13 +76,10 @@ public class MovieMapper {
 
         String sql = "SELECT * FROM movie_roulette WHERE movie_id = ?";
 
-        try(Connection connection = ConnectionPool.getInstance().getConnection()) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
-
             stmt.setInt(1, id);
-
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
                 return new Movie(
                         rs.getInt("movie_id"),
@@ -93,11 +90,11 @@ public class MovieMapper {
                         rs.getInt("movie_length")
                 );
             }
-
             return null;
-
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+
 }
