@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Frontpage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="page">
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img alt="logo" src="../public/images/lifehacklogo.png" th:src="@{/images/lifehacklogo.png}"/>
+        </a>
+    </header>
+    <h1>Lifehack team B</h1>
+        <div class="projects">
+            <h2>Projects to check out</h2>
+            <div class="cards">
+                <div class="card">
+                    <img class="card-image" alt="timezones" src="../public/images/timezones/timezone_icon.jpg" th:src="@{/images/timezones/timezone_icon.jpg}"/>
+                    <div class="card-copy">Check the clock, everywhere</div>
+                    <a class="card-link" href="timezones/index.html" th:href="@{/timezones/}"/>Timezones</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="unitconverter" src="../public/images/Gruppe_B8_unit_converter/unit_conversion_image.png" th:src="@{/images/Gruppe_B8_unit_converter/unit_conversion_image.png}"/>
+                    <div class="card-copy">Easy conversion of various units</div>
+                    <a class="card-link" href="Gruppe-B8-unit-converter/index.html" th:href="@{/Gruppe-B8-unit-converter/}"/>Unit conversion</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="timezones" src="../public/images/myevents/myevents_icon.jpg" th:src="@{/images/myevents/myevents_icon.jpg}"/>
+                    <div class="card-copy">Check current events in your area</div>
+                    <a class="card-link" href="myevents/index.html" th:href="@{/myevents/}"/>My Events</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="Quote Generator" src="../public/images/QuoteGenerator/Logo.png" th:src="@{/images/QuoteGenerator/Logo.png}"/>
+                    <div class="card-copy">Get your daily quotes, gang gang</div>
+                    <a class="card-link" href="QuotesGenerator/index.html" th:href="@{/QuotesGenerator/}"/>Quotes</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="restaurantFinder" src="/public/images/restaurantFinder/restaurantFinderLogo.png" th:src="@{/images/restaurantFinder/restaurantFinderLogo.png}"/>
+                    <div class="card-copy">Find your Restaurant</div>
+                    <a class="card-link" href="restaurantFinder/startPage.html" th:href="@{/restaurantFinder}"/>Restaurant Finder</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="timezones" src="../public/images/bookibois/lifehacklogo.png" th:src="@{/images/bookibois/lifehacklogo.png}"/>
+                    <div class="card-copy">Book some help</div>
+                    <a class="card-link" href="bookibois/bookingsite.html" th:href="@{/bookibois/}"/>BookIBbois</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="jeopardy" src="../public/images/Jeopardy/steveharvey.jpg" th:src="@{/images/Jeopardy/steveharvey.jpg}"/>
+                    <div class="card-copy">Play Jeopardy.</div>
+                    <a class="card-link" href="jeopardy/index.html" th:href="@{/jeopardy/}">Play Jeopardy.</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="drinks" src="../public/images/drinks/drink_icon.png" th:src="@{/images/drinks/drink_icon.png}"/>
+                    <div class="card-copy">Discover your favorite drinks</div>
+                    <a class="card-link" href="drink/index.html" th:href="@{/drink/}">Drink</a>
+                </div>
+                <div class="card">
+                    <img class="card-image" alt="warhammer" src="../public/images/warhammerLogo.png" th:src="@{/images/warhammerLogo.png}"/>
+                    <div class="card-copy">Generate Warhammer bases for 3D print</div>
+                    <a class="card-link" href="warhammer/index.html" th:href="@{/warhammer/}">Warhammer Bases</a>
+                </div>
+            </div>
+        </div>
+    <h3>If you need to log in - do it here</h3>
+    <form class="generic-form" method="post">
+        <input type="text" name="username" placeholder="Enter your username"/>
+        <input type="password" name="password" placeholder="Enter your password"/>
+        <button class="btn btn-ok" type="submit" formaction="/login">Login</button>
+        <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+    </form>
+
+    <div>
+        <a th:if="${session.currentUser != null}" href="index.html" th:href="@{/logout}">Logout</a>
+        <span th:if="${session.currentUser != null}"> | </span>
+        <a href="createuser.html" th:href="@{/createuser}">Create user</a>
+    </div>
+</div>
+</body>
+</html>
+
