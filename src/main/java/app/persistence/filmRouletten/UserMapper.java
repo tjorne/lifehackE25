@@ -18,7 +18,7 @@ public class UserMapper {
     public static User login(String userName, String password) throws DatabaseException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        String sql = "SELECT * FROM users WHERE username=? AND password=?";
+        String sql = "SELECT * FROM user_roulette WHERE username=? AND password=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -150,7 +150,7 @@ public class UserMapper {
         String sql = """
         SELECT m.movie_title, m.movie_description, m.movie_aired, m.movie_length, m.movie_rating
         FROM movie_roulette m
-        JOIN watchlist w ON m.movie_id = w.movie_id
+        JOIN watchlist_roulette w ON m.movie_id = w.movie_id
         WHERE w.user_id = ?
         ORDER BY m.movie_title
         """;
