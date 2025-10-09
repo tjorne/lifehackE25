@@ -34,10 +34,77 @@ public class SplitItExpenseController {
         app.get("/expense", ctx -> showGroupExpenses(ctx));
         app.get("/backToMain", ctx -> backToMain(ctx));
         app.get("/result", ctx -> showResult(ctx));
+        app.get("/expense/edit", ctx -> showEditExpensePage(ctx));
+
 
         app.post("/expenses/addExpense", ctx -> addExpense(ctx));
         app.post("/deleteGroup", ctx -> deleteGroup(ctx));
         app.post("/expenses/deleteExpense", ctx -> deleteExpense(ctx));
+        app.post("/expenses/updateExpense",ctx -> updateExpense(ctx));
+        app.post("/expenses/editExpense", ctx -> editExpense(ctx));
+    }
+
+    private void showEditExpensePage(Context ctx)
+    {
+        int groupId = ctx.sessionAttribute("groupId");
+        ExpenseDTO expenseDTO = ctx.sessionAttribute("editExpense");
+        showGroupExpenses(ctx);
+
+        ctx.attribute("editExpense", expenseDTO);
+
+        ctx.render("/splitit/expenses.html");
+    }
+
+    private void updateExpense(Context ctx)
+    {
+        {
+            ExpenseDTO expenseDTO = ctx.sessionAttribute("editExpense");
+            int groupId = ctx.sessionAttribute("groupId");
+            String description = ctx.formParam("description");
+            double amount = 0.0;
+
+            try {
+                amount = Double.parseDouble(ctx.formParam("amount"));
+            } catch (NumberFormatException e){
+                ctx.sessionAttribute("errorMessage","Please only input numbers in amount");
+                ctx.redirect("/expense?groupId=" + groupId);
+                return;
+            }
+
+            try {
+                if(expenseService.updateExpense(expenseDTO.getExpenseId(),description,amount))
+                {
+                    List<ExpenseDTO> expenses = ctx.sessionAttribute("expenses");
+
+                    if (expenses == null) {
+                        expenses = new ArrayList<>();
+                    } else {
+                        expenses = new ArrayList<>(expenses);
+                    }
+                    expenses.add(expenseDTO);
+                    ctx.sessionAttribute("expenses", expenses);
+                }
+
+            } catch (DatabaseException e) {
+                ctx.sessionAttribute("errorMessage", e.getMessage());
+            }
+            ctx.redirect("/expense?groupId=" + groupId);
+        }
+
+    }
+
+    private void editExpense(Context ctx)
+    {
+        int groupId = ctx.sessionAttribute("groupId");
+        try {
+            int expenseId = Integer.parseInt(ctx.formParam("expenseId"));
+            ExpenseDTO expenseDTO = expenseService.getExpenseById(expenseId);
+            ctx.sessionAttribute("editExpense",expenseDTO);
+            ctx.redirect("/expense/edit?groupId=" + groupId);
+        } catch (Exception e){
+            ctx.sessionAttribute("errorMessage","Error while trying to edit.");
+            ctx.redirect("/expense?groupId=" + groupId);
+        }
     }
 
     private void deleteExpense(Context ctx)
@@ -138,6 +205,7 @@ public class SplitItExpenseController {
         String groupIdParam = ctx.queryParam("groupId");
         User user = ctx.sessionAttribute("currentUser");
         ctx.attribute("accountname",user.getUserName());
+        ctx.attribute("currentUser",user);
 
         String errorMessage = ctx.sessionAttribute("errorMessage");
         if (errorMessage != null) {
@@ -183,7 +251,7 @@ public class SplitItExpenseController {
             ctx.attribute("groupName",group.getName());
             ctx.attribute("members", members);
             ctx.attribute("expenses", groupExpenses);
-            ctx.attribute("userTotal", UserTotalFormated);
+            ctx.attribute("userTotal", userTotalFormated);
             ctx.attribute("groupTotal", groupTotalFormated);
 
             ctx.sessionAttribute("expenses", groupExpenses);

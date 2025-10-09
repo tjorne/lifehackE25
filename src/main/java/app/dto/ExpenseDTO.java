@@ -10,21 +10,24 @@ import java.util.Objects;
 
 public class ExpenseDTO {
     private int expenseId;
+    private int userId;
     private String description;
     private double amount;
     private Timestamp createdAt;
     private String userName;
     private String groupName;
 
-    public ExpenseDTO(int expenseId, String description, double amount,
+    public ExpenseDTO(int expenseId, int userId, String description, double amount,
                       Timestamp createdAt, String userName, String groupName) {
         this.expenseId = expenseId;
+        this.userId = userId;
         this.description = description;
         this.amount = amount;
         this.createdAt = createdAt;
         this.userName = userName;
         this.groupName = groupName;
     }
+    public int getUserId(){return  userId;}
 
     public int getExpenseId() {
         return expenseId;

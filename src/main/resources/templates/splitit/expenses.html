@@ -39,7 +39,7 @@
         </div>
 
         <!-- Add Expense Form -->
-        <div class="add-expense-section">
+        <div class="add-expense-section" th:if="${editExpense == null}">
             <form th:action="@{/expenses/addExpense}" method="post" class="expense-form">
                 <div class="form-group">
                     <label for="amount" class="form-label">Expense</label>
@@ -90,13 +90,15 @@
                         <p class="expense-description" th:text="${expense.description}">Description body goes here.</p>
                         <p class="expense-timestamp" th:text="${expense.getRelativeTime}">TIMESTAMP</p>
                     </div>
-                    <div class="expense-actions">
+
+                    <div class="expense-actions" th:if="${session.currentUser.userId == expense.userId}">
                         <form th:action="@{/expenses/editExpense}" method="post" class="delete-form">
                             <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
                             <button type="submit" class="btn-edit">
                                 <img th:src="@{/images/splitit/edit.svg}" alt="Edit expense" class="edit-icon">
                             </button>
                         </form>
+
                         <form th:action="@{/expenses/deleteExpense}" method="post" class="delete-form">
                             <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
                             <button type="submit" class="btn-delete">
@@ -104,6 +106,7 @@
                             </button>
                         </form>
                     </div>
+
                     <hr class="divider expense-divider">
                 </div>
             </div>

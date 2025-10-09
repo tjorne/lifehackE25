@@ -175,7 +175,6 @@ public class SplitItGroupController {
     private void index(Context ctx)
     {
         User user = ctx.sessionAttribute("currentUser");
-
         if (user == null) {
             ctx.redirect("/");
             return;

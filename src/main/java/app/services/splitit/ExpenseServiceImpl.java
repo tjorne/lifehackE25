@@ -42,7 +42,9 @@ public class ExpenseServiceImpl implements ExpenseService {
         User user = UserMapper.getUserById(expense.getUserId());
         Group group = groupMapper.getGroupById(expense.getGroupId());
 
-        return new ExpenseDTO(expenseId,
+        return new ExpenseDTO(
+                expenseId,
+                expense.getUserId(),
                 expense.getDescription(),
                 expense.getAmount(),
                 expense.getCreatedAt(),
@@ -77,6 +79,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                     try {
                         return new ExpenseDTO(
                                 expense.getExpenseId(),
+                                expense.getUserId(),
                                 expense.getDescription(),
                                 expense.getAmount(),
                                 expense.getCreatedAt(),
@@ -101,6 +104,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                     try {
                         return new ExpenseDTO(
                                 expense.getExpenseId(),
+                                expense.getUserId(),
                                 expense.getDescription(),
                                 expense.getAmount(),
                                 expense.getCreatedAt(),
@@ -124,6 +128,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenses.stream()
                 .map(expense -> new ExpenseDTO(
                         expense.getExpenseId(),
+                        expense.getUserId(),
                         expense.getDescription(),
                         expense.getAmount(),
                         expense.getCreatedAt(),
