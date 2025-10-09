@@ -57,8 +57,9 @@ public class BooksMapper {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, selectedFieldId);
-            ps.setInt(2,selectedTheoristId );
+
+            ps.setInt(1,selectedTheoristId );
+            ps.setInt(2, selectedFieldId);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
