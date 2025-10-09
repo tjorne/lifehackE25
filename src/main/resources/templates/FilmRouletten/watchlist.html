@@ -1,21 +1,34 @@
-<table class="watchlist-table">
-    <link rel="stylesheet" href="src/main/resources/public/css/styles.css">
-    <thead>
-    <tr>
-        <th>Titel</th>
-        <th>Beskrivelse</th>
-        <th>Udgivelsesdato</th>
-        <th>Længde (min)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% for (Movie movie : movies) { %>
-    <tr>
-        <td><%= movie.getMovieTitle() %></td>
-        <td><%= movie.getMovieDescription() %></td>
-        <td><%= movie.getMovieAired() %></td>
-        <td><%= movie.getMovieLength() %></td>
-    </tr>
-    <% } %>
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Min Watchlist</title>
+    <link href="/css/filmRouletten/filmRoulettenGetMovie.css"
+          th:href="@{/css/filmRouletten/filmRoulettenGetMovie.css}"
+          rel="stylesheet" />
+</head>
+<body>
+<h2>Din Watchlist</h2>
+
+<div th:if="${#lists.isEmpty(movies)}">
+    <p>Du har ingen film på din watchlist endnu.</p>
+</div>
+
+<div th:if="${!#lists.isEmpty(movies)}">
+    <ul>
+        <li th:each="movie : ${movies}">
+            <h3 th:text="${movie.title}">Filmtitel</h3>
+            <p th:text="${movie.description}">Beskrivelse</p>
+            <p>
+                Varighed: <span th:text="${movie.length}">N/A</span> min |
+                Rating: <span th:text="${movie.rating}">N/A</span> |
+                Udgivet: <span th:text="${movie.timeStamp}">N/A</span>
+            </p>
+        </li>
+    </ul>
+</div>
+
+<p><a th:href="@{/}">Tilbage til forsiden</a></p>
+
+</body>
+</html>
