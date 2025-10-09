@@ -2,6 +2,13 @@
 BEGIN;
 
 
+CREATE TABLE IF NOT EXISTS public.frenchwords
+(
+    id integer NOT NULL DEFAULT nextval('frenchwords_frenchwordid_seq'::regclass),
+    frenchword character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT frenchwords_pkey PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS public.users
 (
     user_id serial NOT NULL,
@@ -10,14 +17,15 @@ CREATE TABLE IF NOT EXISTS public.users
     role character varying(20) COLLATE pg_catalog."default" NOT NULL DEFAULT USER,
     CONSTRAINT users_pkey PRIMARY KEY (user_id),
     CONSTRAINT unique_username UNIQUE (username)
-    );
+);
 
 CREATE TABLE IF NOT EXISTS public.words
 (
     id integer NOT NULL DEFAULT nextval('words_word_id_seq'::regclass),
-    word character varying COLLATE pg_catalog."default" NOT NULL,
+    word character varying COLLATE pg_catalog."default",
     CONSTRAINT words_pkey PRIMARY KEY (id)
-    );
+);
+END;
 INSERT INTO words (word) VALUES
                              ('apple'),
                              ('brave'),
@@ -117,4 +125,105 @@ INSERT INTO words (word) VALUES
                              ('sugar'),
                              ('touch'),
                              ('vowel');
+INSERT INTO frenchwords (frenchword) VALUES
+                                         ('aimer'),
+                                         ('belle'),
+                                         ('chien'),
+                                         ('danse'),
+                                         ('eclat'),
+                                         ('fleur'),
+                                         ('garde'),
+                                         ('heure'),
+                                         ('image'),
+                                         ('jouer'),
+                                         ('karma'),
+                                         ('lente'),
+                                         ('mange'),
+                                         ('nager'),
+                                         ('ombre'),
+                                         ('piste'),
+                                         ('quand'),
+                                         ('rival'),
+                                         ('sable'),
+                                         ('table'),
+                                         ('utile'),
+                                         ('valse'),
+                                         ('wagon'),
+                                         ('xenon'),
+                                         ('yacht'),
+                                         ('zeste'),
+                                         ('abris'),
+                                         ('banal'),
+                                         ('cible'),
+                                         ('digne'),
+                                         ('envie'),
+                                         ('fable'),
+                                         ('gamin'),
+                                         ('haste'),
+                                         ('ideal'),
+                                         ('jaune'),
+                                         ('koala'),
+                                         ('lourd'),
+                                         ('moral'),
+                                         ('noble'),
+                                         ('objet'),
+                                         ('poule'),
+                                         ('quais'),
+                                         ('reine'),
+                                         ('singe'),
+                                         ('tigre'),
+                                         ('union'),
+                                         ('votre'),
+                                         ('wider'),
+                                         ('xerus'),
+                                         ('yeuxx'),
+                                         ('zebra'),
+                                         ('actif'),
+                                         ('brave'),
+                                         ('clair'),
+                                         ('droit'),
+                                         ('effet'),
+                                         ('froid'),
+                                         ('geste'),
+                                         ('hiver'),
+                                         ('index'),
+                                         ('jolie'),
+                                         ('kilos'),
+                                         ('livre'),
+                                         ('mains'),
+                                         ('natif'),
+                                         ('ordre'),
+                                         ('plage'),
+                                         ('quint'),
+                                         ('rouge'),
+                                         ('somme'),
+                                         ('terre'),
+                                         ('usage'),
+                                         ('verre'),
+                                         ('wagon'),
+                                         ('xenia'),
+                                         ('yogis'),
+                                         ('zincs'),
+                                         ('aigle'),
+                                         ('battu'),
+                                         ('creer'),
+                                         ('durer'),
+                                         ('etude'),
+                                         ('fixer'),
+                                         ('grace'),
+                                         ('humus'),
+                                         ('inoui'),
+                                         ('jouet'),
+                                         ('kyste'),
+                                         ('laver'),
+                                         ('mener'),
+                                         ('noter'),
+                                         ('oserx'),
+                                         ('poser'),
+                                         ('quasi'),
+                                         ('rater'),
+                                         ('saler'),
+                                         ('tenir'),
+                                         ('usure'),
+                                         ('vivre');
 END;

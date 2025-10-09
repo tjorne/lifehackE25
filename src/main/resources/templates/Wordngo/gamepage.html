@@ -24,16 +24,20 @@
 
 <div class="layout">
 <div class="sidebar">
+
   <a class="sidebar-button" href="#" id="menu-btn">
     <img src="/images/wordngo/menu.png"/>
   </a>
+
   <div id="sidebar-actions" class="sidebar-actions hidden">
     <a class="sidebar-button" th:href="@{/Wordngo}">
       <img src="/images/wordngo/home.png"/>
     </a>
-    <div class="sidebar-button">
-      <img src="/images/wordngo/trophy.png"/>
-    </div>
+
+    <a class="sidebar-button" href="/changeLanguage">
+      <img src="/images/wordngo/trophy.png" alt="Change Language">
+    </a>
+
     <a class="sidebar-button" th:href="@{/Wordngo/gamepage}">
       <img src="/images/wordngo/redo.png"/>
     </a>

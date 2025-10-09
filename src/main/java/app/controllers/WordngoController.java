@@ -14,7 +14,15 @@ public class WordngoController {
         app.get("/Wordngo", ctx -> {
             User user = ctx.sessionAttribute("currentUser");
             ctx.attribute("user", user);
+            Word word = ctx.sessionAttribute("correctWord");
+            if (word != null) {
+                ctx.result(word.getWord()); // Return the word as plain text
+            } else {
+                ctx.status(404).result("No word found");
+            }
+
             ctx.render("Wordngo/index.html");
+
 
         });
         app.post("login-wordngo", ctx -> login(ctx));
@@ -40,12 +48,29 @@ public class WordngoController {
             ctx.render("Wordngo/gamepage.html");
         });
 
-
-
+        app.get("/changeLanguage", ctx -> {changeLanguage(ctx);
+        });
 
     }
 
 
+public static void changeLanguage(Context ctx) throws DatabaseException {
+        WordMapper wordMapper = new WordMapper();
+        String language = ctx.sessionAttribute("language");
+        if ("English".equals(language)) {
+            ctx.sessionAttribute("language", "French");
+            ctx.sessionAttribute("correctWord", wordMapper.getWord(ctx.sessionAttribute("language")));
+        } else if ("French".equals(language)) {
+            ctx.sessionAttribute("language", "English");
+            ctx.sessionAttribute("correctWord", wordMapper.getWord(ctx.sessionAttribute("language")));
+        } else {
+            // Optionally set a default or handle unknown/missing case
+            ctx.sessionAttribute("language", "English");
+            ctx.sessionAttribute("correctWord", wordMapper.getWord(ctx.sessionAttribute("language")));
+
+        }
+        ctx.render("Wordngo/gamepage.html");
+    }
 
     public static void login(Context ctx) {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
