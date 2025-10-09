@@ -1,0 +1,20 @@
+<div id="providerPopup" class="popup-overlay">
+    <div class="popup-content">
+        <h2>Where to Watch</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Watch Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="provider : ${providers}">
+                <td th:text="${provider.providerName}">Provider Name</td>
+                <td><a th:href="${provider.providerUrl}" target="_blank">Watch Now</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
