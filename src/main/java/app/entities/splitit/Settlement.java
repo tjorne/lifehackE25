@@ -6,6 +6,7 @@ public class Settlement {
     private String fromUserName;
     private String toUserName;
     private double amount;
+    private final String currency = "$";
 
     public Settlement(String fromUserName, String toUserName, double amount) {
         this.fromUserName = fromUserName;
@@ -35,6 +36,10 @@ public class Settlement {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getFormattedDouble(){
+        return String.format("%s %.2f,-", this.currency, this.amount);
     }
 
     @Override
