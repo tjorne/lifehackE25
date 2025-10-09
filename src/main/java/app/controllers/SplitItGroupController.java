@@ -6,6 +6,7 @@ import app.exceptions.DatabaseException;
 import app.services.splitit.AccountService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class SplitItGroupController {
         app.post("/createGroup/addMember", ctx -> addMemberToGroup(ctx));
         app.post("/createGroup/create", ctx -> createGroup(ctx));
     }
+
 
     private void createGroup(Context ctx)
     {
