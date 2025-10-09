@@ -72,7 +72,14 @@
                 <input type="hidden" name="genre" th:value="${selectedGenre}" />
                 <button class="pill" type="submit">Ny film i samme genre</button>
               </form>
+
               <a class="pill pill--outline" th:href="@{/}">Vælg ny genre</a>
+
+              <form action="/movieProviders" method="get" style="display:inline">
+                <input type="hidden" name="movieId" th:value="${movie.id}" />
+                <button class="pill" type="submit">Se udbydere</button>
+              </form>
+
             </div>
           </div>
         </div>

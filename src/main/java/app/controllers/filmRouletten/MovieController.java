@@ -12,6 +12,22 @@ public class MovieController {
 
     public static void addRoutes(Javalin app) {
 
+        app.get("/movieProviders", ctx -> {
+
+            String movieIdHolder = ctx.queryParam("movieId");
+
+            if (movieIdHolder == null || movieIdHolder.isEmpty()) {
+                ctx.redirect("/");
+                return;
+            }
+
+            int movieId = Integer.parseInt(movieIdHolder);
+            Movie movie = MovieMapper.getMovieById(movieId);
+
+            ctx.attribute("movie", movie);
+
+            ctx.render("filmRouletten/providers.html");
+        });
 
         app.get("/getMovie", ctx -> {
             String genre = ctx.queryParam("genre");

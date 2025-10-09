@@ -4,18 +4,28 @@ import java.sql.Date;
 
 public class Movie {
 
+    private int id;
     private String title;
     private String description;
     private Date timeStamp;
     private int rating;
     private int length;
 
-    public Movie(String title, String description, Date timeStamp, int rating, int length) {
+    public Movie(int id, String title, String description, Date timeStamp, int rating, int length) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.timeStamp = timeStamp;
         this.rating = rating;
         this.length = length;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

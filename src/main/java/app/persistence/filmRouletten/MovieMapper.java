@@ -23,13 +23,14 @@ public class MovieMapper {
 
             while (rs.next()) {
 
+                int id = rs.getInt("movie_id");
                 String title = rs.getString("movie_title");
                 String description = rs.getString("movie_description");
                 Date timeStamp = rs.getDate("movie_aired");
                 int rating = rs.getInt("movie_rating");
                 int length = rs.getInt("movie_length");
 
-                movies.add(new Movie(title, description, timeStamp, rating, length));
+                movies.add(new Movie(id, title, description, timeStamp, rating, length));
             }
 
         } catch (SQLException e) {
@@ -53,13 +54,15 @@ public class MovieMapper {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+
+                int id = rs.getInt("movie_id");
                 String title = rs.getString("movie_title");
                 String description = rs.getString("movie_description");
                 Date timeStamp = rs.getDate("movie_aired");
                 int rating = rs.getInt("movie_rating");
                 int length = rs.getInt("movie_length");
 
-                movies.add(new Movie(title, description, timeStamp, rating, length));
+                movies.add(new Movie(id, title, description, timeStamp, rating, length));
             }
 
         } catch (SQLException e) {
@@ -67,5 +70,34 @@ public class MovieMapper {
         }
 
         return movies;
+    }
+
+    public static Movie getMovieById(int id) {
+
+        String sql = "SELECT * FROM movie_roulette WHERE movie_id = ?";
+
+        try(Connection connection = ConnectionPool.getInstance().getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Movie(
+                        rs.getInt("movie_id"),
+                        rs.getString("movie_title"),
+                        rs.getString("movie_description"),
+                        rs.getDate("movie_aired"),
+                        rs.getInt("movie_rating"),
+                        rs.getInt("movie_length")
+                );
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
