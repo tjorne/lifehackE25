@@ -54,13 +54,16 @@ function showNotification(message, color = "green") {
 
 // _______________________________________________________________________
 
-document.addEventListener("DOMContentLoaded", function() {
 
+document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get("error");
 
-    if (document.getElementById('map')) {
+    const hasWelcomed = sessionStorage.getItem("welcomeMessageShown");
+
+    if (document.getElementById('map') && !hasWelcomed) {
         showNotification("Welcome Back", "green");
+        sessionStorage.setItem("welcomeMessageShown", "true");
     }
 
     switch(error) {

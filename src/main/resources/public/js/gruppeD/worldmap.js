@@ -110,7 +110,7 @@ function updateActiveNavbarMode() {
 // __________________________________________________________
 
 const blIcon = L.icon({ /* Bucket List Icon */
-    iconUrl: '/images/icons/bucketlist-2-s.png',
+    iconUrl: '/images/gruppeD/icons/bucketlist-2-s.png',
     iconSize: [32, 32],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -159,6 +159,8 @@ map.on('click', function(e) {
 
     // Validation
     if (!pinMode) return;
+    pinMode = false;
+    pinButton.classList.remove('active');
 
     const getLatLng = e.latlng;
 
@@ -177,7 +179,7 @@ map.on('click', function(e) {
     // Adds our popup to (map)
     const popUpMenu = L.popup({
 
-        offset: [0, -45] // Fixes our popup visuals
+        offset: [0, 5] // Fixes our popup visuals
 
     })
         .setLatLng(getLatLng)
@@ -225,12 +227,6 @@ map.on('click', function(e) {
             return;
     }
 
-    const marker = L.marker(getLatLng, { icon }).addTo(map);
-
-
-    if (currentMode === 'visited') visitedMarkers.push(marker);
-    if (currentMode === 'hated') hatedMarkers.push(marker);
-    if (currentMode === 'bucket') bucketMarkers.push(marker);
 
     setTimeout(() => {
 
@@ -239,13 +235,19 @@ map.on('click', function(e) {
 
         savebtn.addEventListener("click", async () => {
 
+
+            const marker = L.marker(getLatLng, { icon }).addTo(map);
+
+
+            if (currentMode === 'visited') visitedMarkers.push(marker);
+            if (currentMode === 'hated') hatedMarkers.push(marker);
+            if (currentMode === 'bucket') bucketMarkers.push(marker);
+
             const title = document.getElementById("pinPoint-title").value.trim();
             //const rating = document.getElementById("rating-value").value;
             const rating = `${value} – ${ratingLabels[value]}`;
 
 
-            pinMode = false;
-            pinButton.classList.remove('active');
             map.closePopup(popUpMenu);
 
             marker.pinData = {
