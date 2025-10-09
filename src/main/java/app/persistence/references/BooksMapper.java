@@ -41,16 +41,18 @@ public class BooksMapper {
         List<BookWithTheorist> bookListById = new ArrayList<>();
 
         String sql = """
-         SELECT t.name AS theorist_name,
-                b.title,
-                b.description
-         FROM theorists t
-         JOIN theorist_fields tf ON t.id = tf.theorist_id
-         JOIN theorist_books tb ON t.id = tb.theorist_id
-         JOIN books b ON tb.book_id = b.id
-         WHERE tf.field_id = ?
-           AND t.id = ?;
-        """;
+                SELECT
+                    t.name AS theorist_name,
+                    b.title,
+                    b.description
+                FROM theorists t
+                JOIN theorist_fields tf ON t.id = tf.theorist_id
+                JOIN theorist_books tb ON t.id = tb.theorist_id
+                JOIN books b ON tb.book_id = b.id AND b.field_id = tf.field_id
+                WHERE t.id = ?
+                  AND tf.field_id = ?;
+                """;
+
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
