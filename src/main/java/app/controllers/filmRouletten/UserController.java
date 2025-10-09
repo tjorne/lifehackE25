@@ -63,7 +63,7 @@ public class UserController {
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             ctx.attribute("message", "Udfyld både brugernavn og password.");
-            ctx.render("login.html");
+            ctx.render("filmRouletten/login.html");
             return;
         }
 
@@ -71,10 +71,10 @@ public class UserController {
             User user = UserMapper.login(username, password);
             ctx.sessionAttribute("currentUser", user);
             ctx.attribute("message", "Du er nu logget ind som " + username);
-            ctx.render("index.html");
+            ctx.render("filmRouletten/index.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", "Forkert brugernavn eller adgangskode. Prøv igen.");
-            ctx.render("login.html");
+            ctx.render("filmRouletten/login.html");
         }
     }
 
