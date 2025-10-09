@@ -1,7 +1,9 @@
+
+/*
+
 package app.persistence;
 
 import app.entities.User;
-import app.entities.filmRouletten.Movie;
 import app.exceptions.DatabaseException;
 
 import java.sql.Connection;
@@ -10,177 +12,131 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
-public class UserMapper {
+public class UserMapper
+{
 
-    public static User login(String userName, String password) throws DatabaseException {
+    public static User login(String userName, String password) throws DatabaseException
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        String sql = "SELECT * FROM users WHERE username=? AND password=?";
+        String sql = "select * from public.\"users\" where username=? and password=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
+        )
+        {
             ps.setString(1, userName);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
                 int id = rs.getInt("user_id");
-                return new User(id, userName, password);
-            } else {
+                String role = rs.getString("role");
+                return new User(id, userName, password, role);
+            } else
+            {
                 throw new DatabaseException("Fejl i login. Prøv igen");
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new DatabaseException("DB fejl", e.getMessage());
         }
     }
 
-    public static void createUser(String userName, String password) throws DatabaseException {
+    public static void createuser(String userName, String password) throws DatabaseException
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+
+        String sql = "insert into users (username, password) values (?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
+        )
+        {
             ps.setString(1, userName);
             ps.setString(2, password);
 
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-
-            if (e.getSQLState().equals("23505")) {
-                throw new DatabaseException("Brugernavnet '" + userName + "' findes allerede. Vælg et andet.");
-            } else {
-                throw new DatabaseException("Fejl ved oprettelse af bruger: " + e.getMessage());
-            }
-        }
-    }
-
-
-    public static void addMovieToWatched(int currentUserID, int selectedMovieID) throws DatabaseException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-
-        if (isMovieInWatchlist(currentUserID, selectedMovieID)) {
-            User user = getUserFromID(currentUserID);
-            String username = user.getUserName();
-            throw new DatabaseException("Filmen er allerede på watchlist for bruger " + username);
-        }
-
-        String sql = "INSERT INTO watchlist (current_user, selected_movie) VALUES (?, ?)";
-
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
-            ps.setInt(1, currentUserID);
-            ps.setInt(2, selectedMovieID);
-
             int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected != 1) {
-                User user = getUserFromID(currentUserID);
-                String username = user.getUserName();
-                throw new DatabaseException("Fejl ved indsætning af film på watchlist for bruger " + username);
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
             }
-        } catch (SQLException e) {
-            throw new DatabaseException("DB fejl ved indsætning i watchlist", e.getMessage());
+        }
+        catch (SQLException e)
+        {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value "))
+            {
+                msg = "Brugernavnet findes allerede. Vælg et andet";
+            }
+            throw new DatabaseException(msg, e.getMessage());
         }
     }
 
-
-
-    public static boolean isMovieInWatchlist(int userID, int movieID) throws DatabaseException {
+    public List<User> getAllUsers() throws DatabaseException
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        String sql = "SELECT COUNT(*) AS count FROM watchlist_roulette WHERE current_user = ? AND selected_movie = ?";
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * from users";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
-            ps.setInt(1, userID);
-            ps.setInt(2, movieID);
+        )
+        {
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("count") > 0;
+            while (rs.next())
+            {
+                int userId = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+
+                users.add(new User(userId,username,password, role));
             }
-            return false;
-        } catch (SQLException e) {
-            throw new DatabaseException("DB fejl ved tjek af watchlist", e.getMessage());
         }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("DB fejl", e.getMessage());
+        }
+        return users;
     }
 
-    public static User getUserFromID(int userID) throws DatabaseException {
+    public User getUserById(int userId) throws DatabaseException
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        String sql = "SELECT user_id, username, password, role FROM user_roulette WHERE user_id = ?";
+        User user = null;
+        String sql = "SELECT user_id, username, password, role FROM users WHERE user_id = ?";
 
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
-            ps.setInt(1, userID);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
 
+            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 int id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
+                String role = rs.getString("role");
 
-                return new User(id, username, password);
-            } else {
-                throw new DatabaseException("Ingen bruger fundet med ID: " + userID);
+                user = new User(id, username, password, role);
             }
+
         } catch (SQLException e) {
-            throw new DatabaseException("DB fejl ved hentning af bruger", e.getMessage());
+            throw new DatabaseException("Fejl ved hentning af bruger med id " + userId + ": " + e.getMessage());
         }
+        return user;
     }
-
-    public static List<Movie> getWatchedMoviesByUser(int userID) throws DatabaseException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-
-        String sql = """
-        SELECT m.movie_title, m.movie_description, m.movie_aired, m.movie_length, m.movie_rating
-        FROM movie_roulette m
-        JOIN watchlist w ON m.movie_id = w.movie_id
-        WHERE w.user_id = ?
-        ORDER BY m.movie_title
-        """;
-
-        List<Movie> watchedMovies = new ArrayList<>();
-
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
-            ps.setInt(1, userID);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("movie_id");
-                String title = rs.getString("movie_title");
-                String description = rs.getString("movie_description");
-                Date aired = rs.getDate("movie_aired");
-                int length = rs.getInt("movie_length");
-                int rating = rs.getInt("movie_rating");
-
-                Movie movie = new Movie(id, title, description, aired, rating, length);
-                watchedMovies.add(movie);
-            }
-        } catch (SQLException e) {
-            throw new DatabaseException("DB fejl ved hentning af watchlist", e.getMessage());
-        }
-
-        return watchedMovies;
-    }
-
-
-
 }
+
+ */
