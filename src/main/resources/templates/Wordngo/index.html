@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/wordngoLogin.css">
+</head>
+<body>
+<div class="login-box">
+    <h1 class="title">Word&go</h1>
+    <form th:action="@{/login-wordngo}" method="post">
+
+        <div class="input">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username" placeholder="Enter username"
+                   th:value="${user != null ? user.userName : ''}">
+
+            <br>
+
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder="Enter password"
+                   th:value="${user != null ? user.password : ''}"><br>
+        </div>
+
+        <label for="language">Language:</label>
+        <select name="language" id="Language">
+
+            <option value="English">English</option>
+            <option value="French">French</option>
+        </select>
+        <div class="buttons">
+            <a th:href="@{/createuser}">
+            <input type="button" name="create" value="Create Account">
+            </a>
+            <input type="submit" name="login-wordngo" value="Login">
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

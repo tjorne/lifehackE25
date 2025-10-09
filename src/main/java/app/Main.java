@@ -2,6 +2,7 @@ package app;
 
 import app.config.ThymeleafConfig;
 import app.controllers.*;
+import app.entities.User;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -15,6 +16,7 @@ public class Main
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
+
     public static void main(String[] args)
     {
         // Initializing Javalin and Jetty webserver
@@ -24,10 +26,18 @@ public class Main
             config.staticFiles.add("/templates");
         }).start(7070);
 
+
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
+
+        app.before(ctx -> {
+            User currentUser = ctx.sessionAttribute("currentUser");
+            if (currentUser != null) {
+                ctx.attribute("user", currentUser);
+            }
+        });
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
-
+        WordngoController.addRoutes(app);
+        }
     }
-}
