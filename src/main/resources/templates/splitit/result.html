@@ -66,9 +66,11 @@
         <div class="link-section">
             <a th:href="@{/splitit}" class="create-link">Back</a>
         </div>
-    </div>
-    <div class="error-message">
-        <p th:text="${errorMessage}" class="error-message-text"></p>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}" class="error-message-text"></p>
+        </div>
     </div>
 </main>
 

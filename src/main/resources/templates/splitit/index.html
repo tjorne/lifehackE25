@@ -49,11 +49,12 @@
         <div class="link-section">
             <a th:href="@{/splitit/createGroup}" class="create-link">Create a group</a>
         </div>
-    </div>
-    <div class="error-message">
-        <p th:text="${errorMessage}" class="error-message-text"></p>
-    </div>
 
+        <!-- Error Message -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}" class="error-message-text"></p>
+        </div>
+    </div>
 </main>
 
 <footer class="footer">

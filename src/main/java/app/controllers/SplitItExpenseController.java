@@ -126,7 +126,7 @@ public class SplitItExpenseController {
                 ctx.sessionAttribute("expenses", expenses);
 
             } catch (DatabaseException e) {
-                ctx.attribute("errorMessage", e.getMessage());
+                ctx.sessionAttribute("errorMessage", e.getMessage());
             }
             ctx.redirect("/expense?groupId=" + groupId);
 
@@ -138,8 +138,14 @@ public class SplitItExpenseController {
         User user = ctx.sessionAttribute("currentUser");
         ctx.attribute("accountname",user.getUserName());
 
+        String errorMessage = ctx.sessionAttribute("errorMessage");
+        if (errorMessage != null) {
+            ctx.attribute("errorMessage", errorMessage);
+            ctx.consumeSessionAttribute("errorMessage");
+        }
+
         if (groupIdParam == null) {
-            ctx.attribute("errorMessage", "No group selected");
+            ctx.sessionAttribute("errorMessage", "No group selected");
             ctx.redirect("/splitit");
             return;
         }
@@ -170,16 +176,19 @@ public class SplitItExpenseController {
                 groupTotal = calculateTotal(groupExpenses);
             }
 
+            String UserTotalFormated = String.format("%.2f",userTotal);
+            String groupTotalFormated = String.format("%.2f",groupTotal);
+
             ctx.attribute("groupName",group.getName());
             ctx.attribute("members", members);
             ctx.attribute("expenses", groupExpenses);
-            ctx.attribute("userTotal", userTotal);
-            ctx.attribute("groupTotal", groupTotal);
+            ctx.attribute("userTotal", UserTotalFormated);
+            ctx.attribute("groupTotal", groupTotalFormated);
 
             ctx.sessionAttribute("expenses", groupExpenses);
 
         } catch (DatabaseException e) {
-            ctx.attribute("errorMessage", e.getMessage());
+            ctx.sessionAttribute("errorMessage", e.getMessage());
             ctx.redirect("/splitit");
             return;
         }

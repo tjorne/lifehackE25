@@ -40,7 +40,7 @@ public class SplitItGroupController {
         try {
             userId = Integer.parseInt(userIdParam);
         } catch (NumberFormatException e) {
-            ctx.attribute("errorMessage",e.getMessage());
+            ctx.sessionAttribute("errorMessage",e.getMessage());
         }
         try {
             User user = accountService.getUserById(userId);
@@ -54,7 +54,7 @@ public class SplitItGroupController {
             members.remove(tmpMember);
             ctx.attribute("addedMembers",members);
         } catch (DatabaseException e) {
-            ctx.attribute("errorMessage",e.getMessage());
+            ctx.sessionAttribute("errorMessage",e.getMessage());
         }
         ctx.redirect("/splitit/createGroup");
 
@@ -71,7 +71,7 @@ public class SplitItGroupController {
         try {
             group = accountService.createGroup(groupName);
         } catch (DatabaseException | IllegalArgumentException e) {
-            ctx.attribute("errorMessage", e.getMessage());
+            ctx.sessionAttribute("errorMessage", e.getMessage());
         }
 
         try{
@@ -80,7 +80,7 @@ public class SplitItGroupController {
                 accountService.addMemberToGroup(member.getUserId(),group.getGroupId());
             }
         }catch (DatabaseException e){
-            ctx.attribute("errorMessage", e.getMessage());
+            ctx.sessionAttribute("errorMessage", e.getMessage());
         }
         ctx.redirect("/splitit/");
     }
@@ -89,7 +89,7 @@ public class SplitItGroupController {
     {
         String userIdParam = ctx.formParam("userId");
         if (userIdParam == null) {
-            ctx.attribute("errorMessage", "No user selected");
+            ctx.sessionAttribute("errorMessage", "No user selected");
             ctx.render("/splitit/creategroup");
             return;
         }
@@ -106,13 +106,13 @@ public class SplitItGroupController {
             if (!accountService.isUserInGroup(addedMembers, userId)){
                 addedMembers.add(user);
             } else {
-                ctx.attribute("errorMessage","User is already in group!");
+                ctx.sessionAttribute("errorMessage","User is already in group!");
             }
 
             ctx.sessionAttribute("addedMembers", addedMembers);
 
         } catch (DatabaseException e) {
-            ctx.attribute("errorMessage", e.getMessage());
+            ctx.sessionAttribute("errorMessage", e.getMessage());
         }
 
         ctx.redirect("/splitit/createGroup");

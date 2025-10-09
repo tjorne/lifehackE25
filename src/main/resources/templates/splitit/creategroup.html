@@ -90,9 +90,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="error-message">
-        <p th:text="${errorMessage}" class="error-message-text"></p>
+        <!-- Error Message -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}" class="error-message-text"></p>
+        </div>
     </div>
 </main>
 
