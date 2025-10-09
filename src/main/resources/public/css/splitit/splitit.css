@@ -659,3 +659,70 @@ footer {
 .split-section {
     margin: var(--spacing-lg) 0;
 }
+
+/* === RESULT PAGE SPECIFIC === */
+
+/* Group identifier on result page */
+.group-identifier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.group-display {
+    margin: 0;
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+}
+
+/* Settlements section */
+.settlements-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.settlement-list {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.settlement-item {
+    margin-bottom: var(--spacing-lg);
+}
+
+.settlement-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+}
+
+.settlement-label {
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+}
+
+.settlement-value {
+    font-size: var(--body-size);
+    font-weight: bold;
+}
+
+.settlement-divider {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin: var(--spacing-md) 0;
+}
+
+/* Empty settlements state */
+.empty-settlements {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.empty-settlements p {
+    margin: var(--spacing-xs) 0;
+    font-size: var(--body-size);
+}

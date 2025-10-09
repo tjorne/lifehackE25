@@ -2,54 +2,87 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SPLITit</title>
+    <title>Split Result - SPLITit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/css/splitit/splitit.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/splitit/splitit.css}"/>
 </head>
 <body>
-<header>
-    <nav>
-        <a th:href="@{/}"><img th:src="@{/images/splitit/logo.svg}" alt="Split it logo"></a>
+<header class="header">
+    <nav class="header-nav">
+        <a th:href="@{/}" class="logo-link">
+            <img th:src="@{/images/splitit/logo.svg}" alt="Split it logo" class="logo">
+        </a>
     </nav>
 </header>
 
-<main>
-    <div class="title">
-        <h1>SPLITit</h1>
-        <hr class="divider"> <!-- Format this line - maybe id or class? -->
-        <h3>Your expense splitter</h3>
-    </div>
-
-    <div class="Group-identifier">
-        <!-- Group name -->
-        <p><strong>Group:</strong> <span th:text="${groupName}">Group Name</span></p>
-    </div>
-
-    <!-- Show results of split -->
-    <div class="settlements" th:if="${settlements != null and !settlements.empty}">
-        <div class="settlement" th:each="settlement : ${settlements}">
-            <div class="result-view">
-                <span class="result-from">From: <strong th:text="${settlement.fromUserName}"></strong></span>
-                <span class="result-to">To: <strong th:text="${settlement.toUserName}"></strong></span>
-                <span class="result-amount">Amount: <strong th:text="${settlement.amount}"></strong></span>
-            </div>
+<main class="main">
+    <div class="main-container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="main-title">SPLITit</h1>
             <hr class="divider">
+            <h3 class="tagline">Your expense splitter</h3>
+        </div>
+
+        <!-- Group Name Display -->
+        <div class="group-identifier">
+            <h2 class="group-display" th:text="${groupName}">Group name</h2>
+            <!--
+            <form th:action="@{/expenses/deleteGroup}" method="post" class="delete-form">
+                <input type="hidden" name="groupId" th:value="${group.groupId}">
+                <button type="submit" class="btn-delete">
+                    <img th:src="@{/images/splitit/bucket.svg}" alt="Delete group" class="delete-icon">
+                </button>
+            </form>
+            -->
+        </div>
+
+        <!-- Settlements List -->
+        <div class="settlements-section">
+            <div class="settlement-list" th:if="${settlements != null and !settlements.empty}">
+                <div class="settlement-item" th:each="settlement : ${settlements}">
+                    <div class="settlement-row">
+                        <span class="settlement-label">From:</span>
+                        <span class="settlement-value" th:text="${settlement.fromUserName}">userName</span>
+                    </div>
+                    <div class="settlement-row">
+                        <span class="settlement-label">To:</span>
+                        <span class="settlement-value" th:text="${settlement.toUserName}">userName</span>
+                    </div>
+                    <div class="settlement-row">
+                        <span class="settlement-label">Amount:</span>
+                        <span class="settlement-value" th:text="${settlement.amount} + ',-'">amount</span>
+                    </div>
+                    <hr class="divider settlement-divider">
+                </div>
+            </div>
+
+            <!-- Empty state (if no settlements) -->
+            <div th:if="${settlements == null or settlements.empty}" class="empty-settlements">
+                <p>No settlements to display.</p>
+                <p>All expenses are already even!</p>
+            </div>
+        </div>
+
+        <!-- Back Link -->
+        <div class="link-section">
+            <a th:href="@{/splitit}" class="create-link">Back</a>
         </div>
     </div>
-
-    <a th:href="@{/backToMain}">Back</a>
 </main>
 
-<footer>
-    <div>
-        <p>
-            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener">
-                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> MORTEN JENSEN
+<footer class="footer">
+    <div class="footer-content">
+        <p class="footer-item">
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>MORTEN JENSEN</span>
             </a>
         </p>
-        <p>
-            <a href="https://github.com/DHangaard" target="_blank" rel="noopener">
-                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon"> DANIEL HANGAARD
+        <p class="footer-item">
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>DANIEL HANGAARD</span>
             </a>
         </p>
     </div>

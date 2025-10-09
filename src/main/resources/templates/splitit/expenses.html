@@ -66,7 +66,7 @@
                 <div class="expense-item" th:each="expense : ${expenses}">
                     <div class="expense-header">
                         <h4 class="expense-user" th:text="${expense.userName}">Name</h4>
-                        <span class="expense-amount" th:text="${expense.amount}">amount</span>
+                        <span class="expense-amount" th:text="${expense.amount} + ',-'">amount</span>
                     </div>
                     <div class="expense-body">
                         <p class="expense-label">Description:</p>
@@ -102,11 +102,11 @@
         <div class="totals-section">
             <div class="total-item">
                 <span class="total-label">TOTAL:</span>
-                <span class="total-value" th:text="${userTotal}">amount</span>
+                <span class="total-value" th:text="${userTotal} + ',-'">amount</span>
             </div>
             <div class="total-item">
                 <span class="total-label">GROUP TOTAL:</span>
-                <span class="total-value" th:text="${groupTotal}">amount</span>
+                <span class="total-value" th:text="${groupTotal} + ',-'">amount</span>
             </div>
             <hr class="divider">
         </div>
