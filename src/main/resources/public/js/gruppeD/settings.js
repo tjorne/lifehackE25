@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentMap = {
         'profile': `
             <h2>Profile Settings</h2>
-            <p>Change your username, email & other general information!</p>
+            <p>Change your username, email & other general information!<br><br>NOT WORKING</p>
             <div class="settings-btn-wrapper">
                 <div class="changeUsernameWrapper">
                     <button type="button" id="changeUsername" class="guac-btn guac-btn-profileDefault">
@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="changeUsernameHidden deleteInputWrapper" style="display:none;">
                         <input type="text" id="oldUsername" placeholder="Current Username" required>
                         <input type="text" id="newUsername" placeholder="New Username" required>
+                        <button type="button" id="updateInfo" class="guac-btn guac-btn-profileDefault">
+                            Update
+                        </button>
                     </div>
                 </div>
                 <div class="changeUsernameWrapper">
@@ -24,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="password" id="oldPassword" placeholder="Old Password" required>
                         <input type="password" id="newPassword" placeholder="New Password" required>
                         <input type="password" id="newPasswordConfirm" placeholder="New Password Confirm" required>
+                        <button type="button" id="updateInfo" class="guac-btn guac-btn-profileDefault">
+                            Update
+                        </button>
                     </div>
                 </div>
                 <div class="changeUsernameWrapper">
@@ -34,13 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="text" id="oldUsername" placeholder="Current Username" required>
                         <input type="text" id="oldEmail" placeholder="Current Email" required>
                         <input type="text" id="newEmail" placeholder="New Email" required>
+                        <button type="button" id="updateInfo" class="guac-btn guac-btn-profileDefault">
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>
         `,
         'privacy': `
             <h2>Privacy Settings</h2>
-            <p>We always store your data safely using hashed passwords and other safety measures.</p>
+            <p>We always store your data safely using hashed passwords and other safety measures.<br><br>NOT WORKING</p>
             <div class="settings-btn-wrapper">
                 <button type="button" id="changeCookies" class="guac-btn guac-btn-profileDefault">
                     Change cookies preferences
@@ -55,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `,
         'notifications': `
             <h2>Notification Settings</h2>
-            <p>Tired of the notification popups? Change here!</p>
+            <p>Tired of the notification popups? Change here!<br><br>NOT WORKING</p>
             <div class="settings-btn-wrapper">
                 <button type="button" id="changeNotifications" class="guac-btn guac-btn-profileDefault">
                     Disable Notifications
@@ -64,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `,
         'language': `
             <h2>Language Settings</h2>
-            <p>Feel free to change the language - Simply choose below here!</p>
+            <p>Feel free to change the language - Simply choose below here! <br><br>NOT WORKING</p>
             <div class="deleteInputWrapper">
                 <select id="language-select">
                     <option value="">Vælg sprog...</option>
@@ -80,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `,
         'worldmap': `
             <h2>World Map Settings</h2>
-            <p>Initial Zoom, Start Spawn Location, Darkmode, Lightmode, Custom Icons and so on!</p>
+            <p>Initial Zoom, Start Spawn Location, Darkmode, Lightmode, Custom Icons and so on! <br><br>NOT WORKING</p>
             <div class="settings-btn-wrapper">
                 <button type="button" id="changeZoom" class="guac-btn guac-btn-profileDefault">
                     Change Initial Zoom
@@ -177,6 +186,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         usernameInput.addEventListener('input', checkInputs);
         emailInput.addEventListener('input', checkInputs);
+        deleteButton.addEventListener('click', async () => {
+
+            if (deleteButton.disabled) return;
+            deleteButton.disabled = true;
+
+            const params = new URLSearchParams();
+            params.append('name', usernameInput.value.trim());
+            params.append('email', emailInput.value.trim());
+
+            try {
+                const res = await fetch('/gruppeD/settings/delete', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: params.toString()
+                });
+                if (res.redirected) {
+                    window.location.href = res.url;
+                    return;
+                }
+                window.location.reload();
+            } catch (e) {
+                // fejl
+                deleteButton.disabled = false;
+            }
+
+
+        });
     }
 
     // ________________________________________________________________________

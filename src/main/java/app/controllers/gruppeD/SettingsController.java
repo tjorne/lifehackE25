@@ -18,17 +18,14 @@ public class SettingsController {
 
         String confirmation = ctx.formParam("confirmation");
         String name = ctx.formParam("name");
+        String email = ctx.formParam("email");
 
    
-        if (confirmation == null || name == null) {
+        if (name == null || email == null) {
             ctx.redirect("/gruppeD/settings?error=deleteMissingFields");
             return;
         }
 
-        if (!"I am so sexy".equals(confirmation)) {
-            ctx.redirect("/gruppeD/settings?error=deleteConfirmMismatch");
-            return;
-        }
 
         User currentUser = ctx.sessionAttribute("currentUser");
         if (currentUser == null) {
@@ -38,6 +35,11 @@ public class SettingsController {
 
         if (!currentUser.getUsername().equals(name)) {
             ctx.redirect("/gruppeD/settings?error=deleteNameMismatch");
+            return;
+        }
+
+        if (!currentUser.getEmail().equals(email)) {
+            ctx.redirect("/gruppeD/settings?error=deleteEmailMismatch");
             return;
         }
 

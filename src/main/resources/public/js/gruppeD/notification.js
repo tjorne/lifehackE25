@@ -94,8 +94,8 @@ document.addEventListener("DOMContentLoaded", function() {
         case "deleteMissingFields":
             showNotification("Please fill out both fields.", "red");
             break;
-        case "deleteConfirmMismatch":
-            showNotification("Confirmation text mismatch.", "red");
+        case "deleteEmailMismatch":
+            showNotification("Confirmation email mismatch.", "red");
             break;
         case "deleteNameMismatch":
             showNotification("Username does not match the current user.", "red");
