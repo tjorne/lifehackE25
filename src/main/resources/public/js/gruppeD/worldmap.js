@@ -243,6 +243,9 @@ map.on('click', function(e) {
             //const rating = document.getElementById("rating-value").value;
             const rating = `${value} – ${ratingLabels[value]}`;
 
+
+            pinMode = false;
+            pinButton.classList.remove('active');
             map.closePopup(popUpMenu);
 
             marker.pinData = {
@@ -255,8 +258,7 @@ map.on('click', function(e) {
             };
 
             // TODO: Der skal så her fetches og sendes til vores thymeleaf så vi kan gemme øvrige data til vores database
-            await fetch("/gruppeD/pins", {
-
+            const response = await fetch("/gruppeD/pins", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -266,8 +268,10 @@ map.on('click', function(e) {
                     lat: getLatLng.lat,
                     lng: getLatLng.lng
                 })
-
             });
+
+            const savedPin = await response.json();
+            marker.pinData.id = savedPin.id;
 
             const popupMenu = `
                 <div class="popupContent guac-justify-center">
@@ -297,7 +301,6 @@ map.on('click', function(e) {
                             });
 
                             try {
-
                                 await fetch(`/gruppeD/pins/${marker.pinData.id}`, {method: "DELETE"});
 
                             } catch (err) {
@@ -361,7 +364,6 @@ async function loadPins() {
         }
 
         pins.forEach(pin => {
-
             const ratingString = `${pin.rating} – ${ratingLabels[pin.rating]}`;
             let icon = redIcon;
 
@@ -421,7 +423,7 @@ async function loadPins() {
 
                             try {
 
-                                await fetch(`/pins/${pin.id}`, {method: "DELETE"});
+                                await fetch(`/gruppeD/pins/${pin.id}`, {method: "DELETE"});
 
                             } catch (err) {
 

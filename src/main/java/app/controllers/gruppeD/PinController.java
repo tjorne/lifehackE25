@@ -39,7 +39,7 @@ public class PinController {
                 default -> 1; // fallback
             };
 
-            Pin pin = new Pin(
+            /*Pin p = new Pin(
                     0,
                     currentUser.getId(),
                     categoryId,
@@ -48,12 +48,12 @@ public class PinController {
                     Timestamp.from(Instant.now()),
                     title,
                     rating
-            );
+            );*/
 
             PinMapper mapper = new PinMapper(connection);
-            mapper.addPin(pin);
+            Pin pin = mapper.addPin(currentUser.getId(), categoryId, lat, lng, Timestamp.from(Instant.now()), title, rating);
 
-            ctx.status(201).json(pin);
+            ctx.json(pin);
 
         } catch (SQLException e) {
 

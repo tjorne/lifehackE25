@@ -9,6 +9,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class PinMapper {
@@ -37,22 +38,41 @@ public class PinMapper {
 
     // ________________________________________
 
-    public void addPin(Pin pin) throws SQLException {
-
+    public Pin addPin(int userId, int catID, double lat, double lng, Timestamp created, String title, int rating) throws SQLException {
+        Pin pin = null;
         String sql = "INSERT INTO pins (user_id, category_id, latitude, longitude, created_at, title, rating) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-            stmt.setInt(1, pin.getUser_id());
-            stmt.setInt(2, pin.getCategory_id());
-            stmt.setDouble(3, pin.getLatitude());
-            stmt.setDouble(4, pin.getLongitude());
-            stmt.setTimestamp(5, pin.getCreated_at());
-            stmt.setString(6, pin.getTitle());
-            stmt.setInt(7, pin.getRating());
+        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, catID);
+            stmt.setDouble(3, lat);
+            stmt.setDouble(4, lng);
+            stmt.setTimestamp(5, created);
+            stmt.setString(6, title);
+            stmt.setInt(7, rating);
             stmt.executeUpdate();
 
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int generatedId = rs.getInt(1);
+                    pin = new Pin(
+                            generatedId,
+                            userId,
+                            catID,
+                            lat,
+                            lng,
+                            created,
+                            title,
+                            rating
+                    );
+                }
+            }
         }
+
+        return pin;
     }
+
 
     // ________________________________________
 
