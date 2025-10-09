@@ -1,0 +1,30 @@
+<div id="providerPopup" class="popup-overlay">
+    <div class="popup-content">
+        <h2>Where to Watch</h2>
+
+        <div th:if="${providers == null or #lists.isEmpty(providers)}">
+            <p>Ingen udbydere fundet for denne film.</p>
+        </div>
+
+        <table th:if="${providers != null and !#lists.isEmpty(providers)}">
+            <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Watch Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="provider : ${providers}">
+                <td th:text="${provider.providerName}">Provider Name</td>
+                <td>
+                    <a th:href="${provider.providerUrl}"
+                       target="_blank"
+                       rel="noopener noreferrer">Watch Now</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button onclick="history.back()">Close</button>
+    </div>
+</div>

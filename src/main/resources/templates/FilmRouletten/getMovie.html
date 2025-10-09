@@ -75,10 +75,9 @@
 
               <a class="pill pill--outline" th:href="@{/}">Vælg ny genre</a>
 
-              <form action="/movieProviders" method="get" style="display:inline">
-                <input type="hidden" name="movieId" th:value="${movie.id}" />
-                <button class="pill" type="submit">Se udbydere</button>
-              </form>
+              <a class="pill" th:href="@{/providers/{movieId}(movieId=${movie.id})}">Se udbydere</a>
+
+              <a class="pill" th:href="@{/watchlist/{watchlist}(watchlistId=${movie.id})}">Tilføj til watchlist</a>
 
             </div>
           </div>

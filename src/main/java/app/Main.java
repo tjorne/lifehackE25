@@ -3,6 +3,7 @@ package app;
 import app.config.ThymeleafConfig;
 import app.controllers.filmRouletten.FilmRoulettenController;
 import app.controllers.filmRouletten.MovieController;
+import app.controllers.filmRouletten.ProviderController;
 import app.controllers.filmRouletten.UserController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
@@ -34,6 +35,7 @@ public class Main
         UserController.addRoutes(app);
         FilmRoulettenController.addRoutes(app);
         MovieController.addRoutes(app);
+        ProviderController.addRoutes(app);
 
     }
 }
