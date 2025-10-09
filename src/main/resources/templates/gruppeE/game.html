@@ -25,12 +25,12 @@
             <div class="field-item" th:style="'width: calc(100%/'+@{${mineMap.width}}+');'+'height: calc(100%/'+@{${mineMap.height}}+')'" th:each="field,iter : ${mineMap.field}">
 
                 <!-- render field -->
-                <th:block th:if="${field.shown} == false">
-                    <form  class="field-hidden" th:action="@{/gruppeE/mine/{id} (id=${iter.index})}" method="POST">
+                <th:block th:if="${field.shown} == false AND ${mineMap.gameover} == false">
+                    <form class="field-hidden" th:action="@{/gruppeE/mine/{id} (id=${iter.index})}" method="POST">
                         <button type="submit"></button>
                     </form>
                 </th:block>
-                <th:block th:if="${field.shown} == true">
+                <th:block th:if="${field.shown} == true OR ${mineMap.gameover} == true">
                     <th:block th:if="${field.isMine} == false">
                         <hi class="field" th:text="${field.mineCnt}"></hi>
                     </th:block>

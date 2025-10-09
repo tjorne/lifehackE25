@@ -24,7 +24,7 @@ public class MineController {
                         id SERIAL NOT NULL,
                         user_id INTEGER NOT NULL,
                         score_value INTEGER NOT NULL,
-                        date DATE NOT NULL,                        
+                        date DATE NOT NULL,
                         difficulty VARCHAR NOT NULL,
                         CONSTRAINT scores_pkey PRIMARY KEY (id)
                         
@@ -138,10 +138,6 @@ public class MineController {
                 ctx.status(500);
             }
             ctx.redirect("/gruppeE/gameover");
-            return;
-        }
-        if (map.gameover) {
-            ctx.redirect("/gruppeE");
             return;
         }
 

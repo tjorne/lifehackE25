@@ -7,6 +7,9 @@
 </head>
 <body>
 <div class="flexbox-container-gameover">
+    <form class="game-menu" th:action="@{/gruppeE/quit}" method="post">
+        <button type="submit">quit</button>
+    </form>
     <div class="flexbox-item-h1-gameover"><h1>Game Over!</h1></div>
     <div class="flexbox-lowerhalf-container">
         <div class="flexbox-holder-scoreboard"><h2>Scoreboard:</h2>
