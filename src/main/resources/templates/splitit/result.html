@@ -27,7 +27,7 @@
         <!-- Group Name Display -->
         <div class="group-identifier">
             <h2 class="group-display" th:text="${groupName}">Group name</h2>
-            <form th:action="@{/expenses/deleteGroup}" method="post" class="delete-form">
+            <form th:action="@{/deleteGroup}" method="post" class="delete-form">
                 <input type="hidden" name="groupId" th:value="${groupId}">
                 <button type="submit" class="btn-delete">
                     <img th:src="@{/images/splitit/bucket.svg}" onclick="confirm('Are you sure?')" alt="Delete group" class="delete-icon">
@@ -66,6 +66,9 @@
         <div class="link-section">
             <a th:href="@{/splitit}" class="create-link">Back</a>
         </div>
+    </div>
+    <div class="error-message">
+        <p th:text="${errorMessage}" class="error-message-text"></p>
     </div>
 </main>
 

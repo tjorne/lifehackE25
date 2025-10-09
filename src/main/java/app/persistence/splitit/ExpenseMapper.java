@@ -196,5 +196,28 @@ public class ExpenseMapper {
             }
             return result;
         }
+
+    public boolean deleteAllExpensesByGroupId(int groupId) throws DatabaseException
+    {
+        String sql = "DELETE FROM expense WHERE group_id = ?";
+        boolean result = false;
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, groupId);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0)
+            {
+                result = true;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl ved sletning af udgifter: " + e.getMessage());
+        }
+        return result;
+    }
+
 }
 

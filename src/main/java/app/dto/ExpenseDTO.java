@@ -93,10 +93,10 @@ public class ExpenseDTO {
         long hours = duration.toHours();
         long days = duration.toDays();
 
-        if (minutes < 1) return "Lige nu";
-        if (minutes < 60) return minutes + " min siden";
-        if (hours < 24) return hours + " timer siden";
-        if (days < 7) return days + " dage siden";
+        if (minutes < 1) return "Now";
+        if (minutes < 60) return minutes + " min ago";
+        if (hours < 24) return hours + " hours ago";
+        if (days < 7) return days + " days ago";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return postTime.format(formatter);

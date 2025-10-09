@@ -8,6 +8,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,36 @@ public class SplitItGroupController {
         app.post("/createGroup/setName", ctx -> createGroupName(ctx));
         app.post("/createGroup/addMember", ctx -> addMemberToGroup(ctx));
         app.post("/createGroup/create", ctx -> createGroup(ctx));
+        app.post("/createGroup/removeMember", ctx -> deleteMemberFromGroup(ctx));
+    }
+
+    private void deleteMemberFromGroup(Context ctx)
+    {
+        List<User> members = ctx.sessionAttribute("addedMembers");
+        String userIdParam = ctx.formParam("userId");
+
+        int userId = 0;
+        try {
+            userId = Integer.parseInt(userIdParam);
+        } catch (NumberFormatException e) {
+            ctx.attribute("errorMessage",e.getMessage());
+        }
+        try {
+            User user = accountService.getUserById(userId);
+            User tmpMember = null;
+            for(User member: members)
+            {
+                if(user.getUserId() == member.getUserId()){
+                    tmpMember = member;
+                }
+            }
+            members.remove(tmpMember);
+            ctx.attribute("addedMembers",members);
+        } catch (DatabaseException e) {
+            ctx.attribute("errorMessage",e.getMessage());
+        }
+        ctx.redirect("/splitit/createGroup");
+
     }
 
 
@@ -144,9 +175,13 @@ public class SplitItGroupController {
     private void index(Context ctx)
     {
         User user = ctx.sessionAttribute("currentUser");
+
+        if (user == null) {
+            ctx.redirect("/");
+            return;
+        }
         try {
             List<Group> groups = accountService.getUserGroups(user.getUserId());
-            //TODO if null maybe = new arraylist
             ctx.attribute("groups",groups);
 
         } catch (DatabaseException e) {

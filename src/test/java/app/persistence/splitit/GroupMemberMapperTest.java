@@ -38,7 +38,7 @@ class GroupMemberMapperTest {
 
             stmt.execute("CREATE TABLE test.users (" +
                     "user_id SERIAL PRIMARY KEY," +
-                    "name VARCHAR(100) NOT NULL," +
+                    "username VARCHAR(100) NOT NULL," +
                     "password VARCHAR(255) NOT NULL," +
                     "role VARCHAR(20) DEFAULT 'user' NOT NULL," +
                     "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
@@ -78,7 +78,7 @@ class GroupMemberMapperTest {
             stmt.execute("ALTER SEQUENCE test.users_user_id_seq RESTART WITH 1");
             stmt.execute("ALTER SEQUENCE test.groups_group_id_seq RESTART WITH 1");
 
-            stmt.execute("INSERT INTO test.users (name, password, role) VALUES " +
+            stmt.execute("INSERT INTO test.users (username, password, role) VALUES " +
                     "('Alice', 'pass123', 'user'), " +
                     "('Bob', 'pass456', 'user'), " +
                     "('Charlie', 'pass789', 'user'), " +

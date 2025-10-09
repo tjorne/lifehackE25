@@ -11,6 +11,7 @@ public interface ExpenseService {
     ExpenseDTO getExpenseById(int expenseId) throws DatabaseException;
     boolean updateExpense(int expenseId, String description, double amount) throws DatabaseException;
     boolean deleteExpense(int expenseId) throws DatabaseException;
+    public boolean deleteAllExpensesByGroupId(int groupId) throws DatabaseException;
 
     List<ExpenseDTO> getExpensesByGroupId(int groupId) throws DatabaseException;
     List<ExpenseDTO> getExpensesByUserId(int userId) throws DatabaseException;

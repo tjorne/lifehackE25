@@ -63,6 +63,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    public boolean deleteAllExpensesByGroupId(int groupId) throws DatabaseException {
+    return expenseMapper.deleteAllExpensesByGroupId(groupId);
+    }
+
+    @Override
     public List<ExpenseDTO> getExpensesByGroupId(int groupId) throws DatabaseException {
         List<Expense> expenses = expenseMapper.getExpensesByGroupId(groupId);
         Group group = groupMapper.getGroupById(groupId);

@@ -35,7 +35,7 @@ public class SplitItExpenseController {
         app.get("/result", ctx -> showResult(ctx));
 
         app.post("/expenses/addExpense", ctx -> addExpense(ctx));
-        app.post("/expenses/deleteGroup", ctx -> deleteGroup(ctx));
+        app.post("/deleteGroup", ctx -> deleteGroup(ctx));
         app.post("/expenses/deleteExpense", ctx -> deleteExpense(ctx));
     }
 
@@ -62,6 +62,7 @@ public class SplitItExpenseController {
         int groupId = ctx.sessionAttribute("groupId");
 
         try{
+            expenseService.deleteAllExpensesByGroupId(groupId);
             accountService.removeAllMembersFromGroup(groupId);
             accountService.deleteGroup(groupId);
             ctx.redirect("/splitit");
@@ -74,14 +75,16 @@ public class SplitItExpenseController {
     private void showResult(Context ctx)
     {
         int groupId = ctx.sessionAttribute("groupId");
+
         System.out.println(groupId);
         List<Settlement> settlements = new ArrayList<>();
         try{
+            Group group = accountService.getGroupById(groupId);
             settlements = balanceService.getSettlements(groupId);
+            ctx.attribute("groupName",group.getName());
             ctx.attribute("settlements",settlements);
         } catch (DatabaseException e){
             ctx.attribute("errorMessage",e.getMessage());
-            System.out.println("Settlements Error!!!");
             ctx.redirect("/result");
         }
         ctx.render("/splitit/result");
@@ -103,7 +106,7 @@ public class SplitItExpenseController {
             try {
                  amount = Double.parseDouble(ctx.formParam("amount"));
             } catch (NumberFormatException e){
-                ctx.attribute("errorMessage","Please only input numbers in amount");
+                ctx.sessionAttribute("errorMessage","Please only input numbers in amount");
                 ctx.redirect("/expense?groupId=" + groupId);
                 return;
             }

@@ -205,6 +205,21 @@ button:disabled:hover, .btn:disabled:hover {
     transform: none;
 }
 
+/* === ERROR MESSAGE === */
+.error-message {
+    text-align: center;
+    background-color: white;
+    padding: var(--spacing-sm), var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) auto;
+    width: fit-content;
+}
+
+.error-message-text {
+    color: red;
+    font-weight: bold;
+}
+
 
 /* === SECTIONS === */
 header {
@@ -218,6 +233,8 @@ main {
 footer {
     background-color: var(--color-footer);
 }
+
+
 
 /* === INDEX PAGE SPECIFIC === */
 

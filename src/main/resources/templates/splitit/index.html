@@ -50,6 +50,10 @@
             <a th:href="@{/splitit/createGroup}" class="create-link">Create a group</a>
         </div>
     </div>
+    <div class="error-message">
+        <p th:text="${errorMessage}" class="error-message-text"></p>
+    </div>
+
 </main>
 
 <footer class="footer">
