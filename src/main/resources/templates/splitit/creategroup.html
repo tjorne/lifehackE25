@@ -83,12 +83,11 @@
                         CREATE
                     </button>
                 </form>
-
-                <!-- Cancel Link -->
-                <div class="link-section">
-                    <a th:href="@{/createGroup/cancel}" class="create-link">Cancel</a>
-                </div>
             </div>
+        </div>
+        <!-- Cancel Link -->
+        <div class="link-section">
+            <a th:href="@{/createGroup/cancel}" class="create-link">Cancel</a>
         </div>
         <!-- Error Message -->
         <div class="error-message" th:if="${errorMessage != null}">

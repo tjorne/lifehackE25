@@ -1,5 +1,7 @@
 package app.dto;
 
+import app.entities.splitit.CurrencyFormatter;
+
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -70,6 +72,10 @@ public class ExpenseDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String format(){
+        return CurrencyFormatter.format(this.amount);
     }
 
     @Override

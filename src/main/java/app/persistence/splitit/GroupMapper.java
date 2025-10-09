@@ -12,7 +12,8 @@ public class GroupMapper {
 
     private ConnectionPool connectionPool;
 
-    public GroupMapper(ConnectionPool connectionPool) {
+    public GroupMapper(ConnectionPool connectionPool)
+    {
         this.connectionPool = connectionPool;
     }
 
@@ -124,7 +125,5 @@ public class GroupMapper {
         }
         return result;
     }
-
-
 }
 

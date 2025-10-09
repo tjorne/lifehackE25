@@ -57,6 +57,25 @@
             </form>
         </div>
 
+        <!-- Add Edit Expense Form -->
+        <div class="add-expense-section edit" th:if="${editExpense != null}">
+            <form th:action="@{/expenses/updateExpense}" method="post" class="expense-form">
+                <div class="form-group">
+                    <label for="amount" class="form-label">Expense</label>
+                    <input type="text" id="amount" name="amount" class="form-input" th:value="${editExpense.amount}" required>
+                </div>
+
+                <hr class="divider form-divider">
+
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" id="description" name="description" class="form-input" th:value="${editExpense.description}" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">EDIT</button>
+            </form>
+        </div>
+
         <!-- Expenses List -->
         <div class="expenses-section">
             <!-- Expenses exist -->
@@ -64,7 +83,7 @@
                 <div class="expense-item" th:each="expense : ${expenses}">
                     <div class="expense-header">
                         <h4 class="expense-user" th:text="${expense.userName}">Name</h4>
-                        <span class="expense-amount" th:text="${expense.amount} + ',-'">amount</span>
+                        <span class="expense-amount" th:text="${expense.format}">amount</span>
                     </div>
                     <div class="expense-body">
                         <p class="expense-label">Description:</p>
@@ -100,11 +119,11 @@
         <div class="totals-section">
             <div class="total-item">
                 <span class="total-label">YOUR TOTAL:</span>
-                <span class="total-value" th:text="${userTotal} + ',-'">amount</span>
+                <span class="total-value" th:text="${userTotal}">amount</span>
             </div>
             <div class="total-item">
                 <span class="total-label">GROUP TOTAL:</span>
-                <span class="total-value" th:text="${groupTotal} + ',-'">amount</span>
+                <span class="total-value" th:text="${groupTotal}">amount</span>
             </div>
             <hr class="divider">
         </div>

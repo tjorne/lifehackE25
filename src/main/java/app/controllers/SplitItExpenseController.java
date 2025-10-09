@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.dto.ExpenseDTO;
 import app.entities.User;
+import app.entities.splitit.CurrencyFormatter;
 import app.entities.splitit.Expense;
 import app.entities.splitit.Group;
 import app.entities.splitit.Settlement;
@@ -176,8 +177,8 @@ public class SplitItExpenseController {
                 groupTotal = calculateTotal(groupExpenses);
             }
 
-            String UserTotalFormated = String.format("%.2f",userTotal);
-            String groupTotalFormated = String.format("%.2f",groupTotal);
+            String userTotalFormated = CurrencyFormatter.format(userTotal);
+            String groupTotalFormated = CurrencyFormatter.format(groupTotal);
 
             ctx.attribute("groupName",group.getName());
             ctx.attribute("members", members);
