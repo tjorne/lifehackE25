@@ -11,12 +11,6 @@ public class UserController {
 
     public static void addRoutes(Javalin app) {
 
-        app.get("/", ctx -> {
-            User currentUser = ctx.sessionAttribute("currentUser");
-            ctx.attribute("currentUser", currentUser);
-            ctx.render("filmRouletten/index.html");
-        });
-
         app.get("/login", ctx -> ctx.render("filmRouletten/login.html"));
         app.post("/login", ctx -> login(ctx));
 
