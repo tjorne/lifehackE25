@@ -15,7 +15,7 @@ body {
     top: 40%;
     left: 50%;
     width: 530px;
-    height: 250px;
+    height: 37+px;
     transform: translate(-50%, -50%);
     background-color: #e74c3c;
     padding: 40px;
@@ -30,9 +30,10 @@ body {
 /* center only the title */
 .title {
     align-self: center;         /* center this one element horizontally */
-    margin-top: 0;
+    /*margin-top: 0px;*/
     margin-bottom: 0px;
     font-size: 40px;
+    top:-100px;
 }
 
 /* form inputs */
@@ -87,4 +88,40 @@ input::placeholder {
 input[type="button"]:hover,
 input[type="submit"]:hover {
     background-color: #444;
+}
+/* Style for the language label */
+label[for="language"] {
+    display: block;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Style for the select dropdown */
+#Language {
+    width: 50%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: border-color 0.3s ease;
+}
+
+/* Focus effect */
+#Language:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Optional: style individual options */
+#Language option {
+    padding: 8px;
+    background-color: #fff;
+    color: #333;
 }

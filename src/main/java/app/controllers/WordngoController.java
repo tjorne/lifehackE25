@@ -32,7 +32,9 @@ public class WordngoController {
             User user = ctx.sessionAttribute("currentUser");
             ctx.attribute("user", user);
             WordMapper wordMapper = new WordMapper();
-            Word word = wordMapper.getWord();
+            Word word = wordMapper.getWord(ctx.sessionAttribute("language"));
+
+
             ctx.sessionAttribute("correctWord", word);
 
             ctx.render("Wordngo/gamepage.html");
@@ -52,6 +54,8 @@ public class WordngoController {
         // Hent form parametre
         String username = ctx.formParam("username");
         String password = ctx.formParam("password");
+        String language = ctx.formParam("language");
+
 
         // Check om bruger findes i DB med de angivne username + password
         try {
@@ -61,6 +65,7 @@ public class WordngoController {
             if (user != null) {
                 if (currentUser != null) {
                     ctx.req().getSession().invalidate();
+                    ctx.sessionAttribute("language", language);
                     ctx.sessionAttribute("currentUser", user);
                     ctx.render("Wordngo/gamepage.html");
                 } else {
@@ -71,7 +76,7 @@ public class WordngoController {
 
 
             WordMapper wordMapper = new WordMapper();
-            Word word = wordMapper.getWord();
+            Word word = wordMapper.getWord(language);
             ctx.sessionAttribute("correctWord", word);
 
         } catch (DatabaseException e) {

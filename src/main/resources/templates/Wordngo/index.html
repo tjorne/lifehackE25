@@ -22,6 +22,12 @@
                    th:value="${user != null ? user.password : ''}"><br>
         </div>
 
+        <label for="language">Language:</label>
+        <select name="language" id="Language">
+
+            <option value="English">English</option>
+            <option value="French">French</option>
+        </select>
         <div class="buttons">
             <a th:href="@{/createuser}">
             <input type="button" name="create" value="Create Account">

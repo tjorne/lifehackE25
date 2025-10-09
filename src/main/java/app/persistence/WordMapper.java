@@ -12,10 +12,17 @@ import java.util.Random;
 public class WordMapper {
 
     //     lytter til den første character der bliver trykket på
-    public Word getWord() throws DatabaseException {
-
+    public Word getWord(String language) throws DatabaseException {
+    String sql="";
         Random rdm = new Random();
-        String sql = "select word from words where id = ?";
+
+        if (language.equals("English"))
+        {
+             sql = "select word from words where id = ?";
+        }else if (language.equals("French"))
+        {
+            sql = "select frenchword from frenchwords where id = ?";
+        }
         try (
                 Connection connection = ConnectionPool.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
@@ -24,8 +31,11 @@ public class WordMapper {
             ps.setInt(1, rdm.nextInt(getLengthOfList()));
             ResultSet rs = ps.executeQuery();
             rs.next();
+
             return new Word(rs.getString(1));
-        } catch (SQLException e) {
+
+        } catch (SQLException e)
+        {
             throw new DatabaseException("DB fejl", e.getMessage());
         }
     }
