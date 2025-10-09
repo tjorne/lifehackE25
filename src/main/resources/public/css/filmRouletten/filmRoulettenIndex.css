@@ -201,6 +201,27 @@ body {
 .login-btn:hover {
     background-color: #67514D;
 }
+
+.logout-btn {
+    position: absolute;
+    top: 10%;
+    right: 20rem;
+    transform: translateY(-50%);
+    background-color: var(--btn-primary-bg);
+    font-family: var(--font), monospace;
+    font-weight: var(--font-weight-bold);
+    color: var(--btn-primary-text);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--radius);
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    letter-spacing: 2px; /
+}
+
+.logout-btn:hover {
+    background-color: #67514D;
+}
 .watchlist-btn {
     position: absolute;
     top: 10%;

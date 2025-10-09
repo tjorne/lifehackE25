@@ -40,8 +40,17 @@
     </header>
 
     <header>
-        <a href="/login" class="login-btn">LOGIN</a>
-        <a href="/watchlist" class="watchlist-btn">WATCHLIST</a>
+        <!-- If user is NOT logged in -->
+        <a th:if="${session.currentUser == null}" href="/login" class="login-btn">LOGIN</a>
+
+        <!-- If user IS logged in -->
+        <a th:if="${session.currentUser != null}" href="/logout" class="logout-btn">
+            LOG UD (<span th:text="${session.currentUser.userName}">bruger</span>)
+        </a>
+
+        <!-- Watchlist button (disabled when not logged in) -->
+        <a th:if="${session.currentUser != null}" href="/watchlist" class="watchlist-btn">WATCHLIST</a>
+        <a th:if="${session.currentUser == null}" class="watchlist-btn disabled" title="Log ind først" disabled>WATCHLIST</a>
     </header>
 
     <h2 class="genre-title">Vælg Genre</h2>

@@ -1,11 +1,14 @@
 package app.controllers.filmRouletten;
 
 import app.entities.User;
+import app.entities.filmRouletten.Movie;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+
+import java.util.List;
 
 public class UserController {
 
@@ -19,7 +22,7 @@ public class UserController {
         app.get("/createuser", ctx -> ctx.render("filmRouletten/createuser.html"));
         app.post("/createuser", ctx -> createUser(ctx));
 
-        app.get("/watchlist", ctx -> ctx.render("filmRouletten/watchlist.html"));
+        app.get("/watchlist", ctx -> showWatchlist(ctx));
         // /index kan være overflødig når / renderer index; du kan fjerne eller behold:
         app.get("/index", ctx -> ctx.render("filmRouletten/index.html"));
     }
@@ -78,22 +81,15 @@ public class UserController {
         }
     }
 
-/* //TODO: this shit
     private static void showWatchlist(Context ctx) {
         User currentUser = ctx.sessionAttribute("currentUser");
 
-        if (currentUser == null) {
-            ctx.result("<p>Du skal være logget ind for at se din watchlist.</p>");
-            return;
-        }
-
         try {
-            List<Movie> watchedMovies = UserMapper.getWatchedMoviesByUser(currentUser.getId());
+            List<Movie> watchedMovies = UserMapper.getWatchedMoviesByUser(currentUser.getUserId());
             ctx.attribute("movies", watchedMovies);
-            ctx.render("partials/watchlist-table.html"); // renders only the table content
+            ctx.render("filmRouletten/watchlist.html");
         } catch (DatabaseException e) {
-            ctx.result("<p>Kunne ikke hente watchlist: " + e.getMessage() + "</p>");
+            ctx.render("filmRouletten/watchlist.html");
         }
     }
-    */
 }

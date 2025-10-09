@@ -1,6 +1,7 @@
 package app.persistence;
 
 import app.entities.User;
+import app.entities.filmRouletten.Movie;
 import app.exceptions.DatabaseException;
 
 import java.sql.Connection;
@@ -71,7 +72,7 @@ public class UserMapper {
             throw new DatabaseException("Filmen er allerede på watchlist for bruger " + username);
         }
 
-        String sql = "INSERT INTO watchlist_roulette (current_user, selected_movie) VALUES (?, ?)";
+        String sql = "INSERT INTO watchlist (current_user, selected_movie) VALUES (?, ?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -142,15 +143,14 @@ public class UserMapper {
         }
     }
 
-    /* TODO:
     public static List<Movie> getWatchedMoviesByUser(int userID) throws DatabaseException {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
         String sql = """
-        SELECT m.movie_id, m.movie_title, m.movie_description, m.movie_aired, m.movie_length
+        SELECT m.movie_title, m.movie_description, m.movie_aired, m.movie_length, m.movie_rating
         FROM movie_roulette m
-        JOIN watchlist_roulette w ON m.movie_id = w.selected_movie
-        WHERE w.current_user = ?
+        JOIN watchlist w ON m.movie_id = w.movie_id
+        WHERE w.user_id = ?
         ORDER BY m.movie_title
         """;
 
@@ -164,13 +164,13 @@ public class UserMapper {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int movieId = rs.getInt("movie_id");
                 String title = rs.getString("movie_title");
                 String description = rs.getString("movie_description");
                 Date aired = rs.getDate("movie_aired");
                 int length = rs.getInt("movie_length");
+                int rating = rs.getInt("movie_rating");
 
-                Movie movie = new Movie(movieId, title, description, aired, length);
+                Movie movie = new Movie(title, description, aired, rating, length);
                 watchedMovies.add(movie);
             }
         } catch (SQLException e) {
@@ -180,6 +180,6 @@ public class UserMapper {
         return watchedMovies;
     }
 
-     */
+
 
 }
