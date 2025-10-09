@@ -13,11 +13,9 @@ public class Beton {
         return withFiltPrice;
     }
 
-
     public int getWithoutFiltPrice() {
         return withoutFiltPrice;
     }
-
 
     public String workDescription(boolean filt) {
         if (!filt) {

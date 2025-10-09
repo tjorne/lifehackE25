@@ -4,52 +4,53 @@
     <meta charset="UTF-8"/>
     <title>Er det helt sort?!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- Thymeleaf vil erstatte th:href; den “plain” href virker ved ren statisk visning -->
     <link rel="stylesheet" href="/css/erdetheltsort.css" th:href="@{/css/erdetheltsort.css}"/>
 </head>
 <body>
 
-<!-- Header med logo -->
 <header>
-    <button>
-        <a href="index.html" th:href="@{/}">🏠Home</a>
-    </button>
+    <nav>
+        <button>
+            <a id="lifehack" href="index.html" th:href="@{/}">😎Lifehack</a>
+        </button>
 
-    <a href="index.html" th:href="@{/}">
+        <button>
+            <a id="home" href="index.html" th:href="@{/heltsort}">🏠Home</a>
+        </button>
+
+        <button id="themeSwitch" type="button">🌓Mode</button>
+    </nav>
+
+    <a href="index.html" th:href="@{/heltsort}">
         <img src="/images/heltsort/erdetheltsort_long.png"
              alt="Er det helt sort?!"
              th:src="@{/images/heltsort/erdetheltsort_long.png}"/>
     </a>
 
-    <button id="themeSwitch" type="button">🌓Mode</button>
 </header>
+
 <main>
-    <!-- Beregner sektion -->
     <div class="calculator-container">
-        <!-- Velkommen sektion -->
         <section>
-            <h1>Proffesionelt arbejde, med et glimt i øjet</h1>
+            <h1>Professionelt arbejde, med et glimt i øjet</h1>
             <p>Få et hurtigt overblik over prisen på malerarbejde – uden moms og uden mellemled.<br>
                 Vælg vægtypen, indtast dine mål, og se hvad “helt sort” egentlig koster.</p>
         </section>
         <br>
-        <!-- Titel -->
         <section class="title-container">
             <h2>Vælg din vægtype &amp; indsæt dine mål</h2>
         </section>
 
-        <!-- Brug th:action, så backenden rammes korrekt -->
         <form method="post" th:action="@{/getresult}">
-            <!-- Materiale radio knapper -->
             <section class="radio-group">
                 <label>
                     <input type="radio" name="materiale" value="Gasbeton/Beton"
-                           th:checked="${materiale == 'Gasbeton/Beton'}" checked>
+                           th:checked="${materiale == null or materiale=='Gasbeton/Beton'}">
                     Gasbeton/Beton
                 </label>
                 <label>
                     <input type="radio" name="materiale" value="Gips"
-                           th:checked="${materiale == null or materiale=='Gips'}">
+                           th:checked="${materiale == 'Gips'}">
                     Gips
                 </label>
                 <label>
@@ -60,25 +61,19 @@
 
             </section>
 
-            <!-- Toggle + input felter -->
             <section class="areas-container">
-                <!-- skjulte radioer styrer toggle -->
-                <!-- M2 er valgt som default, hvis mode er null ELLER 'm2' -->
                 <input id="mode-m2" class="hidden-radio" type="radio" name="mode" value="m2"
                        th:checked="${mode == null or mode == 'm2'}" checked>
 
                 <input id="mode-hb" class="hidden-radio" type="radio" name="mode" value="hb"
                        th:checked="${mode == 'hb'}">
 
-
-                <!-- Toggle UI -->
                 <div class="toggle" role="tablist" aria-label="Input-tilstand">
                     <label for="mode-m2" class="toggle-option" role="tab" aria-selected="true">M²</label>
                     <label for="mode-hb" class="toggle-option" role="tab">Højde × Bredde</label>
                     <span class="toggle-thumb" aria-hidden="true"></span>
                 </div>
 
-                <!-- Input hvis M2 er valgt -->
                 <div class="mode mode-m2">
                     <label>
                         M²
@@ -86,7 +81,6 @@
                     </label>
                 </div>
 
-                <!-- Input hvis H×B er valgt -->
                 <div class="mode mode-hb">
                     <label>
                         Højde (m)
@@ -98,15 +92,13 @@
                     </label>
                 </div>
 
-                <!-- Beregn knap -->
                 <div class="centerBox">
-                    <button type="submit" formaction="getresult">Beregn vejledende pris</button>
+                    <button type="submit" formaction="/getresult">Beregn vejledende pris</button>
                 </div>
             </section>
         </form>
     </div>
 
-    <!-- Fejlbesked centreret -->
     <div class="centerBox">
         <p class="error" th:if="${session.inputerror != null}" th:text="${session.inputerror}"></p>
     </div>
@@ -127,18 +119,16 @@
 </footer>
 
 <script>
-    // Apply saved theme on load
     (function applySavedTheme() {
         try {
-            const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+            const saved = localStorage.getItem('theme');
             if (saved === 'light') {
-                document.body.classList.add('light'); // matches your CSS: body.light { ... }
+                document.body.classList.add('light');
             }
-        } catch (_) { /* ignore private mode errors etc. */
+        } catch (_) {
         }
     })();
 
-    // Toggle + persist
     (function wireThemeSwitcher() {
         const btn = document.getElementById('themeSwitch');
         if (!btn) return;
@@ -147,7 +137,7 @@
             const isLight = document.body.classList.toggle('light');
             try {
                 localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            } catch (_) { /* ignore */
+            } catch (_) {
             }
         });
     })();

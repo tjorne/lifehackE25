@@ -19,9 +19,9 @@ public class Premalet {
 
     public String workDescription(boolean twoCoats) {
         if (!twoCoats) {
-            return "1x Pletspartling af vægge\n1x Pletmaling\n1x Fuldmaling";
+            return "1x Pletspartling af vægge\n1x Slibning & pletmaling\n1x Fuldmaling";
         } else {
-            return "1x Pletspartling af vægge\n2x Fuldmaling";
+            return "1x Pletspartling af vægge\n1x Slibning\n2x Fuldmaling";
         }
     }
 }

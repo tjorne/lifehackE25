@@ -18,8 +18,15 @@ import java.util.Locale;
 public class HeltSortController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.post("getresult", ctx -> getResult(ctx, connectionPool));
+        app.get("/heltsort", ctx -> index(ctx));
+        app.post("/getresult", ctx -> getResult(ctx, connectionPool));
     }
+
+    public static void index(Context ctx) {
+        ctx.render("heltsort/index.html");
+        ctx.sessionAttribute("inputerror", null);
+    }
+
 
     private static void getResult(Context ctx, ConnectionPool connectionPool) {
         String material = ctx.formParam("materiale");
@@ -36,7 +43,7 @@ public class HeltSortController {
                 case "Eksisterende væg" -> materialResult = getPrepaintedResult();
                 default -> {
                     ctx.sessionAttribute("inputerror", "Ukendt materiale valgt");
-                    ctx.redirect("/");
+                    ctx.redirect("heltsort");
                     return;
                 }
             }
@@ -45,10 +52,10 @@ public class HeltSortController {
 
         } catch (NumberFormatException e) {
             ctx.sessionAttribute("inputerror", "Indtast venligst mål");
-            ctx.redirect("/");
+            ctx.redirect("heltsort");
         } catch (DatabaseException e) {
             ctx.sessionAttribute("inputerror", "Hov noget gik galt, prøv igen");
-            ctx.redirect("/");
+            ctx.redirect("heltsort");
         }
 
     }
@@ -87,7 +94,7 @@ public class HeltSortController {
         ctx.attribute("resultOneDescription", materialResult.descriptionOne);
         ctx.attribute("resultTwoDescription", materialResult.descriptionTwo);
 
-        ctx.render("resultpage.html");
+        ctx.render("heltsort/resultpage.html");
     }
 
     private static String doubleFormatter(double price) {
@@ -105,12 +112,12 @@ public class HeltSortController {
         }
     }
 
-    private static class MaterialResult {
-        double resultOne;
-        double resultTwo;
-        String descriptionOne;
-        String descriptionTwo;
-        boolean filt;
+    private static final class MaterialResult {
+        final double resultOne;
+        final double resultTwo;
+        final String descriptionOne;
+        final String descriptionTwo;
+        final boolean filt;
 
         MaterialResult(double resultOne, double resultTwo, String descriptionOne, String descriptionTwo, boolean filt) {
             this.resultOne = resultOne;

@@ -21,11 +21,14 @@ public class Main
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
-            config.staticFiles.add("/templates/heltsort");
+            config.staticFiles.add("/templates");
         }).start(7070);
 
         // Routing
-        app.get("/heltsort", ctx -> ctx.render("index.html"));
+        app.get("/", ctx -> ctx.render("/index.html"));
+
+        UserController.addRoutes(app);
+        TimeZonesController.addRoutes(app);
 
         HeltSortController.addRoutes(app, connectionPool);
     }

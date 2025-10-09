@@ -10,19 +10,24 @@
 
 <!-- Header med logo -->
 <header>
-    <button>
-        <a href="index.html" th:href="@{/}">🏠Home</a>
-    </button>
+    <nav>
+        <button>
+            <a id="lifehack" href="index.html" th:href="@{/}">😎Lifehack</a>
+        </button>
 
+        <button>
+            <a id="home" href="index.html" th:href="@{/heltsort}">🏠Home</a>
+        </button>
 
-    <a href="index.html" th:href="@{/}">
+        <button id="themeSwitch" type="button">🌓Mode</button>
+    </nav>
+    <a href="index.html" th:href="@{/heltsort}">
         <img src="/images/heltsort/erdetheltsort_long.png"
              alt="Er det helt sort?!"
              th:src="@{/images/heltsort/erdetheltsort_long.png}"/>
     </a>
-
-    <button id="themeSwitch" type="button">🌓Mode</button>
 </header>
+
 <main>
     <section class="calculator-container">
         <h1>Her er dine tilbud</h1>
@@ -32,7 +37,7 @@
         </p>
 
     </section>
-    <!-- Resultater -->
+
     <section class="results-container">
         <article class="resultbox" th:if="${!#strings.isEmpty(result1)}">
             <h2 th:text="${result1title}">Resultat 1</h2>
@@ -67,18 +72,15 @@
 </footer>
 
 <script>
-    // Apply saved theme on load
     (function applySavedTheme() {
         try {
-            const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+            const saved = localStorage.getItem('theme');
             if (saved === 'light') {
-                document.body.classList.add('light'); // matches your CSS: body.light { ... }
+                document.body.classList.add('light');
             }
-        } catch (_) { /* ignore private mode errors etc. */
+        } catch (_) {
         }
     })();
-
-    // Toggle + persist
     (function wireThemeSwitcher() {
         const btn = document.getElementById('themeSwitch');
         if (!btn) return;
@@ -87,7 +89,7 @@
             const isLight = document.body.classList.toggle('light');
             try {
                 localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            } catch (_) { /* ignore */
+            } catch (_) {
             }
         });
     })();
