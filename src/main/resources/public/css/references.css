@@ -74,10 +74,6 @@ main h2 {
     border-radius: 20px;
 }
 
-#field-select, #theorist-select {
-
-}
-
 .input-group {
     display: flex;
     align-items: center;
@@ -166,8 +162,8 @@ footer {
 }
 
 /* Dropdown styling */
-#field-select, #theorist-select {
-    width: 220px;
+/*#field-select, #theorist-select {
+    width: 240px;
     padding: 0.7rem 1rem;
     font-size: 1rem;
     border-radius: 999px;
