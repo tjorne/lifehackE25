@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.entities.User;
 import app.exceptions.DatabaseException;
-import app.entities.Task;
+//import app.entities.Task;
 import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
