@@ -28,6 +28,7 @@ public class Main
 
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
+
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
 
@@ -37,4 +38,7 @@ public class Main
 
     }
 
+}
+        HeltSortController.addRoutes(app, connectionPool);
+    }
 }

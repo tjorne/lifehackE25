@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Er det helt sort?!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/erdetheltsort.css" th:href="@{/css/erdetheltsort.css}"/>
+</head>
+<body>
+
+<!-- Header med logo -->
+<header>
+    <nav>
+        <button>
+            <a id="lifehack" href="index.html" th:href="@{/}">😎Lifehack</a>
+        </button>
+
+        <button>
+            <a id="home" href="index.html" th:href="@{/heltsort}">🏠Home</a>
+        </button>
+
+        <button id="themeSwitch" type="button">🌓Mode</button>
+    </nav>
+    <a href="index.html" th:href="@{/heltsort}">
+        <img src="/images/heltsort/erdetheltsort_long.png"
+             alt="Er det helt sort?!"
+             th:src="@{/images/heltsort/erdetheltsort_long.png}"/>
+    </a>
+</header>
+
+<main>
+    <section class="calculator-container">
+        <h1>Her er dine tilbud</h1>
+        <p>Nedenfor kan du se et overslag på dit malerprojekt for <span th:text="${maalvalg}"></span> m² med <span
+                th:text="${materialevalg}"></span> – enkelt og uden store overraskelser.<br>
+            Prisen inkluderer selvfølgelig afdækning og oprydning, så du slipper for malerpletter og ekstra oprydning.
+        </p>
+
+    </section>
+
+    <section class="results-container">
+        <article class="resultbox" th:if="${!#strings.isEmpty(result1)}">
+            <h2 th:text="${result1title}">Resultat 1</h2>
+            <p aria-hidden="true">—————</p>
+            <h3>Tilbuddet indeholder følgende:</h3>
+            <p th:text="${resultOneDescription}"></p>
+            <p class="price" th:text="${result1}"></p>
+        </article>
+
+        <article class="resultbox" th:if="${!#strings.isEmpty(result2)}">
+            <h2 th:text="${result2title}">Resultat 2</h2>
+            <p aria-hidden="true">—————</p>
+            <h3>Tilbuddet indeholder følgende:</h3>
+            <p th:text="${resultTwoDescription}"></p>
+            <p class="price" th:text="${result2}"></p>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <a href="https://github.com/Obliwobbi" th:href="@{https://github.com/Obliwobbi}" target="_blank">
+        <img src="/images/heltsort/github_logo.png"
+             alt="Toby's Github"
+             th:src="@{/images/heltsort/github_logo.png}"/>
+    </a>
+    <h3>Project by</h3>
+    <a href="https://github.com/JesperTAndersen" th:href="@{https://github.com/JesperTAndersen}" target="_blank">
+        <img id="rightimg" src="/images/heltsort/github_logo.png"
+             alt="Jesper's Github"
+             th:src="@{/images/heltsort/github_logo.png}"/>
+    </a>
+</footer>
+
+<script>
+    (function applySavedTheme() {
+        try {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.body.classList.add('light');
+            }
+        } catch (_) {
+        }
+    })();
+    (function wireThemeSwitcher() {
+        const btn = document.getElementById('themeSwitch');
+        if (!btn) return;
+
+        btn.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light');
+            try {
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            } catch (_) {
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
