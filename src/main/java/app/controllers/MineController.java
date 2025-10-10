@@ -17,31 +17,7 @@ import app.entities.gruppeE.*;
 public class MineController {
     public static void addRoutes(Javalin app)
     {
-        try {
-            Connection conn = ConnectionPool.getInstance().getConnection();
-            String sql = """
-                        CREATE TABLE IF NOT EXISTS public.scores (
-                        id SERIAL NOT NULL,
-                        user_id INTEGER NOT NULL,
-                        score_value INTEGER NOT NULL,
-                        date DATE NOT NULL,
-                        difficulty VARCHAR NOT NULL,
-                        CONSTRAINT scores_pkey PRIMARY KEY (id)
-                        
-                                                                );
 
-                        ALTER TABLE IF EXISTS public.scores
-                        ADD CONSTRAINT fk_user FOREIGN KEY (user_id)
-                        REFERENCES public.users (user_id) MATCH SIMPLE
-                        ON UPDATE NO ACTION
-                        ON DELETE CASCADE;
-                        """;
-            Statement stmt = conn.createStatement();
-            stmt.execute(sql);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
         app.get("/gruppeE", MineController::serveStartPage);
         app.get("/gruppeE/game", MineController::serveGamePage);
         app.get("/gruppeE/gameover", MineController::serveGameOverPage);
