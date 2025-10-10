@@ -1,9 +1,11 @@
 /*
 
     Gruppe D Tables
-    Last Updated: 09/10-2025
+    Last Updated: 10/10-2025
 
     Should be 3NF.
+
+    Insert as new Database named "Beyondborders" and it should work as intended.
 
 */
 

@@ -207,19 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 window.location.reload();
             } catch (e) {
-                // fejl
                 deleteButton.disabled = false;
             }
 
 
         });
     }
-
-    // ________________________________________________________________________
-
-    function changeNotifications(isEnabledFromServer) {
-        // JONAS DU SKAL LIGE LAVE DETTE. JEG LAVER BARE BACKEND I JAVA!!!!
-    }
-
 
 });

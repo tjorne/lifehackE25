@@ -19,26 +19,21 @@ public class RegisterController {
 
     public static void handleRegister(Context ctx) {
 
-        // Gets inserted values
         String username = ctx.formParam("username");
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
         String passwordConfirm = ctx.formParam("password_confirm");
 
-        // Validation
         if (username == null || email == null || password == null || passwordConfirm == null) {
-            // Notification later
             ctx.redirect("/gruppeD/register?error=missingFields");
             return;
         }
 
         if (!password.equals(passwordConfirm)) {
-            // Notification later
             ctx.redirect("/gruppeD/register?error=wrongPassMatch");
             return;
         }
 
-        // Static method Try-Catch for SQL Errors
         try (Connection connection = Database.getConnection()) {
 
             UserMapper userMapper = new UserMapper(connection);
@@ -51,14 +46,11 @@ public class RegisterController {
 
             }
 
-            // Hash password
             String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
 
-            // Create new user and insert in our database!
             User user = new User(0, username, email, passwordHash, 1, LocalDateTime.now(), true, "en");
             userMapper.insertUser(user);
 
-            // Redirect back to login
             ctx.redirect("/gruppeD/?error=accountCreated");
 
         } catch (SQLException e) {

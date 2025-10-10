@@ -7,9 +7,6 @@
 let pinMode = false;
 let eraseMode = false;
 let activeButton = null;
-
-
-//Variables for mode (visited, hated, bucket)
 let currentMode = 'visited';
 const visitedMarkers = [];
 const hatedMarkers = [];
@@ -19,9 +16,6 @@ const visitedButton = document.querySelector('#displayVisited');
 const hatedButton = document.querySelector('#displayHated');
 const bucketButton = document.querySelector('#displayBucketList');
 const displayMode = document.getElementById("mode-display");
-//end of mode
-
-
 const HIT_RADIUS = 50;
 const MIN_DISTANCE = 30;
 const eraserButton = document.querySelector('#eraserButton');
@@ -38,7 +32,7 @@ const ratingLabels = {
 
 /* ______________________________________ */
 
-// Startup så pins loader!!!!
+// Startup
 
 /* ______________________________________ */
 
@@ -244,7 +238,6 @@ map.on('click', function(e) {
             if (currentMode === 'bucket') bucketMarkers.push(marker);
 
             const title = document.getElementById("pinPoint-title").value.trim();
-            //const rating = document.getElementById("rating-value").value;
             const rating = `${value} – ${ratingLabels[value]}`;
 
 
@@ -259,7 +252,6 @@ map.on('click', function(e) {
                 value: value
             };
 
-            // TODO: Der skal så her fetches og sendes til vores thymeleaf så vi kan gemme øvrige data til vores database
             const response = await fetch("/gruppeD/pins", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

@@ -1,7 +1,5 @@
-// Package
 package app.controllers;
 
-// Imports
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -9,13 +7,11 @@ import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-public class UserController {
+public class UserController
+{
 
-    // Attributes
-
-    // ______________________________________________________________
-
-    public static void addRoutes(Javalin app) {
+    public static void addRoutes(Javalin app)
+    {
 
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -26,9 +22,8 @@ public class UserController {
 
     }
 
-    // ______________________________________________________________
-
-    private static void createUser(Context ctx) {
+    private static void createUser(Context ctx)
+    {
 
         // Hent form parametre
         String username = ctx.formParam("username");
@@ -54,16 +49,14 @@ public class UserController {
 
     }
 
-    // ______________________________________________________________
-
-    private static void logout(Context ctx) {
+    private static void logout(Context ctx)
+    {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
 
-    // ______________________________________________________________
-
-    public static void login(Context ctx) {
+    public static void login(Context ctx)
+    {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
 
@@ -89,4 +82,4 @@ public class UserController {
 
     }
 
-} // UserController end
+}

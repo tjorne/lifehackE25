@@ -13,7 +13,7 @@ public class ValidRoutes {
 
     // __________________________________________________________
 
-    // HANDLES POST REQUESTS
+    // POST
 
     public ValidRoutes(Javalin app) {
         app.post("/gruppeD/login", LoginController::handleLogin);

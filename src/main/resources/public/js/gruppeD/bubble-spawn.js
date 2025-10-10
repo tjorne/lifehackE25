@@ -1,9 +1,3 @@
-// Bubbles are cool. Bubbles are life #nemoFan
-
-// - Guac
-
-// ___________________________________________________________________________________
-
 function createBubble() {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');

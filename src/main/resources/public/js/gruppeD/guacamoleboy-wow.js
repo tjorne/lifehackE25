@@ -6,14 +6,13 @@
 
                   Last edited by
                    Guacamoleboy
-                    01/10-2025
+                    10/10-2025
 
 */
 
 // __________________________________________________________________
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Animationer
     const elements = document.querySelectorAll(".guac-animate");
 
     function isInViewport(el) {

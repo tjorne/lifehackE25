@@ -1,5 +1,5 @@
 // Makes sure our placeholder values reset on page reload.
-// Else it'll keep same value as previously selected which is.. Not pretty? lol.
+// Else it'll keep same value as previously selected which is.. Not pretty?
 
 // - Guac
 

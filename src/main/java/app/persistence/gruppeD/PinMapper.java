@@ -4,7 +4,6 @@ package app.persistence.gruppeD;
 // Imports
 import app.entities.gruppeD.Pin;
 import app.entities.gruppeD.User;
-
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

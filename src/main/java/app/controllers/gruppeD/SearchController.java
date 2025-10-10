@@ -9,6 +9,7 @@ import io.javalin.http.Context;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class SearchController {
 
@@ -21,7 +22,7 @@ public class SearchController {
         String query = ctx.queryParam("query");
 
         if (query == null || query.isBlank()) {
-            ctx.status(400).json("Query missing");
+            ctx.status(400).json(Map.of("message", "Query missing"));
             return;
         }
 

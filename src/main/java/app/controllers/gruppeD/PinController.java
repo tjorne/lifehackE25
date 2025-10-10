@@ -1,5 +1,7 @@
+// Package
 package app.controllers.gruppeD;
 
+// Imports
 import app.entities.gruppeD.Pin;
 import app.entities.gruppeD.User;
 import app.db.gruppeD.Database;
@@ -14,9 +16,13 @@ import java.util.ArrayList;
 
 public class PinController {
 
-    public static void createPin(Context ctx) {
-        try (Connection connection = Database.getConnection()) {
+    // Attributes
 
+    // ________________________________________
+
+    public static void createPin(Context ctx) {
+
+        try (Connection connection = Database.getConnection()) {
 
             User currentUser = ctx.sessionAttribute("currentUser");
             if (currentUser == null) {
@@ -38,17 +44,6 @@ public class PinController {
                 case "bucket" -> 3;
                 default -> 1; // fallback
             };
-
-            /*Pin p = new Pin(
-                    0,
-                    currentUser.getId(),
-                    categoryId,
-                    lat,
-                    lng,
-                    Timestamp.from(Instant.now()),
-                    title,
-                    rating
-            );*/
 
             PinMapper mapper = new PinMapper(connection);
             Pin pin = mapper.addPin(currentUser.getId(), categoryId, lat, lng, Timestamp.from(Instant.now()), title, rating);
@@ -106,8 +101,7 @@ public class PinController {
             ctx.redirect("/gruppeD/?error=500");
 
         }
-    }
 
-    // ________________________________________
+    }
 
 }

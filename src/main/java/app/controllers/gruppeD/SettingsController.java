@@ -1,3 +1,4 @@
+// Package
 package app.controllers.gruppeD;
 
 // Imports
@@ -6,11 +7,12 @@ import app.db.gruppeD.Database;
 import app.persistence.gruppeD.UserMapper;
 import io.javalin.http.Context;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class SettingsController {
+
+    // Attributes
 
     // __________________________________________________________
 
@@ -19,13 +21,11 @@ public class SettingsController {
         String confirmation = ctx.formParam("confirmation");
         String name = ctx.formParam("name");
         String email = ctx.formParam("email");
-
    
         if (name == null || email == null) {
             ctx.redirect("/gruppeD/settings?error=deleteMissingFields");
             return;
         }
-
 
         User currentUser = ctx.sessionAttribute("currentUser");
         if (currentUser == null) {
@@ -43,7 +43,6 @@ public class SettingsController {
             return;
         }
 
-        // Delete fra databasen
         try (Connection connection = Database.getConnection()) {
 
             UserMapper userMapper = new UserMapper(connection);
@@ -61,6 +60,7 @@ public class SettingsController {
     // __________________________________________________________
 
     public static void handleChangeUsername(Context ctx) {
+
         String newName = ctx.formParam("name");
         User currentUser = ctx.sessionAttribute("currentUser");
 
@@ -91,13 +91,12 @@ public class SettingsController {
             ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
-
-
     }
 
     // __________________________________________________________
 
     public static void handleChangePassword(Context ctx) {
+
         String oldPassword = ctx.formParam("password");
         String newPassword = ctx.formParam("newPassword");
         String confirmPassword = ctx.formParam("newPasswordConfirm");
@@ -132,8 +131,6 @@ public class SettingsController {
             e.printStackTrace();
             ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
-
-
 
     }
 
@@ -170,8 +167,6 @@ public class SettingsController {
             ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
-
-
     }
 
     // __________________________________________________________
@@ -197,8 +192,6 @@ public class SettingsController {
             e.printStackTrace();
             ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
-
-
 
     }
 
@@ -232,7 +225,6 @@ public class SettingsController {
             ctx.redirect("/gruppeD/settings?error=UsernameError");
         }
 
-
-
     }
-}
+
+} // SettingsController end

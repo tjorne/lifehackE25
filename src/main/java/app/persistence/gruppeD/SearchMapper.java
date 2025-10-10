@@ -22,7 +22,6 @@ public class SearchMapper {
 
     public List<Search> searchCities(String query) throws SQLException {
 
-        // Initial arraylist for results
         List<Search> results = new ArrayList<>();
 
         String sql = "SELECT * FROM cities WHERE city_name ILIKE ? OR country ILIKE ? LIMIT 10";
