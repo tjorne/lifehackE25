@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+
+    <!-- Meta -->
+    <meta charset="UTF-8"> <!-- ÆØÅ -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- In case some nerd uses Internet Explorer -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile Responsiveness -->
+    <meta name="description" content="Fuck vi hader livet jo... #swag"> <!-- SEO / Google -->
+    <meta name="author" content="Gruppe D"> <!-- Author of Website -->
+
+    <!-- Visuals -->
+    <title>BeyondBorders | Login</title>
+
+    <!-- Icon -->
+    <link rel="icon" href="/images/gruppeD/icons/logo-noText-travlr-red.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/images/gruppeD/icons/logo-noText-travlr-red.png">
+
+    <!-- CSS Load -->
+    <link rel="stylesheet" href="/css/gruppeD/style.css">
+
+    <!-- Framwork load -->
+    <link rel="stylesheet" href="/css/gruppeD/guacamoleboy-wow.css">
+    <link rel="stylesheet" href="/css/gruppeD/guacamoleboy-framework.css">
+    <script src="/js/gruppeD/guacamoleboy-wow.js"></script>
+
+    <!-- Font Load -->
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+
+    <!-- Script Load -->
+    <script src="/js/gruppeD/blocker.js" defer></script>
+    <script src="/js/gruppeD/click-sound.js" defer></script>
+    <script src="/js/gruppeD/notification.js" defer></script>
+
+</head>
+<body>
+
+<!-- Button Back To Lifehack Project -->
+<a href="/" class="exit-btn" title="Tilbage til Lifehack">&#10006;</a>
+<!-- Button Back To Lifehack Project -->
+
+<!-- Login Section Start -->
+<section class="login-section-1">
+
+    <!-- Blob Start -->
+    <div class="blob-background">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+            <path fill="#00bbf9" class="out-top" d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z"/>
+            <path fill="#00f5d4" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z"/>
+            <path fill="#ff9f1c" class="out-bottom" d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z"/>
+            <path fill="#0077b6" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z"/>
+        </svg>
+    </div>
+    <!-- Blob End -->
+
+    <div class="login-container guac-animate guac-fade-slide-up">
+        <h2>Log Ind</h2>
+        <form id="loginForm" method="post" action="/gruppeD/login">
+            <input type="text" name="username" placeholder="Brugernavn" required>
+            <input type="password" name="password" placeholder="Adgangskode" required>
+            <div class="login-btn-group">
+                <button type="submit" class="guac-btn guac-btn-form lh-font">
+                    Log Ind
+                </button>
+                <button type="button" class="guac-btn guac-btn-form lh-font" id="registerBtn" onclick="window.location.href='/gruppeD/register'">
+                    Opret Bruger
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Login Section End -->
+
+<!-- Notification -->
+<div id="guac-notification-container"></div>
+<!-- Notification -->
+
+</body>
+</html>

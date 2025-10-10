@@ -47,10 +47,10 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.users (
-                              user_id integer NOT NULL,
-                              username character varying(50) NOT NULL,
-                              password character varying(50) NOT NULL,
-                              role character varying(20) DEFAULT USER NOT NULL
+user_id integer NOT NULL,
+username character varying(50) NOT NULL,
+password character varying(50) NOT NULL,
+role character varying(20) DEFAULT USER NOT NULL
 );
 
 
