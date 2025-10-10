@@ -1,10 +1,13 @@
+package app.entities;
+
+public class User
+{
     private int userId;
     private String userName;
     private String password;
     private String role;
 
     public User(int userId, String userName, String password, String role)
-    public User(int userId, String userName, String password)
     {
         this.userId = userId;
         this.userName = userName;
@@ -13,7 +16,17 @@
     }
 
     public int getUserId()
-@@ -30,19 +28,13 @@ public String getPassword()
+    {
+        return userId;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getPassword()
+    {
         return password;
     }
 
