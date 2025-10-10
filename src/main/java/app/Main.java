@@ -6,7 +6,7 @@ import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
-public class Main 
+public class Main
 {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
@@ -29,6 +29,7 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        ReferencesController.addRoutes(app);
 
         HeltSortController.addRoutes(app, connectionPool);
     }

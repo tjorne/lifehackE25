@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bøger</title>
+    <link rel="stylesheet" href="/css/references.css">
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <h1><a th:href="@{/references}">References</a></h1>
+        <nav class="hjem_reference"><a th:href="@{index.html}">Home</a></nav>
+    </div>
+</header>
+
+<main>
+    <h2>Search results</h2>
+
+
+    <!-- Loop through books -->
+    <div th:each="book : ${books}" class="search-result">
+        <div class="input-group">
+            <label>Theorist name:</label>
+            <p th:text="${book.theoristName}">theorist</p>
+        </div>
+
+        <div class="input-group">
+            <label>Book title:</label>
+            <p th:text="${book.title}">book title</p>
+        </div>
+
+        <div class="input-group">
+            <label>Description:</label>
+            <p th:text="${book.description}">book description</p>
+        </div>
+        <br>
+        <br>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 References Inc. All rights reserved</p>
+    <div class="footer-links">
+        <a href="#">Guides / Instructions</a> |
+        <a href="#">Company Information</a> |
+        <a href="#">Terms of Use</a> |
+        <a href="#">Privacy and Cookies Policy</a>
+    </div>
+    <span class="footer-locale">Denmark</span>
+</footer>
+</body>
+</html>

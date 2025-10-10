@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Page</title>
+    <link rel="stylesheet" href="/css/references.css">
+</head>
+<body>
+<header>
+    <div class="nav-container">
+        <h1><a th:href="@{/references}">References</a></h1>
+        <nav class="hjem_reference"><a th:href="@{index.html}">Home</a></nav>
+    </div>
+</header>
+<main>
+    <form action="/theorists" method="post">
+        <label for="theorist-select"></label>
+        <select name="theorist" id="theorist-select">
+            <option disabled selected>Select a Theorist</option>
+            <option th:each="theorist : ${theorists}"
+                    th:value="${theorist.id}"
+                    th:text="${theorist.name}">placeholder</option>
+        </select>
+        <br/>
+        <br/>
+        <button type="submit" class="search-btn">Select Theorist</button>
+    </form>
+</main>
+
+
+<footer><p>© 2025 References Inc. All rights reserved</p>
+    <div class="footer-links"><a href="#">Guides / Instructions</a> | <a href="#">Company Information</a> | <a href="#">Terms
+        of Use</a> | <a href="#">Privacy and Cookies Policy</a></div>
+    <span class="footer-locale">Denmark</span></footer>
+</body>
+</html>
