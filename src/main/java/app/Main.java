@@ -28,6 +28,6 @@ public class Main
         app.get("/", ctx -> ctx.render("index.html"));
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
-
+        MineController.addRoutes(app);
     }
 }
