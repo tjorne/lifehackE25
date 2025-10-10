@@ -105,7 +105,7 @@ public static void changeLanguage(Context ctx) throws DatabaseException {
             ctx.sessionAttribute("correctWord", word);
 
         } catch (DatabaseException e) {
-            // Hvis nej, send tilbage til login side med fejl besked
+
 
             ctx.attribute("message", e.getMessage());
             ctx.render("wordngo/index.html");

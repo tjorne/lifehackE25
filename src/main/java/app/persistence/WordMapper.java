@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class WordMapper {
 
-    //     lytter til den første character der bliver trykket på
+
     public Word getWord(String language) throws DatabaseException {
     String sql="";
         Random rdm = new Random();

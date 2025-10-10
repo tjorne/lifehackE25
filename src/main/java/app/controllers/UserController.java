@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.entities.User;
 import app.exceptions.DatabaseException;
+import app.entities.Task;
 import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
@@ -17,7 +18,6 @@ public class UserController
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx));
-
     }
 
     private static void createUser(Context ctx)

@@ -30,12 +30,7 @@ public class Main
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
 
-        app.before(ctx -> {
-            User currentUser = ctx.sessionAttribute("currentUser");
-            if (currentUser != null) {
-                ctx.attribute("user", currentUser);
-            }
-        });
+
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
         WordngoController.addRoutes(app);
