@@ -29,6 +29,7 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        VineTimeController.addRoutes(app);
 
         HeltSortController.addRoutes(app, connectionPool);
     }
