@@ -5,6 +5,7 @@ import app.controllers.*;
 import app.controllers.gratitudeJournal.GratitudeJournalController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
+import io.javalin.config.JavalinConfig;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
 public class Main {
@@ -15,16 +16,17 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
+
     public static void main(String[] args) {
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
+            config.staticFiles.add("/templates");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
         // Routing
-        //app.get("/", ctx -> ctx.render("index.html"));
-        app.get("/", ctx -> ctx.render("gratitudeJournal/index"));
+        app.get("/", ctx -> ctx.render("index.html"));
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
         GratitudeJournalController.addRoutes(app);
