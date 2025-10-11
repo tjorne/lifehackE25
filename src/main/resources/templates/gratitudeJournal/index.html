@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GratitudeJournal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../../../public/css/gratitudeJournal.css" th:href="@{/css/gratitudeJournal/gratitudeJournal.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page">
+    <header>
+        <a href="../index.html" th:href="@{/}">
+            <img alt="logo" src="../../public/images/lifehacklogo.png" th:src="@{/images/lifehacklogo.png}"/>
+        </a>
+    </header>
+
+    <form class="app-shell" method="post" th:action="@{/journal}" autocomplete="off">
+        <section class="journal-card">
+            <header class="journal-header">
+                <div><h1>GRATITUDE<br/>JOURNAL</h1></div>
+                <div class="date">
+                    <label for="d">DATE</label>
+                    <input id="d" type="date" name="logDate">
+                </div>
+            </header>
+
+            <div class="upper-padding">
+                <h2>TODAY I'M GRATEFUL FOR:</h2>
+                <div class="grid-3">
+                    <textarea name="grateful" class="textarea-notebook khula-font" rows="4" placeholder="1"></textarea>
+                    <textarea name="grateful" class="textarea-notebook khula-font" rows="4" placeholder="2"></textarea>
+                    <textarea name="grateful" class="textarea-notebook khula-font" rows="4" placeholder="3"></textarea>
+                </div>
+            </div>
+
+            <div class="upper-padding">
+                <h2>THINGS THAT MADE ME SMILE TODAY:</h2>
+                <div class="grid-1">
+                    <textarea name="smile" rows="3" placeholder=" "></textarea>
+                </div>
+                <div class="grid-1">
+                    <textarea name="smile" rows="3" placeholder=" "></textarea>
+                </div>
+                <div class="grid-1">
+                    <textarea name="smile" rows="3" placeholder=" "></textarea>
+                </div>
+            </div>
+
+            <div class="tripple-upper-padding">
+                <div class="grid-2 khula-font">
+                    <textarea name="inspired" placeholder="SOMETHING THAT INSPIRED ME TODAY:"></textarea>
+                    <textarea name="people" rows="4" placeholder="PEOPLE I'M GRATEFUL TO HAVE IN MY LIFE:"></textarea>
+                </div>
+            </div>
+
+            <div class="tripple-upper-padding">
+                <h3>Daily Affirmation:</h3>
+                <div class="grid-1">
+                    <textarea name="affirmation" rows="1" placeholder=" "></textarea>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit">SUBMIT</button>
+            </div>
+        </section>
+    </form>
+
+</div>
+</body>
+</html>

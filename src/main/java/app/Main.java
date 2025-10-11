@@ -2,16 +2,17 @@ package app;
 
 import app.config.ThymeleafConfig;
 import app.controllers.*;
+import app.controllers.gratitudeJournal.GratitudeJournalController;
 import app.persistence.ConnectionPool;
 import app.persistence.splitit.ExpenseMapper;
 import app.persistence.splitit.GroupMapper;
 import app.persistence.splitit.GroupMemberMapper;
 import app.services.splitit.*;
 import io.javalin.Javalin;
+import io.javalin.config.JavalinConfig;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
-public class Main 
-{
+public class Main {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
@@ -19,13 +20,13 @@ public class Main
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         // Initializing Javalin and Jetty webserver
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
-            config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
             config.staticFiles.add("/templates");
+            config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
         }).start(7070);
 
         // Routing
@@ -33,6 +34,7 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        GratitudeJournalController.addRoutes(app);
 
         // SPLITit
         ExpenseMapper expenseMapper = new ExpenseMapper(connectionPool);

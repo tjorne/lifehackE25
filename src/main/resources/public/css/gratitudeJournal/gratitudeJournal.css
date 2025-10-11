@@ -1,0 +1,191 @@
+:root {
+    --paper: #FAF8F4;
+    --ink: #3F3A32;
+    --muted: #777;
+    --brand: #1e1e1e;
+    --radius: 16px;
+    --gap: 16px;
+}
+
+body {
+    background: #fff;
+    color: var(--ink);
+}
+
+.app-shell {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 16px 64px;
+}
+
+.journal-card {
+    width: min(850px, 100%);
+    background: var(--paper);
+    /*border-radius: var(--radius);*/
+    /*box-shadow: 0 10px 30px rgba(0,0,0,.08);*/
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, .06);
+}
+
+.journal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap);
+    margin-bottom: 24px;
+}
+
+.journal-header h1 {
+    font-family: "Italiana", serif;
+    font-weight: 300;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.date {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.date input {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 10px;
+}
+
+h2 {
+    font-family: "Khula", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: .1em;
+    color: var(--ink);
+    margin: 18px 0 8px;
+}
+
+.khula-font{
+    font-family: "Khula", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: .1em;
+    color: var(--ink);
+    margin: 18px 0 8px;
+}
+
+h3 {
+    font-family: "Herr Von Muellerhoff", cursive;
+    font-weight: 500;
+    font-size: 35px;
+    letter-spacing: .12em;
+    color: var(--ink);
+    margin: 18px 0 8px;
+}
+
+/* Layout-grids */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+.grid-1 { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+
+/* Standard inputs */
+input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background: #FAF8F4;
+    font: inherit;
+}
+textarea { resize: vertical; }
+
+/* ✅ Notebook style til "TODAY I'M GRATEFUL FOR" */
+.grid-3 textarea {
+    border: 1px solid rgba(0,0,0,.15);
+    background-color: #FAF8F4;
+    line-height: 1.6;
+    background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(1.6em - 1px),
+            rgba(63,58,50,.15) calc(1.6em - 1px),
+            rgba(63,58,50,.15) 1.6em
+    );
+    background-origin: content-box;
+    background-clip: content-box;
+    padding: 20px 14px 5px; /* 🔹 ens luft over og under linjerne */
+    resize: vertical;
+    color: var(--ink);
+}
+
+.grid-3 textarea:focus {
+    border-color: rgba(63,58,50,.35);
+}
+
+/* Lined single-line fields */
+.grid-1 textarea {
+    width: 100%;
+    border: 0;
+    border-bottom: 1.5px solid rgba(0, 0, 0, .35);
+    background: transparent;
+    padding: 20px 2px;
+    border-radius: 0;
+    outline: none;
+    resize: none;
+    height: 1.8em;
+    line-height: 1.6;
+    box-shadow: none;
+}
+
+.grid-1 textarea:focus {
+    border-bottom-color: #333;
+}
+
+.grid-1 textarea::placeholder {
+    color: #9b8f85;
+    opacity: .9;
+}
+
+.upper-padding{
+    padding-top: 15px;
+}
+
+.tripple-upper-padding{
+    padding-top: 45px;
+}
+
+
+/* Buttons */
+.actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    appearance: none;
+    border: 0;
+    padding: 40px 0px;
+    background: transparent;
+    /*color: transparent;*/
+    cursor: pointer;
+    font-family: "Khula", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: .1em;
+    color: var(--ink);
+    margin: 18px 0 8px;
+}
+button.secondary {
+    background: #e6e6e6;
+    color: #111;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .journal-header { flex-direction: column; align-items: flex-start; }
+    .date { text-align: left; }
+}
