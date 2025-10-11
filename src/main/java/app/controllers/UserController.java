@@ -15,7 +15,7 @@ public class UserController
 
         app.post("login", ctx -> login(ctx));
         app.get("logout", ctx -> logout(ctx));
-        app.get("createuser", ctx -> ctx.render("createuser.html"));
+        app.get("createuser", ctx -> ctx.render("creategroup.html"));
         app.post("createuser", ctx -> createUser(ctx));
     }
 
@@ -39,12 +39,12 @@ public class UserController
             catch (DatabaseException e)
             {
                 ctx.attribute("message", "Dit brugernavn findes allerede. Prøv igen, eller log ind");
-                ctx.render("createuser.html");
+                ctx.render("creategroup.html");
             }
         } else
         {
             ctx.attribute("message", "Dine to passwords matcher ikke! Prøv igen");
-            ctx.render("createuser.html");
+            ctx.render("creategroup.html");
         }
 
     }

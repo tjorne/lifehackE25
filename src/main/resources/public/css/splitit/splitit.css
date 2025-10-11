@@ -1,0 +1,745 @@
+:root {
+    /* === MOBILE FIRST === */
+
+    /* Colors */
+    --color-header: #00509D;
+    --color-body: #003F88;
+    --color-footer: #00296B;
+    --color-button-light: #CC20BA;
+    --color-button-dark: #9C1598;
+    --color-text: #FFFFFF;
+    --color-text-link: #F49AF4;
+    --color-text-placeholder: #A3A3A3;
+
+    /* Typography - Mobile */
+    --font-primary: system-ui, Arial, sans-serif;
+
+    --h1-size: 2rem;
+    --h1-weight: 900;
+    --h1-line-height: 1.4;
+    --h1-letter-spacing: 0.05rem;
+
+    --h2-size: 1.125rem;
+    --h2-weight: 500;
+    --h2-line-height: 1.3;
+
+    --h3-size: 1rem;
+    --h3-weight: 500;
+    --h3-line-height: 1.4;
+
+    --h4-size: 0.875rem;
+    --h4-weight: 500;
+    --h4-line-height: 1.2;
+    --h4-letter-spacing: 0.1rem;
+
+    --body-size: 0.875rem;
+    --body-weight: 400;
+
+    --link-size: 0.875rem;
+    --link-weight: 500;
+
+    --caption-size: 0.7rem;
+    --caption-weight: 400;
+    --caption-line-height: 1.2;
+    --caption-letter-spacing: 0.1rem;
+
+    /* Layout */
+    --max-width: 1000px;
+    --border-radius: 6px;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+}
+
+/* === DESKTOP (768px and up) === */
+@media (min-width: 768px) {
+    :root {
+        --h1-size: 2.5rem;
+        --h1-line-height: 1.2;
+
+        --h2-size: 1.375rem;
+
+        --h3-size: 1.25rem;
+
+        --h4-size: 1rem;
+
+        --body-size: 1rem;
+
+        --link-size: 1rem;
+
+        --caption-size: 0.75rem;
+        --caption-letter-spacing: 0.075rem;
+    }
+}
+
+/* === BASE STYLES === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    color: var(--color-text);
+    line-height: normal;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Får main til at udfylde alt mellem header og footer */
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* === TYPOGRAPHY === */
+h1 {
+    font-size: var(--h1-size);
+    font-weight: var(--h1-weight);
+    line-height: var(--h1-line-height);
+    letter-spacing: var(--h1-letter-spacing);
+    font-variant: small-caps;
+}
+
+h2 {
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+    line-height: var(--h2-line-height);
+}
+
+h3 {
+    font-size: var(--h3-size);
+    font-weight: var(--h3-weight);
+    font-style: italic;
+    line-height: var(--h3-line-height);
+}
+
+h4 {
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--h4-letter-spacing);
+    text-transform: uppercase;
+}
+
+a {
+    font-size: var(--link-size);
+    font-weight: var(--link-weight);
+    color: var(--color-text-link);
+    text-decoration: underline;
+}
+
+/* === LAYOUT === */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+/* === FORM ELEMENTS === */
+select, input {
+    background-color: white;
+    color: var(--color-text-placeholder);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+}
+
+/* === COMPONENTS === */
+/* === BUTTON STATES === */
+/* Default button */
+button, .btn {
+    background: linear-gradient(to top, var(--color-button-dark), var(--color-button-light));
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    border: none;
+    color: var(--color-text);
+
+    /* Button typography (H4 style) */
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--h4-letter-spacing);
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+
+    /* Smooth transition for hover effect */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover state - slightly lift button */
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Active/Clicked state - push button down */
+button:active, .btn:active {
+    transform: translateY(0px);
+    opacity: 0.8;
+}
+
+/* Disabled state */
+button:disabled, .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:disabled:hover, .btn:disabled:hover {
+    transform: none;
+}
+
+/* === ERROR MESSAGE === */
+.error-message {
+    text-align: center;
+    background-color: white;
+    padding: var(--spacing-sm), var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) auto;
+    width: fit-content;
+}
+
+.error-message-text {
+    color: red;
+    font-weight: bold;
+}
+
+
+/* === SECTIONS === */
+header {
+    background-color: var(--color-header);
+}
+
+main {
+    background-color: var(--color-body);
+}
+
+footer {
+    background-color: var(--color-footer);
+}
+
+
+
+/* === INDEX PAGE SPECIFIC === */
+
+/* Header */
+.header {
+    padding: var(--spacing-md) 0;
+    text-align: center;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+/* Main Container */
+.main {
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.main-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Title Section */
+.title-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.main-title {
+    margin-bottom: var(--spacing-xs);
+}
+
+.divider {
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-button-light);
+    border: none;
+    margin: var(--spacing-sm) auto;
+}
+
+.tagline {
+    margin-top: var(--spacing-sm);
+}
+
+/* Selector Section */
+.selector-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-heading {
+    margin-bottom: var(--spacing-md);
+}
+
+.selector-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+/* Custom Select Dropdown */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.group-select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) var(--spacing-sm);
+    appearance: none;
+    cursor: pointer;
+    font-size: var(--body-size);
+    font-family: var(--font-primary);
+}
+
+.select-arrow {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+}
+
+/* Button */
+.btn-primary {
+    min-width: 200px;
+}
+
+/* Link Section */
+.link-section {
+    margin-top: var(--spacing-lg);
+}
+
+.create-link {
+    display: inline-block;
+    padding: var(--spacing-xs) 0;
+}
+
+/* Footer */
+.footer {
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.footer-item {
+    margin: 0;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--caption-size);
+    text-transform: uppercase;
+    letter-spacing: var(--caption-letter-spacing);
+}
+
+.footer-link:hover {
+    color: var(--color-text-link);
+}
+
+.github-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .main-container {
+        max-width: 500px;
+    }
+
+    .logo {
+        height: 80px;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        justify-content: center;
+        gap: var(--spacing-lg);
+    }
+}
+
+/* === CREATE GROUP PAGE SPECIFIC === */
+
+/* Name input form */
+.name-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.group-input {
+    width: 100%;
+    max-width: 300px;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    border: none;
+    text-align: center;
+    font-size: var(--body-size);
+    font-family: var(--font-primary);
+    color: var(--color-text-placeholder);
+}
+
+.group-input:focus {
+    outline: 2px solid var(--color-button-light);
+    color: #000;
+}
+
+/* Group name display */
+.group-name-display {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--body-size);
+}
+
+/* Member divider */
+.member-divider {
+    width: 100%;
+    max-width: 300px;
+    height: 2px;
+    background-color: var(--color-text);
+    margin: var(--spacing-lg) auto;
+}
+
+/* Member list */
+.member-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) auto;
+    max-width: 300px;
+}
+
+/* Individual member item */
+.member-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+}
+
+.member-name {
+    margin: 0;
+    text-align: left;
+    flex: 1;
+}
+
+/* Delete form and button */
+.delete-form {
+    display: inline;
+    margin: 0;
+}
+
+/* Delete and Edit button */
+.btn-delete, .btn-edit {
+    background: none;
+    border: none;
+    padding: var(--spacing-xs);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.btn-delete:hover, .btn-edit:hover {
+    transform: scale(1.1);
+}
+
+.btn-delete:active, .btn-edit:active {
+    transform: scale(0.95);
+}
+
+.delete-icon, .edit-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Empty state message */
+.empty-message {
+    font-size: var(--body-size);
+    opacity: 0.7;
+    margin: var(--spacing-md) 0;
+}
+
+/* === EXPENSE PAGE SPECIFIC === */
+
+/* Group identifier section */
+.expense-identifier {
+    margin-bottom: var(--spacing-lg);
+}
+
+.group-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.group-display {
+    margin: 0;
+    font-size: var(--body-size);
+}
+
+.user-name {
+    text-align: center;
+    margin: 0;
+}
+
+/* Add expense form */
+.add-expense-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-label {
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    text-align: left;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    border: none;
+    font-size: var(--body-size);
+    font-family: var(--font-primary);
+    color: #000;
+}
+
+.form-input::placeholder {
+    color: var(--color-text-placeholder);
+}
+
+.form-divider {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-button-light);
+    margin: var(--spacing-xs) 0;
+}
+
+/* Expenses list */
+.expenses-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.expense-list {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.expense-item {
+    margin-bottom: var(--spacing-md);
+}
+
+.expense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--spacing-xs);
+}
+
+.expense-user {
+    margin: 0;
+    text-align: left;
+}
+
+.expense-amount {
+    font-size: var(--body-size);
+    font-weight: bold;
+}
+
+.expense-body {
+    text-align: left;
+    margin-bottom: var(--spacing-sm);
+}
+
+.expense-label {
+    margin: 0;
+    font-size: var(--body-size);
+}
+
+.expense-description {
+    margin: var(--spacing-xs) 0;
+    font-style: italic;
+    font-size: var(--body-size);
+}
+
+.expense-timestamp {
+    margin: 0;
+    font-size: var(--caption-size);
+    text-transform: uppercase;
+    letter-spacing: var(--caption-letter-spacing);
+    opacity: 0.8;
+}
+
+.expense-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.expense-divider {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    margin: var(--spacing-md) 0;
+}
+
+/* Empty expenses state */
+.empty-expenses {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.empty-expenses p {
+    margin: var(--spacing-xs) 0;
+    font-size: var(--body-size);
+}
+
+/* Totals section */
+.totals-section {
+    max-width: 400px;
+    margin: var(--spacing-xl) auto;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+}
+
+.total-label {
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    text-transform: uppercase;
+    letter-spacing: var(--h4-letter-spacing);
+}
+
+.total-value {
+    font-size: var(--h4-size);
+    font-weight: bold;
+}
+
+/* Split section */
+.split-section {
+    margin: var(--spacing-lg) 0;
+}
+
+/* === RESULT PAGE SPECIFIC === */
+
+/* Group identifier on result page */
+.group-identifier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.group-display {
+    margin: 0;
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+}
+
+/* Settlements section */
+.settlements-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.settlement-list {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.settlement-item {
+    margin-bottom: var(--spacing-lg);
+}
+
+.settlement-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+}
+
+.settlement-label {
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+}
+
+.settlement-value {
+    font-size: var(--body-size);
+    font-weight: bold;
+}
+
+.settlement-divider {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin: var(--spacing-md) 0;
+}
+
+/* Empty settlements state */
+.empty-settlements {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.empty-settlements p {
+    margin: var(--spacing-xs) 0;
+    font-size: var(--body-size);
+}
