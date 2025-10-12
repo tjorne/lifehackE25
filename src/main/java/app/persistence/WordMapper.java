@@ -22,7 +22,8 @@ public class WordMapper {
         }else if (language.equals("French"))
         {
             sql = "select frenchword from frenchwords where id = ?";
-        }
+        }else if (language.equals("Danish"))
+            sql = "select danishword from danishwords where id = ?";
         try (
                 Connection connection = ConnectionPool.getInstance().getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)

@@ -10,7 +10,7 @@
 
     const key = e.key.toUpperCase();
 
-    if (/^[A-Z]$/.test(key) && currentCell < 5) {
+    if (/^[A-Z || Æ || Ø || Å ]$/.test(key) && currentCell < 5) {
     const cell = rows[currentRow].children[currentCell];
     cell.textContent = key;
     guess += key;
