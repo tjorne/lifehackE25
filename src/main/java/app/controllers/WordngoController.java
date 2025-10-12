@@ -10,49 +10,6 @@ import io.javalin.http.Context;
 import app.entities.User;
 
 public class WordngoController {
-    public static void addRoutes(Javalin app) {
-        app.get("/Wordngo", ctx -> {
-            User user = ctx.sessionAttribute("currentUser");
-            ctx.attribute("user", user);
-            Word word = ctx.sessionAttribute("correctWord");
-            if (word != null) {
-                ctx.result(word.getWord()); // Return the word as plain text
-            } else {
-                ctx.status(404).result("No word found");
-            }
-
-            ctx.render("Wordngo/index.html");
-
-
-        });
-        app.post("login-wordngo", ctx -> login(ctx));
-
-        app.get("/api/correct-word", ctx -> {
-            Word word = ctx.sessionAttribute("correctWord");
-            if (word != null) {
-                ctx.result(word.getWord()); // Return the word as plain text
-            } else {
-                ctx.status(404).result("No word found");
-            }
-        });
-
-        app.get("/Wordngo/gamepage", ctx -> {
-            User user = ctx.sessionAttribute("currentUser");
-            ctx.attribute("user", user);
-            WordMapper wordMapper = new WordMapper();
-            Word word = wordMapper.getWord(ctx.sessionAttribute("language"));
-
-
-            ctx.sessionAttribute("correctWord", word);
-
-            ctx.render("Wordngo/gamepage.html");
-        });
-
-        app.get("/changeLanguage", ctx -> {changeLanguage(ctx);
-        });
-
-    }
-
 
 public static void changeLanguage(Context ctx) throws DatabaseException {
         WordMapper wordMapper = new WordMapper();

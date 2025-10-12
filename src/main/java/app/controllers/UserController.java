@@ -10,17 +10,9 @@ import io.javalin.http.Context;
 
 public class UserController
 {
-    public static void addRoutes(Javalin app)
-    {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-        app.post("login", ctx -> login(ctx));
-        app.get("logout", ctx -> logout(ctx));
-        app.get("createuser", ctx -> ctx.render("createuser.html"));
-        app.post("createuser", ctx -> createUser(ctx));
-    }
 
-    private static void createUser(Context ctx)
+    public static void createUser(Context ctx)
     {
         // Hent form parametre
         String username = ctx.formParam("username");
@@ -50,7 +42,7 @@ public class UserController
 
     }
 
-    private static void logout(Context ctx)
+    public static void logout(Context ctx)
     {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");

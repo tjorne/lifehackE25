@@ -2,9 +2,16 @@ package app;
 
 import app.config.ThymeleafConfig;
 import app.controllers.*;
+import app.entities.User;
+import app.entities.Word;
 import app.persistence.ConnectionPool;
+import app.persistence.WordMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
+
+import static app.controllers.TimeZonesController.index;
+import static app.controllers.UserController.*;
+import static app.controllers.WordngoController.changeLanguage;
 
 public class Main 
 {
@@ -27,9 +34,47 @@ public class Main
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
 
+        app.get("/timezones", ctx -> index(ctx));
 
-        UserController.addRoutes(app);
-        TimeZonesController.addRoutes(app);
-        WordngoController.addRoutes(app);
+        app.post("login", UserController::login);
+        app.get("logout", UserController::logout);
+        app.get("createuser", ctx -> ctx.render("createuser.html"));
+        app.post("createuser", UserController::createUser);
+
+        app.get("/Wordngo", ctx -> {
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("user", user);
+            Word word = ctx.sessionAttribute("correctWord");
+            if (word != null) {
+                ctx.result(word.getWord()); // Return the word as plain text
+            } else {
+                ctx.status(404).result("No word found");
+            }
+
+            ctx.render("Wordngo/index.html");
+
+
+        });
+        app.post("login-wordngo", WordngoController::login);
+
+        app.get("/api/correct-word", ctx -> {
+            Word word = ctx.sessionAttribute("correctWord");
+            if (word != null) {
+                ctx.result(word.getWord()); // Return the word as plain text
+            } else {
+                ctx.status(404).result("No word found");
+            }
+        });
+
+        app.get("/Wordngo/gamepage", ctx -> {
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("user", user);
+            WordMapper wordMapper = new WordMapper();
+            Word word = wordMapper.getWord(ctx.sessionAttribute("language"));
+
+            ctx.sessionAttribute("correctWord", word);
+            ctx.render("Wordngo/gamepage.html");
+        });
+        app.get("/changeLanguage", WordngoController::changeLanguage);
         }
     }
