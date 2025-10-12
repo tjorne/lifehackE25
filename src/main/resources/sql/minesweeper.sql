@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS public.scores (
+id SERIAL NOT NULL,
+user_id INTEGER NOT NULL,
+score_value INTEGER NOT NULL,
+date DATE NOT NULL,
+difficulty VARCHAR NOT NULL,
+CONSTRAINT scores_pkey PRIMARY KEY (id)
+);
+
+ALTER TABLE IF EXISTS public.scores
+    ADD CONSTRAINT fk_user FOREIGN KEY (user_id)
+    REFERENCES public.users (user_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+       ON DELETE CASCADE;

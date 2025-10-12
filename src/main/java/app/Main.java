@@ -33,6 +33,7 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        MineController.addRoutes(app);
 
         // SPLITit
         ExpenseMapper expenseMapper = new ExpenseMapper(connectionPool);
@@ -48,6 +49,7 @@ public class Main
 
         splitItGroupController.addRoutes(app);
         splitItExpenseController.addRoutes(app);
+
         HeltSortController.addRoutes(app, connectionPool);
     }
 }
