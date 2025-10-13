@@ -76,7 +76,7 @@ public class UserMapper
         }
     }
 
-    public List<User> getAllUsers() throws DatabaseException
+    public static List<User> getAllUsers() throws DatabaseException
     {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
@@ -107,7 +107,7 @@ public class UserMapper
         return users;
     }
 
-    public User getUserById(int userId) throws DatabaseException
+    public static User getUserById(int userId) throws DatabaseException
     {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
 
