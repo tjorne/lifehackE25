@@ -33,6 +33,7 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        ReferencesController.addRoutes(app);
         MineController.addRoutes(app);
 
         // SPLITit

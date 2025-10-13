@@ -13,8 +13,10 @@
 .idea/**/shelf
 .idea/**/dataSources.xml
 .idea/**/vcs.xml
-.idea/
 
+
+.idea/misc.xml
+.idea/name.xml
 
 # AWS User-specific
 .idea/**/aws.xml
