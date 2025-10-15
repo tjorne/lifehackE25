@@ -20,7 +20,7 @@ public class VineTimeSessionDAO {
         }
 
         String sql = """
-            INSERT INTO vt_sessions (user_id, session_type, duration_minutes, created_at)
+            INSERT INTO vt_session (user_id, session_type, duration_minutes, created_at)
             VALUES (?, ?, ?,?)
             RETURNING session_id
             """;
