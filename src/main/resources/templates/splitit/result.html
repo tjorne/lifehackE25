@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Split Result - SPLITit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/splitit/splitit.css}"/>
+</head>
+<body>
+<header class="header">
+    <nav class="header-nav">
+        <a th:href="@{/}" class="logo-link">
+            <img th:src="@{/images/splitit/logo.svg}" alt="Split it logo" class="logo">
+        </a>
+    </nav>
+</header>
+
+<main class="main">
+    <div class="main-container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="main-title">SPLITit</h1>
+            <hr class="divider">
+            <h3 class="tagline">Your expense splitter</h3>
+        </div>
+
+        <!-- Group Name Display -->
+        <div class="group-identifier">
+            <h2 class="group-display" th:text="${groupName}">Group name</h2>
+            <form th:action="@{/deleteGroup}" method="post" class="delete-form">
+                <input type="hidden" name="groupId" th:value="${groupId}">
+                <button type="submit" class="btn-delete">
+                    <img th:src="@{/images/splitit/bucket.svg}" onclick="confirm('Are you sure?')" alt="Delete group" class="delete-icon">
+                </button>
+            </form>
+        </div>
+
+        <!-- Settlements List -->
+        <div class="settlements-section">
+            <div class="settlement-list" th:if="${settlements != null and !settlements.empty}">
+                <div class="settlement-item" th:each="settlement : ${settlements}">
+                    <div class="settlement-row">
+                        <span class="settlement-label">From:</span>
+                        <span class="settlement-value" th:text="${settlement.fromUserName}">userName</span>
+                    </div>
+                    <div class="settlement-row">
+                        <span class="settlement-label">To:</span>
+                        <span class="settlement-value" th:text="${settlement.toUserName}">userName</span>
+                    </div>
+                    <div class="settlement-row">
+                        <span class="settlement-label">Amount:</span>
+                        <span class="settlement-value" th:text="${settlement.amount} + ',-'">amount</span>
+                    </div>
+                    <hr class="divider settlement-divider">
+                </div>
+            </div>
+
+            <!-- Empty state (if no settlements) -->
+            <div th:if="${settlements == null or settlements.empty}" class="empty-settlements">
+                <p>No settlements to display.</p>
+                <p>All expenses are already even!</p>
+            </div>
+        </div>
+
+        <!-- Back Link -->
+        <div class="link-section">
+            <a th:href="@{/splitit}" class="create-link">Back</a>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}" class="error-message-text"></p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p class="footer-item">
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>MORTEN JENSEN</span>
+            </a>
+        </p>
+        <p class="footer-item">
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>DANIEL HANGAARD</span>
+            </a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>

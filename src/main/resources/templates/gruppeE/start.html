@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../public/css/gruppeE/stylesheet.css" th:href="@{/css/gruppeE/stylesheet.css}" rel="stylesheet">
+
+</head>
+<body>
+<div class ="flexbox-container">
+    <div class ="flexbox-item-h1">
+        <h1>Welcome to minesweeper</h1>
+    </div>
+    <div class ="flexbox-item-difficultySelection">
+        <form action="/gruppeE/start" method="POST">
+            <div class ="flexbox-item-radioSelect">
+                <div class="difficulty-option">
+                    <label for="easy">9x9 Easy</label>
+                    <input type="radio" id="easy" name="difficulty" value="easy">
+                </div>
+                <div class="difficulty-option">
+                    <label for="medium">16x16 Medium</label>
+                    <input type="radio" id="medium" name="difficulty" value="medium">
+                </div>
+                <div class="difficulty-option">
+                    <label for="hard">30x16 Hard</label>
+                    <input type="radio" id="hard" name="difficulty" value="hard">
+                </div>
+            </div>
+            <div class ="flexbox-item-startButton">
+                <button type="submit" id="startButton">Click to start</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

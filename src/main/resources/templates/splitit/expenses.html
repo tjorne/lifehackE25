@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Group Expenses - SPLITit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/splitit/splitit.css}"/>
+</head>
+<body>
+<header class="header">
+    <nav class="header-nav">
+        <a th:href="@{/}" class="logo-link">
+            <img th:src="@{/images/splitit/logo.svg}" alt="Split it logo" class="logo">
+        </a>
+    </nav>
+</header>
+
+<main class="main">
+    <div class="main-container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="main-title">SPLITit</h1>
+            <hr class="divider">
+            <h3 class="tagline">Your expense splitter</h3>
+        </div>
+
+        <!-- Group Identifier Section -->
+        <div class="expense-identifier">
+            <div class="group-info">
+                <h2 class="group-display" th:text="${groupName}">Group Name</h2>
+                <form th:action="@{/deleteGroup}" method="post" class="delete-form">
+                    <input type="hidden" name="groupId" th:value="${groupId}">
+                    <button type="submit" class="btn-delete">
+                        <img th:src="@{/images/splitit/bucket.svg}" onclick="confirm('Are you sure?')" alt="Delete group" class="delete-icon">
+                    </button>
+                </form>
+            </div>
+            <h4 class="user-name" th:text="${accountname}">Name Placeholder</h4>
+        </div>
+
+        <!-- Add Expense Form -->
+        <div class="add-expense-section">
+            <form th:action="@{/expenses/addExpense}" method="post" class="expense-form">
+                <div class="form-group">
+                    <label for="amount" class="form-label">Expense</label>
+                    <input type="text" id="amount" name="amount" class="form-input" placeholder="Expense" required>
+                </div>
+
+                <hr class="divider form-divider">
+
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" id="description" name="description" class="form-input" placeholder="Description" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">ADD</button>
+            </form>
+        </div>
+
+        <!-- Expenses List -->
+        <div class="expenses-section">
+            <!-- Expenses exist -->
+            <div class="expense-list" th:if="${expenses != null and !expenses.empty}">
+                <div class="expense-item" th:each="expense : ${expenses}">
+                    <div class="expense-header">
+                        <h4 class="expense-user" th:text="${expense.userName}">Name</h4>
+                        <span class="expense-amount" th:text="${expense.amount} + ',-'">amount</span>
+                    </div>
+                    <div class="expense-body">
+                        <p class="expense-label">Description:</p>
+                        <p class="expense-description" th:text="${expense.description}">Description body goes here.</p>
+                        <p class="expense-timestamp" th:text="${expense.getRelativeTime}">TIMESTAMP</p>
+                    </div>
+                    <div class="expense-actions">
+                        <form th:action="@{/expenses/editExpense}" method="post" class="delete-form">
+                            <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
+                            <button type="submit" class="btn-edit">
+                                <img th:src="@{/images/splitit/edit.svg}" alt="Edit expense" class="edit-icon">
+                            </button>
+                        </form>
+                        <form th:action="@{/expenses/deleteExpense}" method="post" class="delete-form">
+                            <input type="hidden" name="expenseId" th:value="${expense.expenseId}">
+                            <button type="submit" class="btn-delete">
+                                <img th:src="@{/images/splitit/bucket.svg}" onclick="confirm('Are you sure?')" alt="Delete expense" class="delete-icon">
+                            </button>
+                        </form>
+                    </div>
+                    <hr class="divider expense-divider">
+                </div>
+            </div>
+
+            <!-- Empty state -->
+            <div th:if="${expenses == null or expenses.empty}" class="empty-expenses">
+                <p>No expenses yet.</p>
+                <p>Be the first to add one!</p>
+            </div>
+        </div>
+
+        <!-- Totals Section -->
+        <div class="totals-section">
+            <div class="total-item">
+                <span class="total-label">TOTAL:</span>
+                <span class="total-value" th:text="${userTotal} + ',-'">amount</span>
+            </div>
+            <div class="total-item">
+                <span class="total-label">GROUP TOTAL:</span>
+                <span class="total-value" th:text="${groupTotal} + ',-'">amount</span>
+            </div>
+            <hr class="divider">
+        </div>
+
+        <!-- Split It Button -->
+        <div class="split-section">
+            <form th:action="@{/result}" method="get">
+                <button type="submit" class="btn btn-primary">SPLIT IT</button>
+            </form>
+        </div>
+
+        <!-- Back Link -->
+        <div class="link-section">
+            <a th:href="@{/splitit}" class="create-link">Back</a>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}" class="error-message-text"></p>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p class="footer-item">
+            <a href="https://github.com/Mortenjenne" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>MORTEN JENSEN</span>
+            </a>
+        </p>
+        <p class="footer-item">
+            <a href="https://github.com/DHangaard" target="_blank" rel="noopener" class="footer-link">
+                <img th:src="@{/images/splitit/github-icon.svg}" alt="Github icon" class="github-icon">
+                <span>DANIEL HANGAARD</span>
+            </a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
