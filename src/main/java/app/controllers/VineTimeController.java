@@ -19,7 +19,6 @@ public class VineTimeController {
         System.out.println("Adding vinetime route");
 
         app.get("/vinetime", VineTimeController::index);
-        app.post("/api/vinetime/login", VineTimeController::login);
         app.post("/api/vinetime/session", ctx -> createSession(ctx, sessionDAO));
         app.get("/api/vinetime/sessions", ctx -> getSessions(ctx, sessionDAO));
         app.get("/api/vinetime/sessions/today", ctx -> getTodaySessions(ctx, sessionDAO));
@@ -28,19 +27,6 @@ public class VineTimeController {
 
     private static void index(Context ctx) {
         ctx.render("/vinetime/index.html");
-    }
-
-    private static void login(Context ctx) {
-        String username = ctx.formParam("username") != null ? ctx.formParam("username") : "";
-        String password = ctx.formParam("password") != null ? ctx.formParam("password") : "";
-
-        if ("test".equals(username) && "1234".equals(password)) {
-            User testUser = new User(0, "test", "1234", "user");
-            ctx.sessionAttribute("currentUser", testUser);
-            ctx.render("/vinetime/index.html");
-        } else {
-            ctx.status(401).result("Invalid username or password");
-        }
     }
 
     private static void createSession(Context ctx, VineTimeSessionDAO sessionDAO) {
