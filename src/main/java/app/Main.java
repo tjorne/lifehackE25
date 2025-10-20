@@ -33,8 +33,10 @@ public class Main
 
         UserController.addRoutes(app);
         TimeZonesController.addRoutes(app);
+        VineTimeController.addRoutes(app);
         ReferencesController.addRoutes(app);
         MineController.addRoutes(app);
+        9ff70eeea11c27b7782be29e8d964d13a6aff9dd
 
         // SPLITit
         ExpenseMapper expenseMapper = new ExpenseMapper(connectionPool);
